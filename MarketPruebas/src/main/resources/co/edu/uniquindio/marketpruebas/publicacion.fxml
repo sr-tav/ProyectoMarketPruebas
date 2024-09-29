@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketpruebas.controlador.PublicacionController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="-1.0" prefHeight="560.0" prefWidth="500.0">
+         <children>
+            <ImageView fx:id="ImagenProd" fitHeight="240.0" fitWidth="431.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </ImageView>
+            <Separator prefWidth="200.0" />
+            <Label fx:id="labelTitulo" text="Titulo del Producto">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelPrecio" text="PRECIO">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelFecha" text="Fecha" />
+            <Label fx:id="labelHora" text="Hora" />
+            <TextArea fx:id="areaDescrip" editable="false" maxHeight="200.0" maxWidth="400.0" minHeight="30.0" minWidth="400.0" prefHeight="70.0" prefWidth="400.0" styleClass="text-area" stylesheets="@loginStyle.css" text="Descripcion" wrapText="true" />
+            <Separator prefWidth="200.0" />
+            <HBox alignment="CENTER" prefHeight="19.0" prefWidth="500.0">
+               <children>
+                  <Label fx:id="labelNumMegustas" text="Num megustas">
+                     <HBox.margin>
+                        <Insets right="325.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button fx:id="btnDarMegusta" mnemonicParsing="false" onAction="#clickDarMegusta" text="Me gusta" />
+               </children>
+            </HBox>
+            <Separator prefHeight="8.0" prefWidth="500.0" />
+            <ScrollPane fx:id="scrollPaneComentarios" prefHeight="145.0" prefWidth="500.0">
+               <content>
+                  <GridPane fx:id="grindPaneComentarios" prefHeight="0.0" prefWidth="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

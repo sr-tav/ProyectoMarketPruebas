@@ -11,7 +11,7 @@ public class Producto {
 
     public Producto(String nombre, String rutaImagen, String categoria, Estado estado, double precio) {
         this.nombre = nombre;
-        this.imagen = new Image(rutaImagen);
+        this.imagen = new Image(getClass().getResource(rutaImagen).toString());
         this.categoria = categoria;
         this.estado = estado;
         this.precio = precio;

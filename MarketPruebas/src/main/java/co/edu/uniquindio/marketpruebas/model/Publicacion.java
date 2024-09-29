@@ -10,16 +10,18 @@ import java.util.List;
 public class Publicacion implements IInteractuar {
     private LocalDate fechaPublicacion;
     private LocalTime horaPublicacion;
+    private String descripcion;
     private Producto producto;
     private List<Comentario> listaComentarios;
     private int numMeGustas;
 
-    public Publicacion(LocalDate fechaPublicacion, LocalTime horaPublicacion, Producto producto) {
+    public Publicacion(LocalDate fechaPublicacion, LocalTime horaPublicacion, Producto producto,String descripcion) {
         this.fechaPublicacion = fechaPublicacion;
         this.horaPublicacion = horaPublicacion;
         this.producto = producto;
         this.numMeGustas = 0;
         listaComentarios = new ArrayList<Comentario>();
+        this.descripcion = descripcion;
     }
     public Publicacion() {
         listaComentarios = new ArrayList<Comentario>();
@@ -74,6 +76,14 @@ public class Publicacion implements IInteractuar {
 
     public void setNumMeGustas(int numMeGustas) {
         this.numMeGustas = numMeGustas;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     @Override

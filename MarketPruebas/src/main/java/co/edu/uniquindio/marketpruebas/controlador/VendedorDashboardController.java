@@ -1,12 +1,23 @@
 package co.edu.uniquindio.marketpruebas.controlador;
 
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
+import co.edu.uniquindio.marketpruebas.model.Muro;
+import co.edu.uniquindio.marketpruebas.model.Publicacion;
 import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VendedorDashboardController {
     private ModelFactory modelFactory;
@@ -70,6 +81,12 @@ public class VendedorDashboardController {
     @FXML
     private BorderPane panePerfil;
 
+    @FXML
+    private GridPane gridPaneMuro;
+
+    @FXML
+    private ScrollPane scrollPaneMuro;
+
     /**
      * Metodo para actualizar los botones del menu Contactos
      */
@@ -109,8 +126,23 @@ public class VendedorDashboardController {
     }
 
     @FXML
-    void clickCon1(ActionEvent event) {
+    void clickCon1(ActionEvent event) throws IOException {
         paneCon1.setVisible(true);
+        int columna = 0;
+        int fila = 0;
+        Muro muro = vendedor.getListaContactos().get(0).getMuro();
+
+        for(int i=0 ; i<muro.getListaPublicaciones().size() ; i++){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/publicacion.fxml"));
+            AnchorPane anchorPane = fxmlLoader.load();
+
+            PublicacionController publicacionController = fxmlLoader.getController();
+            publicacionController.setData(muro.getListaPublicaciones().get(i));
+
+            gridPaneMuro.add(anchorPane, columna, fila);
+            GridPane.setMargin(anchorPane, new Insets(10));
+            fila++;
+        }
     }
 
     @FXML

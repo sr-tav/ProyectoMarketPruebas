@@ -6,9 +6,9 @@ import java.time.LocalTime;
 public class Comentario extends Mensaje{
     private int numMeGustas;
 
-    public Comentario(Usuario usuario, LocalDate fecha, LocalTime hora, String mensaje, int numMeGustas) {
+    public Comentario(Usuario usuario, LocalDate fecha, LocalTime hora, String mensaje) {
         super(usuario, fecha, hora, mensaje);
-        this.numMeGustas = numMeGustas;
+        this.numMeGustas = 0;
     }
     public Comentario(){}
     /**
