@@ -1,9 +1,11 @@
 package co.edu.uniquindio.marketpruebas.model;
 
+import co.edu.uniquindio.marketpruebas.services.IInteraccionEntreContactos;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MarketPlace {
+public class MarketPlace implements IInteraccionEntreContactos {
     private String nombre;
     private List<Administrador> listaAdministradores;
     private List<Usuario> listaUsuarios;
@@ -15,7 +17,11 @@ public class MarketPlace {
         this.listaUsuarios = new ArrayList<Usuario>();
         this.listaVendedores = new ArrayList<Vendedor>();
     }
-    public MarketPlace() {}
+    public MarketPlace() {
+        this.listaAdministradores = new ArrayList<Administrador>();
+        this.listaUsuarios = new ArrayList<Usuario>();
+        this.listaVendedores = new ArrayList<Vendedor>();
+    }
 
     public <T> void agregarAutomatico(T objeto){
         if (objeto instanceof Usuario){
@@ -53,5 +59,11 @@ public class MarketPlace {
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public void agregarContactosEntreSi(Vendedor contacto1, Vendedor contacto2) {
+        contacto1.agregarContacto(contacto2);
+        contacto2.agregarContacto(contacto1);
     }
 }

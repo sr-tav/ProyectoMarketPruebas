@@ -1,0 +1,22 @@
+.primary_color{
+    -fx-background-color: #254B5E;
+}
+.secondary_color{
+    -fx-background-color: #4d83a1;
+    -fx-background-radius: 30;
+}
+.login_btn{
+    -fx-background-color: #A7D0D2;
+    -fx-background-radius: 5;
+}
+.login_btn:hover{
+    -fx-background-color: #88adb3;
+    -fx-background-radius: 5;
+}
+.register_btn{
+    -fx-background-color: transparent;
+}
+.register_btn:hover{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}

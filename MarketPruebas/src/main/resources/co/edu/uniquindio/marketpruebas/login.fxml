@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="468.0" styleClass="primary_color" stylesheets="@loginStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketpruebas.controlador.LoginController">
+   <children>
+      <BorderPane layoutY="-1.0" prefHeight="531.0" prefWidth="468.0">
+         <center>
+            <AnchorPane prefHeight="419.0" prefWidth="277.0" styleClass="secondary_color" stylesheets="@loginStyle.css" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="TOP_CENTER" layoutX="-1.0" prefHeight="424.0" prefWidth="309.0" styleClass="secondary_color" stylesheets="@loginStyle.css">
+                     <children>
+                        <ImageView fitHeight="245.0" fitWidth="311.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@login.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <TextField fx:id="textUsuario" onAction="#clickUsuario" prefHeight="25.0" prefWidth="266.0" promptText="Usuario">
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="40.0" right="40.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="textContraseña" onAction="#clickContra" promptText="Contraseña">
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="40.0" right="40.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Button fx:id="btnIngresar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickIngresar" styleClass="login_btn" stylesheets="@loginStyle.css" text="Ingresar" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Label text="¿No tienes cuenta?" textFill="#bce7ff" />
+                        <Button fx:id="btnRegistrarse" mnemonicParsing="false" onAction="#clickRegistrarse" styleClass="register_btn" stylesheets="@loginStyle.css" text="Click aqui para registrarte" textFill="#3a5068">
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </center>
+         <left>
+            <AnchorPane prefHeight="422.0" prefWidth="79.0" BorderPane.alignment="CENTER" />
+         </left>
+         <top>
+            <AnchorPane prefHeight="56.0" prefWidth="468.0" BorderPane.alignment="CENTER" />
+         </top>
+         <bottom>
+            <AnchorPane prefHeight="53.0" prefWidth="468.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <right>
+            <AnchorPane prefHeight="416.0" prefWidth="81.0" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+   </children>
+</AnchorPane>

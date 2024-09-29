@@ -11,7 +11,12 @@ public class Muro {
         listaPublicaciones = new ArrayList<Publicacion>();
         listaChats = new ArrayList<Chat>();
     }
-
+    public void agregarPublicacion(Publicacion publicacion){
+        listaPublicaciones.add(publicacion);
+    }
+    public void agregarChat(Chat chat){
+        listaChats.add(chat);
+    }
     public List<Chat> getListaChats() {
         return listaChats;
     }
