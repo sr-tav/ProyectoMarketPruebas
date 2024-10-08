@@ -23,3 +23,54 @@
 .text-area{
     -fx-background-color: transparent;
 }
+.casilla_contacto_btn{
+    -fx-background-color: #3d5c78;
+}
+.casilla_contacto_btn:hover{
+    -fx-background-color: #2e475a;
+}
+.menu_arriba{
+    -fx-background-color: #293651;
+}
+.btn_menu{
+    -fx-background-color: #5f7ea6;
+}
+.btn_menu:hover{
+    -fx-background-color: #80a6d8;
+}
+.btn_menu_chat{
+    -fx-background-color: #5f7ea6;
+    -fx-background-radius: 30;
+}
+.btn_menu_chat:hover{
+    -fx-background-color: #80a6d8;
+    -fx-background-radius: 30;
+}
+.btn_salir{
+    -fx-background-color: #d12222;
+}
+.btn_salir:hover{
+    -fx-background-color: #fb4949;
+}
+.barra_contactos{
+    -fx-background-color: #5f7ea6;
+}
+.barra_contactos:horizontal.thumb{
+    -fx-background-color: #5f7ea6;
+}
+.barra_contactos:vertical.thumb{
+    -fx-background-color: #5f7ea6;
+}
+.fondo_pane{
+    -fx-background-color: #476381;
+}
+.scroll-pane{
+    -fx-background: transparent;
+}
+.scroll-pane:vertical.thumb{
+    -fx-background-color: #5f7ea6;
+}
+.scroll-pane:horizontal.thumb{
+    -fx-background-color: #5f7ea6;
+}
+

@@ -8,50 +8,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class VendedorDashboardController {
     private ModelFactory modelFactory;
     private VendedorDto vendedor;
 
-    @FXML
-    private Button btnCon1;
-
-    @FXML
-    private Button btnCon10;
-
-    @FXML
-    private Button btnCon2;
-
-    @FXML
-    private Button btnCon3;
-
-    @FXML
-    private Button btnCon4;
-
-    @FXML
-    private Button btnCon5;
-
-    @FXML
-    private Button btnCon6;
-
-    @FXML
-    private Button btnCon7;
-
-    @FXML
-    private Button btnCon8;
-
-    @FXML
-    private Button btnCon9;
-
-    private Button[] botonesContactos = new Button[10];
     @FXML
     private Button btnContacto;
 
@@ -64,8 +36,6 @@ public class VendedorDashboardController {
     @FXML
     private Button btnPerfil;
 
-    @FXML
-    private Pane paneCon1;
 
     @FXML
     private BorderPane paneContactos;
@@ -85,106 +55,79 @@ public class VendedorDashboardController {
     @FXML
     private ScrollPane scrollPaneMuro;
 
-    /**
-     * Metodo para actualizar los botones del menu Contactos
-     */
-    public void actualizarContactos(){
-        int numContactos = vendedor.getListaContactos().size();
-        for (int i = 0; i < botonesContactos.length; i++) {
-            if (i<numContactos){
-                botonesContactos[i].setVisible(true);
-                botonesContactos[i].setText(vendedor.getListaContactos().get(i).getNombre());
-            }else{
-                botonesContactos[i].setVisible(false);
-            }
+    @FXML
+    private Button btnSkip;
+    @FXML
+    private Button btnChats;
+    @FXML
+    private GridPane gridContacto;
+    @FXML
+    void clickSkip(ActionEvent event) throws IOException {
+        int result = JOptionPane.showConfirmDialog (null, "¿Seguro que deseas salir?","LOG OUT", JOptionPane.YES_NO_OPTION);
+        if(result == JOptionPane.YES_OPTION) {
+            Stage cerrar = (Stage) btnContacto.getScene().getWindow();
+            cerrar.close();
+            Stage login = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/login.fxml"));
+            Scene scene = new Scene(loader.load(), 468, 531);
+            LoginController loginController = loader.getController();
+            loginController.setModelFactory(modelFactory);
+            login.setScene(scene);
+            login.show();
         }
     }
-    public void inicializarBotonesContactos(){
-        botonesContactos[0] = btnCon1;
-        botonesContactos[1] = btnCon2;
-        botonesContactos[2] = btnCon3;
-        botonesContactos[3] = btnCon4;
-        botonesContactos[4] = btnCon5;
-        botonesContactos[5] = btnCon6;
-        botonesContactos[6] = btnCon7;
-        botonesContactos[7] = btnCon8;
-        botonesContactos[8] = btnCon9;
-        botonesContactos[9] = btnCon10;
+    @FXML
+    void clickChats(ActionEvent event) {
+
     }
     /**
      * Metodo para inicializar los datos en el dashboard de un vendedor
      * @param vendedor
      */
-    public void inicializarDashboard(VendedorDto vendedor) {
+    public void inicializarDashboard(VendedorDto vendedor) throws IOException {
         modelFactory = ModelFactory.getInstance();
         this.vendedor = vendedor;
-        inicializarBotonesContactos();
-        actualizarContactos();
+        mostrarContactos();
     }
 
-    @FXML
-    void clickCon1(ActionEvent event) throws IOException {
-        paneCon1.setVisible(true);
+    public void mostrarContactos() throws IOException {
         int columna = 0;
         int fila = 0;
-        Muro muro = vendedor.getListaContactos().get(0).getMuro();
+        for (int i = 0; i<vendedor.getListaContactos().size(); i++) {
+            Vendedor vendedor1 = vendedor.getListaContactos().get(i);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/casillaContacto.fxml"));
+            Button boton = loader.load();
 
-        for(int i=0 ; i<muro.getListaPublicaciones().size() ; i++){
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/publicacion.fxml"));
-            AnchorPane anchorPane = fxmlLoader.load();
+            boton.setOnAction(event -> {
+                try {
+                    mostrarPublicaciones(vendedor1);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
-            PublicacionController publicacionController = fxmlLoader.getController();
-            publicacionController.setData(muro.getListaPublicaciones().get(i));
+            CasillaContactoController controller = loader.getController();
+            controller.setData(vendedor.getListaContactos().get(i));
 
-            gridPaneMuro.add(anchorPane, columna, fila);
-            GridPane.setMargin(anchorPane, new Insets(10));
-            fila++;
+            gridContacto.add(boton, columna, fila);
+
+            fila ++;
         }
     }
 
-    @FXML
-    void clickCon10(ActionEvent event) {
+    public void mostrarPublicaciones(Vendedor vendedor) throws IOException {
+        int columna = 0;
+        int fila = 0;
+        Muro muro = vendedor.getMuro();
+        for (int i = 0; i<muro.getListaPublicaciones().size(); i++) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/publicacion.fxml"));
+            AnchorPane pane = loader.load();
 
-    }
-
-    @FXML
-    void clickCon2(ActionEvent event) {
-
-    }
-
-    @FXML
-    void clickCon3(ActionEvent event) {
-
-    }
-
-    @FXML
-    void clickCon4(ActionEvent event) {
-
-    }
-
-    @FXML
-    void clickCon5(ActionEvent event) {
-
-    }
-
-    @FXML
-    void clickCon6(ActionEvent event) {
-
-    }
-
-    @FXML
-    void clickCon7(ActionEvent event) {
-
-    }
-
-    @FXML
-    void clickCon8(ActionEvent event) {
-
-    }
-
-    @FXML
-    void clickCon9(ActionEvent event) {
-
+            PublicacionController controller = loader.getController();
+            controller.setData(muro.getListaPublicaciones().get(i));
+            gridPaneMuro.add(pane, columna, fila);
+            fila ++;
+        }
     }
 
     @FXML
