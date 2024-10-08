@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -57,8 +58,13 @@ public class VendedorDashboardController {
 
     @FXML
     private Button btnSkip;
+
     @FXML
     private Button btnChats;
+
+    @FXML
+    private Label labelNombreMuro;
+
     @FXML
     private GridPane gridContacto;
     @FXML
@@ -101,6 +107,7 @@ public class VendedorDashboardController {
             boton.setOnAction(event -> {
                 try {
                     mostrarPublicaciones(vendedor1);
+                    labelNombreMuro.setText("Publicaciones de " + vendedor1.getNombre());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -124,6 +131,7 @@ public class VendedorDashboardController {
             AnchorPane pane = loader.load();
 
             PublicacionController controller = loader.getController();
+            controller.setVendedor(vendedor);
             controller.setData(muro.getListaPublicaciones().get(i));
             gridPaneMuro.add(pane, columna, fila);
             fila ++;

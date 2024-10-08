@@ -1,0 +1,19 @@
+.fondo_publicacion{
+    -fx-background-color: #5f7ea6;
+    -fx-background-radius: 25;
+}
+.arriba{
+    -fx-background-color: #7596cd;
+    -fx-background-radius: 25;
+}
+.btn_gusta_comentario{
+    -fx-background-color: #7ab5ec;
+    -fx-background-radius: 5;
+}
+.btn_gusta_comentario:hover{
+    -fx-background-color: #6398c6;
+    -fx-background-radius: 5;
+}
+.barra_like{
+    -fx-background-color: #425d7e;
+}
