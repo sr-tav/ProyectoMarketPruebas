@@ -1,6 +1,6 @@
 package co.edu.uniquindio.marketpruebas;
 
-import co.edu.uniquindio.marketpruebas.controlador.LoginController;
+import co.edu.uniquindio.marketpruebas.viewcontroller.LoginController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

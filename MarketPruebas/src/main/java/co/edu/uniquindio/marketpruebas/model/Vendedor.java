@@ -19,7 +19,9 @@ public class Vendedor extends Usuario implements IRealizarPublicacion {
         listaProductos = new ArrayList<Producto>();
         muro = new Muro();
     }
+    public Vendedor(){
 
+    }
     /**
      * Metodo para verificar si hay un contacto repetido
      * @param vendedor

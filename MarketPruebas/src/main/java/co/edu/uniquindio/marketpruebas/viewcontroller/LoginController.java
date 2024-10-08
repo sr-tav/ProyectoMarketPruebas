@@ -1,6 +1,10 @@
-package co.edu.uniquindio.marketpruebas.controlador;
+package co.edu.uniquindio.marketpruebas.viewcontroller;
 
+import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
+import co.edu.uniquindio.marketpruebas.mapping.dto.AdministradorDto;
+import co.edu.uniquindio.marketpruebas.mapping.dto.UsuarioDto;
+import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketpruebas.model.Administrador;
 import co.edu.uniquindio.marketpruebas.model.Usuario;
 import co.edu.uniquindio.marketpruebas.model.Vendedor;
@@ -17,6 +21,8 @@ import java.io.IOException;
 
 public class LoginController {
     private ModelFactory modelFactory;
+    private UsuarioController usuarioController;
+
     @FXML
     private Button btnIngresar;
 
@@ -28,28 +34,56 @@ public class LoginController {
 
     @FXML
     private TextField textUsuario;
+
+    @FXML
+    void initialize(){
+        usuarioController = new UsuarioController();
+    }
+
     @FXML
     void clickIngresar(ActionEvent event) throws IOException {
-        String usuario = textUsuario.getText();
-        String contra = textContraseña.getText();
-        Usuario user = modelFactory.login(usuario, contra);
-        if (user instanceof Vendedor) {
-            JOptionPane.showMessageDialog(null, "Bienvenido Vendedor "+ user.getNombre());
+        login();
+    }
+
+    public void login() throws IOException {
+        UsuarioDto dto = buildUsuarioDto();
+        if (usuarioController.validarUsuario(dto)){
+            abrirVentana(usuarioController.getUsuario(dto));
+        }
+    }
+
+    public void abrirVentana(UsuarioDto usuario) throws IOException {
+        if (usuario instanceof VendedorDto){
+            JOptionPane.showMessageDialog(null, "Bienvenido Vendedor "+ usuario.getNombre());
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/vendedor-dashboard.fxml"));
             Scene scene = new Scene(fxmlLoader.load(),723,525);
             Stage stage = new Stage();
             VendedorDashboardController controller = fxmlLoader.getController();
-            controller.inicializarDashboard(modelFactory,(Vendedor)user);
+            controller.inicializarDashboard((VendedorDto)usuario);
             stage.setScene(scene);
-            stage.show();
 
-        } else if (user instanceof Administrador) {
-            JOptionPane.showMessageDialog(null, "Bienvenido Administrador "+ user.getNombre());
+            //Cerrar la ventana actual
+            Stage stageCerrar = (Stage) btnIngresar.getScene().getWindow();
+            stageCerrar.close();
+
+            //Mostrar la nueva ventana
+            stage.show();
+        }else if (usuario instanceof AdministradorDto){
+            JOptionPane.showMessageDialog(null, "Bienvenido Administrador "+ usuario.getNombre());
         }else{
             JOptionPane.showMessageDialog(null, "Este usuario no existe");
-            textUsuario.setText("");
-            textContraseña.setText("");
         }
+    }
+
+    public UsuarioDto buildUsuarioDto(){
+        return new UsuarioDto(
+                null,
+                null,
+                null,
+                null,
+                textUsuario.getText(),
+                textContraseña.getText()
+        );
     }
 
     @FXML

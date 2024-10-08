@@ -1,18 +1,24 @@
 package co.edu.uniquindio.marketpruebas.factory;
 
+import co.edu.uniquindio.marketpruebas.mapping.dto.UsuarioDto;
+import co.edu.uniquindio.marketpruebas.mapping.mappers.MarketPlaceMappingImpl;
 import co.edu.uniquindio.marketpruebas.model.*;
+import co.edu.uniquindio.marketpruebas.services.IModelFactoryService;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
-public class ModelFactory {
+public class ModelFactory implements IModelFactoryService {
     private static ModelFactory instance;
     private static MarketPlace marketPlace;
+    private static MarketPlaceMappingImpl mapping;
 
     private ModelFactory() {
         inicializarDatos();
+        mapping = new MarketPlaceMappingImpl();
     }
     public static ModelFactory getInstance() {
         if (instance == null) {
@@ -20,6 +26,23 @@ public class ModelFactory {
         }
         return instance;
     }
+
+    @Override
+    public UsuarioDto getUsuario(UsuarioDto usuario) {
+        if(validarLogin(usuario)){
+            return mapping.usuarioToUsuarioDto(marketPlace.getUsuario(usuario.getUsuario(), usuario.getPassword()));
+        }
+        return null;
+    }
+
+    @Override
+    public boolean validarLogin(UsuarioDto usuario) {
+        if (marketPlace.verificarUsuario(usuario.getUsuario(), usuario.getPassword())) {
+            return true;
+        }
+        return false;
+    }
+
     public static Usuario login(String usuario, String password) {
         for(Usuario usuario1 : marketPlace.getListaUsuarios()){
             if (usuario1.getUsuario().equals(usuario) && usuario1.getPassword().equals(password)){
@@ -28,6 +51,7 @@ public class ModelFactory {
         }
         return null;
     }
+
     /**
      * INICIALIZACION DE DATOS
      */

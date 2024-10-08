@@ -1,10 +1,9 @@
-package co.edu.uniquindio.marketpruebas.controlador;
+package co.edu.uniquindio.marketpruebas.viewcontroller;
 
 import co.edu.uniquindio.marketpruebas.model.Publicacion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;

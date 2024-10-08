@@ -1,4 +1,4 @@
-package co.edu.uniquindio.marketpruebas.controlador;
+package co.edu.uniquindio.marketpruebas.viewcontroller;
 
 import co.edu.uniquindio.marketpruebas.model.Comentario;
 import javafx.fxml.FXML;

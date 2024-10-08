@@ -33,6 +33,25 @@ public class MarketPlace implements IInteraccionEntreContactos {
             }
         }
     }
+    public Usuario getUsuario(String usuario, String password){
+        if (verificarUsuario(usuario, password)){
+            for (Usuario usuario1 : listaUsuarios){
+                if (usuario1.getUsuario().equals(usuario) && usuario1.getPassword().equals(password)){
+                    return usuario1;
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean verificarUsuario(String usuario, String password){
+        for(Usuario u : listaUsuarios){
+            if(u.getUsuario().equals(usuario) && u.getPassword().equals(password)){
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * Seccion Getter y Setters
      */

@@ -7,6 +7,7 @@ public class Administrador extends Usuario {
         super(nombre,apellido,cedula,direccion,usuario,password);
         this.IdAdmin = IdAdmin;
     }
+    public Administrador() {}
 
     public String getIdAdmin() {
         return IdAdmin;

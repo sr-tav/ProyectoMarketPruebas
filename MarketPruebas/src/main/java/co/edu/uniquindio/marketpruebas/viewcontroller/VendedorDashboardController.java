@@ -1,8 +1,8 @@
-package co.edu.uniquindio.marketpruebas.controlador;
+package co.edu.uniquindio.marketpruebas.viewcontroller;
 
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
+import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketpruebas.model.Muro;
-import co.edu.uniquindio.marketpruebas.model.Publicacion;
 import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,12 +16,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class VendedorDashboardController {
     private ModelFactory modelFactory;
-    private Vendedor vendedor;
+    private VendedorDto vendedor;
 
     @FXML
     private Button btnCon1;
@@ -115,11 +113,10 @@ public class VendedorDashboardController {
     }
     /**
      * Metodo para inicializar los datos en el dashboard de un vendedor
-     * @param modelFactory
      * @param vendedor
      */
-    public void inicializarDashboard(ModelFactory modelFactory, Vendedor vendedor) {
-        this.modelFactory = modelFactory;
+    public void inicializarDashboard(VendedorDto vendedor) {
+        modelFactory = ModelFactory.getInstance();
         this.vendedor = vendedor;
         inicializarBotonesContactos();
         actualizarContactos();
