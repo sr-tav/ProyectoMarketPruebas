@@ -1,11 +1,7 @@
 package co.edu.uniquindio.marketpruebas.mapping.mappers;
 
-import co.edu.uniquindio.marketpruebas.mapping.dto.AdministradorDto;
-import co.edu.uniquindio.marketpruebas.mapping.dto.UsuarioDto;
-import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
-import co.edu.uniquindio.marketpruebas.model.Administrador;
-import co.edu.uniquindio.marketpruebas.model.Usuario;
-import co.edu.uniquindio.marketpruebas.model.Vendedor;
+import co.edu.uniquindio.marketpruebas.mapping.dto.*;
+import co.edu.uniquindio.marketpruebas.model.*;
 import co.edu.uniquindio.marketpruebas.services.IMarketPlaceMapping;
 
 import java.util.List;
@@ -80,4 +76,51 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     public List<UsuarioDto> getUsuariosDto(List<Usuario> usuarios) {
         return List.of();
     }
+
+    @Override
+    public Publicacion publicacionDtoToPublicacion(PublicacionDto publicacion) {
+        Publicacion publi = new Publicacion();
+        publi.setDescripcion(publicacion.getDescripcion());
+        publi.setFechaPublicacion(publicacion.getFechaPublicacion());
+        publi.setProducto(productoDtoToProducto(publicacion.getProducto()));
+        publi.setListaComentarios(publicacion.getListaComentarios());
+        publi.setListaMegustas(publicacion.getListaMegustas());
+        publi.setHoraPublicacion(publicacion.getHoraPublicacion());
+        return publi;
+    }
+
+    @Override
+    public PublicacionDto publicacionToPublicacionDto(Publicacion publicacion) {
+        PublicacionDto dto = new PublicacionDto();
+        dto.setDescripcion(publicacion.getDescripcion());
+        dto.setFechaPublicacion(publicacion.getFechaPublicacion());
+        dto.setProducto(productoToProductoDto(publicacion.getProducto()));
+        dto.setListaComentarios(publicacion.getListaComentarios());
+        dto.setListaMegustas(publicacion.getListaMegustas());
+        dto.setHoraPublicacion(publicacion.getHoraPublicacion());
+        return dto;
+    }
+
+    @Override
+    public ProductoDto productoToProductoDto(Producto producto) {
+        ProductoDto dto = new ProductoDto();
+        dto.setCategoria(producto.getCategoria());
+        dto.setNombre(producto.getNombre());
+        dto.setPrecio(producto.getPrecio());
+        dto.setImagen(producto.getImagen());
+        dto.setEstado(producto.getEstado());
+        return dto;
+    }
+
+    @Override
+    public Producto productoDtoToProducto(ProductoDto productoDto) {
+        Producto producto = new Producto();
+        producto.setCategoria(productoDto.getCategoria());
+        producto.setNombre(productoDto.getNombre());
+        producto.setPrecio(productoDto.getPrecio());
+        producto.setImagen(productoDto.getImagen());
+        producto.setEstado(productoDto.getEstado());
+        return producto;
+    }
+
 }

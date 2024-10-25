@@ -1,6 +1,9 @@
 package co.edu.uniquindio.marketpruebas.factory;
 
+import co.edu.uniquindio.marketpruebas.mapping.dto.ProductoDto;
+import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.UsuarioDto;
+import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketpruebas.mapping.mappers.MarketPlaceMappingImpl;
 import co.edu.uniquindio.marketpruebas.model.*;
 import co.edu.uniquindio.marketpruebas.services.IModelFactoryService;
@@ -8,6 +11,7 @@ import co.edu.uniquindio.marketpruebas.services.IModelFactoryService;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,6 +57,52 @@ public class ModelFactory implements IModelFactoryService {
         marketPlace.darMeGustaPublicacion((Vendedor) (mapping.usuarioDtoToUsuario(usuario)), publicacion);
     }
 
+    @Override
+    public List<ProductoDto> getListaProductosDisponibles(UsuarioDto usuario) {
+        Usuario user = marketPlace.getUsuarioLogin(usuario.getUsuario(), usuario.getPassword());
+        List<ProductoDto> disponibles = new ArrayList<>();
+        if (user != null) {
+            for (Producto producto:((Vendedor)user).getListaProductosDisponibles()){
+                disponibles.add(mapping.productoToProductoDto(producto));
+            }
+        }
+        return disponibles;
+    }
+
+    /**
+     * /////////////////////////////////////// CRUD PUBLICACION ////////////////////////////////////////////////////////
+     */
+
+    @Override
+    public boolean agregarPublicacion(PublicacionDto publicacion, VendedorDto vendedor) {
+        Publicacion p = mapping.publicacionDtoToPublicacion(publicacion);
+        Vendedor v = (Vendedor) mapping.usuarioDtoToUsuario(vendedor);
+
+        if (marketPlace.crearPublicacion(p,v)){
+            return true;
+        }else {
+            return true;
+        }
+
+    }
+
+    @Override
+    public boolean eliminarPublicacion(PublicacionDto publicacion, VendedorDto vendedor) {
+        return false;
+    }
+
+    @Override
+    public boolean actualizarPublicacion(PublicacionDto publicacion, VendedorDto vendedor) {
+        return false;
+    }
+
+    @Override
+    public List<PublicacionDto> getListaPublicaciones(Muro muro) {
+        return List.of();
+    }
+
+
+
     public static Usuario login(String usuario, String password) {
         for(Usuario usuario1 : marketPlace.getListaUsuarios()){
             if (usuario1.getUsuario().equals(usuario) && usuario1.getPassword().equals(password)){
@@ -74,6 +124,7 @@ public class ModelFactory implements IModelFactoryService {
         Producto producto2 = new Producto("Nintendo Switch", "/co/edu/uniquindio/marketpruebas/imagenes/Nintendo-Switch.jpg","Consolas de video",Estado.PUBLICADO, 500000);
         Producto producto3 = new Producto("Closet de dos puertas", "/co/edu/uniquindio/marketpruebas/imagenes/Closet-dos.png","Muebles para el hogar",Estado.PUBLICADO, 450000);
         Producto producto4 = new Producto("Iphone 25", "/co/edu/uniquindio/marketpruebas/imagenes/iphone 25.jpeg","Celulares",Estado.PUBLICADO, 450000);
+        Producto producto5 = new Producto("Moto cualquiera","/co/edu/uniquindio/marketpruebas/imagenes/Moto.png", "Vehiculos",null,2500000);
 
         //Creacion de publicaciones
         Publicacion publicacion = new Publicacion(LocalDate.now(), LocalTime.now(), producto1,"Flamante vehiculo mazda dos dias de uso, mas informacion al interno");
@@ -120,6 +171,7 @@ public class ModelFactory implements IModelFactoryService {
         vendedor2.setMuro(muro2);
 
         //Agregar Producto a vendedor
+        vendedor1.agregarProducto(producto5);
         vendedor1.agregarProducto(producto1);
         vendedor1.agregarProducto(producto2);
         vendedor1.agregarProducto(producto3);

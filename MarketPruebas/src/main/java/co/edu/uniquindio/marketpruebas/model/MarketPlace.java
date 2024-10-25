@@ -1,11 +1,14 @@
 package co.edu.uniquindio.marketpruebas.model;
 
+import co.edu.uniquindio.marketpruebas.mapping.dto.ProductoDto;
+import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
+import co.edu.uniquindio.marketpruebas.services.ICrudPublicacion;
 import co.edu.uniquindio.marketpruebas.services.IInteraccionEntreContactos;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MarketPlace implements IInteraccionEntreContactos {
+public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion {
     private String nombre;
     private List<Administrador> listaAdministradores;
     private List<Usuario> listaUsuarios;
@@ -101,5 +104,59 @@ public class MarketPlace implements IInteraccionEntreContactos {
     @Override
     public void darMeGustaPublicacion(Vendedor usuario, Publicacion publicacion) {
         publicacion.agregarMeGusta(usuario);
+    }
+
+    /**
+     * //////////////////////////////////////////// CRUD PUBLICACION ///////////////////////////////////////////////////
+     */
+    public boolean verificarProductoExiste(Producto producto){
+        List<Producto> productos = new ArrayList<>();
+        for (Vendedor vendedor: listaVendedores){
+            for (Producto p: vendedor.getListaProductos()){
+                productos.add(p);
+            }
+        }
+
+        for (Producto p: productos){
+            if (p.getImagen() == producto.getImagen()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verificarPublicacionExiste(Publicacion publicacion){
+        List<Publicacion> publicaciones = new ArrayList<>();
+        for (Vendedor vendedor: listaVendedores){
+            for(Publicacion p : vendedor.getMuro().getListaPublicaciones()){
+                publicaciones.add(p);
+            }
+        }
+
+        for (Publicacion p: publicaciones){
+            if (p.getProducto() == publicacion.getProducto()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean crearPublicacion(Publicacion publicacion, Vendedor vendedor) {
+        if(verificarPublicacionExiste(publicacion)){
+            vendedor.getMuro().agregarPublicacion(publicacion);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean eliminarPublicacion(Publicacion publicacion, Vendedor vendedor) {
+        return false;
+    }
+
+    @Override
+    public boolean actualizarPublicacion(Publicacion publicacion, Vendedor vendedor) {
+        return false;
     }
 }

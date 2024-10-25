@@ -1,28 +1,37 @@
 package co.edu.uniquindio.marketpruebas.viewcontroller;
 
+import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
+import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
+import co.edu.uniquindio.marketpruebas.mapping.dto.ProductoDto;
+import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketpruebas.model.Muro;
+import co.edu.uniquindio.marketpruebas.model.Producto;
 import co.edu.uniquindio.marketpruebas.model.Vendedor;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class VendedorDashboardController {
     private ModelFactory modelFactory;
-
     private VendedorDto vendedor;
+    private PublicacionController publicacionController;
+    private UsuarioController usuarioController;
 
     @FXML
     private Button btnContacto;
@@ -81,18 +90,31 @@ public class VendedorDashboardController {
             login.show();
         }
     }
-    @FXML
-    void clickChats(ActionEvent event) {
 
-    }
     /**
      * Metodo para inicializar los datos en el dashboard de un vendedor
      * @param vendedor
      */
     public void inicializarDashboard(VendedorDto vendedor) throws IOException {
         modelFactory = ModelFactory.getInstance();
+        publicacionController = new PublicacionController();
+        usuarioController = new UsuarioController();
+
         this.vendedor = vendedor;
         mostrarContactos();
+        fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+
+        selectProducto.setItems(FXCollections.observableArrayList(usuarioController.getListaProductosDisponibles(vendedor)));
+
+        selectProducto.setCellFactory(lv -> new ListCell<ProductoDto>(){
+            @Override
+            protected void updateItem(ProductoDto item, boolean empty){
+                super.updateItem(item, empty);
+                setText(empty ? "" : "Producto = " + item.getNombre() + " / " + item.getEstado());
+            }
+        });
+
     }
 
     /**
@@ -164,13 +186,72 @@ public class VendedorDashboardController {
     /**
      * /////////////////////////////////////////// SECCION PANEL INICIO/////////////////////////////////////////////////
      */
+
+    @FXML
+    private Button btnCargarImagen;
+
+    @FXML
+    private Button btnPublicar;
+
+    @FXML
+    private TextArea textAreaPublicar;
+
+    private FileChooser fileChooser;
+
+    private String rutaImagenCargada;
+
+    @FXML
+    private ComboBox<ProductoDto> selectProducto;
+
+    private ProductoDto productoSeleccionado;
+
+    /**
+     * Metodo para que al darle click al inicio se oculten los otros paneles y solo se muestre el inicio
+     * @param event
+     */
     @FXML
     void clickInicio(ActionEvent event) {
         paneContactos.setVisible(false);
         paneEstadistica.setVisible(false);
         paneInicio.setVisible(true);
         panePerfil.setVisible(false);
+        rutaImagenCargada = null;
+        textAreaPublicar.clear();
     }
+
+    @FXML
+    void clickCargarImagen(ActionEvent event) {
+        File archivo = fileChooser.showOpenDialog(null);
+        if (archivo != null) {
+            this.rutaImagenCargada = archivo.toURI().toString();
+        }
+    }
+
+    @FXML
+    void clickPublicar(ActionEvent event) {
+
+        if (textAreaPublicar.getText() != null) {
+            JOptionPane.showMessageDialog(null, "Paso");
+            PublicacionDto dto = new PublicacionDto();
+            dto.setDescripcion(textAreaPublicar.getText());
+            dto.setHoraPublicacion(LocalTime.now());
+            dto.setFechaPublicacion(LocalDate.now());
+            dto.setProducto(selectProducto.getSelectionModel().getSelectedItem());
+            if (publicacionController.agregarPublicacion(dto,vendedor)){
+                JOptionPane.showMessageDialog(null, "Publicacion realizada con exito");
+                textAreaPublicar.clear();
+                selectProducto.getSelectionModel().clearSelection();
+            }else {
+                JOptionPane.showMessageDialog(null, "No se puede agregar el publicacion");
+            }
+
+
+        }else {
+            JOptionPane.showMessageDialog(null, "Escribe una descripcion para poder realizar la publicacion");
+        }
+
+    }
+
 
 
     /**
@@ -182,6 +263,14 @@ public class VendedorDashboardController {
         paneEstadistica.setVisible(false);
         paneInicio.setVisible(false);
         panePerfil.setVisible(true);
+    }
+    /**
+     * ///////////////////////////////////////////// SECCION PANEL CHATS ///////////////////////////////////////////////
+     */
+
+    @FXML
+    void clickChats(ActionEvent event) {
+
     }
 
     /**
