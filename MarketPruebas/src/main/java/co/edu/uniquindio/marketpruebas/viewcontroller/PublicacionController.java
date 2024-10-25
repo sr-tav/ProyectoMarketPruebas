@@ -1,11 +1,14 @@
 package co.edu.uniquindio.marketpruebas.viewcontroller;
 
+import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
+import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketpruebas.model.Publicacion;
 import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -14,11 +17,28 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
+import javax.swing.*;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class PublicacionController {
+public class PublicacionController implements Initializable {
+
+    UsuarioController usuarioController;
+
+    /**
+     * Metodo para inicializar el controlador a la par que se carga la vista
+     * @param url
+     * @param resourceBundle
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        usuarioController = new UsuarioController();
+    }
+
     @FXML
     private Button btnComentar;
+
     @FXML
     private ImageView imgProducto;
 
@@ -59,6 +79,9 @@ public class PublicacionController {
 
     private Vendedor vendedor;
 
+    //El vendedor que esta usando el programa
+    private VendedorDto interactVendedor;
+
     public void setData(Publicacion publicacion1) throws IOException {
 
         //llenar los datos de la vista con los de la publicacion
@@ -67,7 +90,7 @@ public class PublicacionController {
         labelTitulo.setText(publicacion1.getProducto().getNombre());
         labelDescrip.setText(publicacion1.getDescripcion());
         labelPrecio.setText(Double.toString(publicacion1.getProducto().getPrecio()));
-        labelNumMegustas.setText(Integer.toString(publicacion1.getNumMeGustas()));
+        labelNumMegustas.setText(Integer.toString(publicacion1.getListaMegustas().size()));
         labelFecha.setText(publicacion1.getFechaPublicacion().toString());
         labelHora.setText(publicacion1.getHoraPublicacion().getHour() + " : " + publicacion1.getHoraPublicacion().getMinute());
         labelComentarios.setText(Integer.toString(publicacion1.getListaComentarios().size()));
@@ -94,9 +117,10 @@ public class PublicacionController {
     void clickDarMegusta(ActionEvent event) {
 
         //Dar like solamente una vez
-        publicacion.setNumMeGustas(publicacion.getNumMeGustas() + 1);
-        labelNumMegustas.setText(Integer.toString(publicacion.getNumMeGustas()));
+        publicacion.agregarMeGusta((Vendedor)(usuarioController.getUsuarioCompleto(interactVendedor)));
+        labelNumMegustas.setText(Integer.toString(publicacion.getListaMegustas().size()));
         btnDarMegusta.setDisable(true);
+        JOptionPane.showMessageDialog(null,publicacion.getListaMegustas().size());
     }
     @FXML
     void clickComentar(ActionEvent event) {
@@ -109,6 +133,9 @@ public class PublicacionController {
 
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
+    }
+    public void setInteractVendedor(VendedorDto InteractVendedor) {
+        this.interactVendedor = InteractVendedor;
     }
 }
 

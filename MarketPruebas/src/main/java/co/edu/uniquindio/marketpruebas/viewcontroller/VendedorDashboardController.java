@@ -23,6 +23,7 @@ import java.io.IOException;
 
 public class VendedorDashboardController {
     private ModelFactory modelFactory;
+
     private VendedorDto vendedor;
 
     @FXML
@@ -132,6 +133,7 @@ public class VendedorDashboardController {
 
             PublicacionController controller = loader.getController();
             controller.setVendedor(vendedor);
+            controller.setInteractVendedor(this.vendedor);
             controller.setData(muro.getListaPublicaciones().get(i));
             gridPaneMuro.add(pane, columna, fila);
             fila ++;

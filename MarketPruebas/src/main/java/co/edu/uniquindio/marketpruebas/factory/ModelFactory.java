@@ -30,7 +30,7 @@ public class ModelFactory implements IModelFactoryService {
     @Override
     public UsuarioDto getUsuario(UsuarioDto usuario) {
         if(validarLogin(usuario)){
-            return mapping.usuarioToUsuarioDto(marketPlace.getUsuario(usuario.getUsuario(), usuario.getPassword()));
+            return mapping.usuarioToUsuarioDto(marketPlace.getUsuarioLogin(usuario.getUsuario(), usuario.getPassword()));
         }
         return null;
     }
@@ -41,6 +41,11 @@ public class ModelFactory implements IModelFactoryService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Usuario getUsuarioCompleto(UsuarioDto usuario) {
+        return marketPlace.getUsuarioLogin(usuario.getUsuario(), usuario.getPassword());
     }
 
     public static Usuario login(String usuario, String password) {
@@ -56,15 +61,22 @@ public class ModelFactory implements IModelFactoryService {
      * INICIALIZACION DE DATOS
      */
     private static void inicializarDatos() {
+
         MarketPlace marketPlace1 = new MarketPlace();
+
+        //Creacion de productos
         Producto producto1 = new Producto("Mazda carro", "/co/edu/uniquindio/marketpruebas/imagenes/Mazda.jpeg", "Vehiculos usados", Estado.PUBLICADO, 40000000);
         Producto producto2 = new Producto("Nintendo Switch", "/co/edu/uniquindio/marketpruebas/imagenes/Nintendo-Switch.jpg","Consolas de video",Estado.PUBLICADO, 500000);
         Producto producto3 = new Producto("Closet de dos puertas", "/co/edu/uniquindio/marketpruebas/imagenes/Closet-dos.png","Muebles para el hogar",Estado.PUBLICADO, 450000);
         Producto producto4 = new Producto("Iphone 25", "/co/edu/uniquindio/marketpruebas/imagenes/iphone 25.jpeg","Celulares",Estado.PUBLICADO, 450000);
+
+        //Creacion de publicaciones
         Publicacion publicacion = new Publicacion(LocalDate.now(), LocalTime.now(), producto1,"Flamante vehiculo mazda dos dias de uso, mas informacion al interno");
         Publicacion publicacion2 = new Publicacion(LocalDate.now().plusDays(1),LocalTime.now(),producto2,"Espectacular consola de video, nintendo porfavor no me demandes, mas informacion al interno");
         Publicacion publicacion3 = new Publicacion(LocalDate.now().plusDays(2),LocalTime.now(),producto3,"Closet de dos puertas, de 3 metros de alto y 1,5 de ancho, mdf, mas info al interno");
         Publicacion publicacion4 = new Publicacion(LocalDate.now().plusDays(3),LocalTime.now(),producto4,"Unico en el mundo, iphone 25, extraido de los laboratorios de apple, promosion del 10% al primer interesado, precio real: 1 billon de dolars");
+
+        //Creacion de vendedores
         Vendedor vendedor1 = new Vendedor("Pepe", "Bermuda", "00001", "Alli al lado", "pepito07", "1234", "01");
         Vendedor vendedor2 = new Vendedor("Gustava", "Santos", "00002", "Alli al otro lado", "Pollos08", "12345", "02");
         Vendedor vendedor3 = new Vendedor("Martin", "Santos", "00003", "Alli", "user01", "00001", "03");
@@ -76,21 +88,39 @@ public class ModelFactory implements IModelFactoryService {
         Vendedor vendedor9 = new Vendedor("vendedor9","apellido9","00009","Alli","user09","00009","09");
         Vendedor vendedor10 = new Vendedor("vendedor10", "apellido10","000010","Alli","user10","000010","10");
         Vendedor vendedor11 = new Vendedor("vendedor11","apellido11","000011","Alli","user11","000011","11");
+
+        //Creacion de administradores
         Administrador admin = new Administrador("Admin", "admin", "00000", "desconocida", "admin", "admin","00");
-        Comentario comentario = new Comentario(vendedor2,LocalDate.now(),LocalTime.now(),"JAJAJAJAJ el parcerito mas alucin");
+
+        //Creacion de comentarios
+        Comentario comentario = new Comentario(vendedor4,LocalDate.now(),LocalTime.now(),"JAJAJAJAJ el parcerito mas alucin");
         Comentario comentario2 = new Comentario(vendedor2,LocalDate.now().plusDays(2),LocalTime.now(),"Esta feo");
+
+        //Agregar comentario a publicaciones
         publicacion4.agregarComentario(comentario);
         publicacion.agregarComentario(comentario2);
+
+        //Creacion de muros
         Muro muro = new Muro();
+        Muro muro2 = new Muro();
+
+        //Agregar publicaciones al muro
         muro.agregarPublicacion(publicacion);
         muro.agregarPublicacion(publicacion2);
         muro.agregarPublicacion(publicacion3);
-        muro.agregarPublicacion(publicacion4);
+        muro2.agregarPublicacion(publicacion4);
+
+        //Agregar muro a un vendedor
         vendedor1.setMuro(muro);
+        vendedor2.setMuro(muro2);
+
+        //Agregar Producto a vendedor
         vendedor1.agregarProducto(producto1);
         vendedor1.agregarProducto(producto2);
         vendedor1.agregarProducto(producto3);
-        vendedor1.agregarProducto(producto4);
+        vendedor2.agregarProducto(producto4);
+
+        //Relacionar contactos bilateralmente
         marketPlace1.agregarContactosEntreSi(vendedor1,vendedor2);
         marketPlace1.agregarContactosEntreSi(vendedor1,vendedor3);
         marketPlace1.agregarContactosEntreSi(vendedor1,vendedor4);
@@ -101,8 +131,11 @@ public class ModelFactory implements IModelFactoryService {
         marketPlace1.agregarContactosEntreSi(vendedor1,vendedor9);
         marketPlace1.agregarContactosEntreSi(vendedor1,vendedor10);
         marketPlace1.agregarContactosEntreSi(vendedor1,vendedor11);
+
+        //Agregar distintos objetos al marketplace automaticamente
         List<Object> parametros = Arrays.asList(vendedor1,vendedor2,admin);
         parametros.forEach(marketPlace1::agregarAutomatico);
+
         marketPlace = marketPlace1;
     }
 }

@@ -2,6 +2,7 @@ package co.edu.uniquindio.marketpruebas.controller;
 
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.UsuarioDto;
+import co.edu.uniquindio.marketpruebas.model.Usuario;
 import co.edu.uniquindio.marketpruebas.services.IUsuarioControllerService;
 
 public class UsuarioController implements IUsuarioControllerService {
@@ -22,5 +23,10 @@ public class UsuarioController implements IUsuarioControllerService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Usuario getUsuarioCompleto(UsuarioDto usuario) {
+        return modelFactory.getUsuarioCompleto(usuario);
     }
 }

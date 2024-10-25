@@ -13,19 +13,20 @@ public class Publicacion implements IInteractuar {
     private String descripcion;
     private Producto producto;
     private List<Comentario> listaComentarios;
-    private int numMeGustas;
+    private List<Vendedor> listaMegustas;
 
     public Publicacion(LocalDate fechaPublicacion, LocalTime horaPublicacion, Producto producto,String descripcion) {
         this.fechaPublicacion = fechaPublicacion;
         this.horaPublicacion = horaPublicacion;
         this.producto = producto;
-        this.numMeGustas = 0;
+        listaComentarios = new ArrayList<>();
         listaComentarios = new ArrayList<Comentario>();
         this.descripcion = descripcion;
+        listaMegustas = new ArrayList<>();
     }
     public Publicacion() {
         listaComentarios = new ArrayList<Comentario>();
-        this.numMeGustas = 0;
+        listaMegustas = new ArrayList<>();
     }
 
     /**
@@ -35,8 +36,21 @@ public class Publicacion implements IInteractuar {
     public void agregarComentario(Comentario comentario) {
         listaComentarios.add(comentario);
     }
+
     /**
-     * SECCION GETTERS Y SETTERS
+     * Metodo para agregar me gustas
+     * @param vendedor
+     */
+    private void agregarMegusta(Vendedor vendedor) {
+        listaMegustas.add(vendedor);
+    }
+
+    @Override
+    public void agregarMeGusta(Vendedor vendedor) {
+        agregarMegusta(vendedor);
+    }
+    /**
+     * ////////////////////////SECCION GETTERS Y SETTERS/////////////////////////////////////////////////
      */
     public LocalDate getFechaPublicacion() {
         return fechaPublicacion;
@@ -70,14 +84,6 @@ public class Publicacion implements IInteractuar {
         this.listaComentarios = listaComentarios;
     }
 
-    public int getNumMeGustas() {
-        return numMeGustas;
-    }
-
-    public void setNumMeGustas(int numMeGustas) {
-        this.numMeGustas = numMeGustas;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -86,8 +92,11 @@ public class Publicacion implements IInteractuar {
         this.descripcion = descripcion;
     }
 
-    @Override
-    public void agregarMeGusta() {
-        numMeGustas++;
+    public List<Vendedor> getListaMegustas() {
+        return listaMegustas;
+    }
+
+    public void setListaMegustas(List<Vendedor> listaMegustas) {
+        this.listaMegustas = listaMegustas;
     }
 }
