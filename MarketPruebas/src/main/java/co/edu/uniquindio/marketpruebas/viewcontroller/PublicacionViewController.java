@@ -77,7 +77,7 @@ public class PublicacionViewController implements Initializable {
 
     private Publicacion publicacion;
 
-    private Vendedor vendedor;
+    private VendedorDto vendedor;
 
     //El vendedor que esta usando el programa
     private VendedorDto interactVendedor;
@@ -127,11 +127,11 @@ public class PublicacionViewController implements Initializable {
 
     }
 
-    public Vendedor getVendedor() {
+    public VendedorDto getVendedor() {
         return vendedor;
     }
 
-    public void setVendedor(Vendedor vendedor) {
+    public void setVendedor(VendedorDto vendedor) {
         this.vendedor = vendedor;
     }
     public void setInteractVendedor(VendedorDto InteractVendedor) {

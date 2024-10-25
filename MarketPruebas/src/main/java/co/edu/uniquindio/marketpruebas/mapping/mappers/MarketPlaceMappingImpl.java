@@ -4,9 +4,13 @@ import co.edu.uniquindio.marketpruebas.mapping.dto.*;
 import co.edu.uniquindio.marketpruebas.model.*;
 import co.edu.uniquindio.marketpruebas.services.IMarketPlaceMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
+    /**
+     * ////////////////////////////////////////////////// CONVERTIDOR CLASES ////////////////////////////////////////////////////////////
+     */
     @Override
     public UsuarioDto usuarioToUsuarioDto(Usuario usuario) {
         if(usuario instanceof Vendedor){
@@ -20,9 +24,11 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                     vendedor.getPassword(),
                     vendedor.getApellido()
             );
-            vendedorDto.setListaContactos(vendedor.getListaContactos());
+
+            vendedorDto.setListaContactos(UsuariosToUsuariosDto(vendedor.getListaContactos()));
             vendedorDto.setListaProductos(vendedor.getListaProductos());
             vendedorDto.setMuro(vendedor.getMuro());
+
             return vendedorDto;
         }else if(usuario instanceof Administrador){
             Administrador administrador = (Administrador)usuario;
@@ -52,9 +58,11 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
             vendedor.setDireccion(vendedorDto.getDireccion());
             vendedor.setUsuario(vendedorDto.getUsuario());
             vendedor.setPassword(vendedorDto.getPassword());
-            vendedor.setListaProductos(vendedorDto.getListaProductos());
+
+            vendedor.setListaProductos(productosDtoToProductos(vendedorDto.getListaProductos()));
             vendedor.setMuro(vendedorDto.getMuro());
             vendedor.setListaContactos(vendedorDto.getListaContactos());
+
             return vendedor;
 
         }else if(usuarioDto instanceof AdministradorDto){
@@ -73,31 +81,32 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     }
 
     @Override
-    public List<UsuarioDto> getUsuariosDto(List<Usuario> usuarios) {
-        return List.of();
-    }
-
-    @Override
     public Publicacion publicacionDtoToPublicacion(PublicacionDto publicacion) {
+
         Publicacion publi = new Publicacion();
         publi.setDescripcion(publicacion.getDescripcion());
         publi.setFechaPublicacion(publicacion.getFechaPublicacion());
         publi.setProducto(productoDtoToProducto(publicacion.getProducto()));
+        publi.setHoraPublicacion(publicacion.getHoraPublicacion());
+
         publi.setListaComentarios(publicacion.getListaComentarios());
         publi.setListaMegustas(publicacion.getListaMegustas());
-        publi.setHoraPublicacion(publicacion.getHoraPublicacion());
+
         return publi;
     }
 
     @Override
     public PublicacionDto publicacionToPublicacionDto(Publicacion publicacion) {
+
         PublicacionDto dto = new PublicacionDto();
         dto.setDescripcion(publicacion.getDescripcion());
         dto.setFechaPublicacion(publicacion.getFechaPublicacion());
         dto.setProducto(productoToProductoDto(publicacion.getProducto()));
+        dto.setHoraPublicacion(publicacion.getHoraPublicacion());
+
         dto.setListaComentarios(publicacion.getListaComentarios());
         dto.setListaMegustas(publicacion.getListaMegustas());
-        dto.setHoraPublicacion(publicacion.getHoraPublicacion());
+
         return dto;
     }
 
@@ -121,6 +130,83 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         producto.setImagen(productoDto.getImagen());
         producto.setEstado(productoDto.getEstado());
         return producto;
+    }
+
+    @Override
+    public Mensaje mesajeDtoToMensaje(Mensaje mensaje) {
+        return null;
+    }
+
+    @Override
+    public MensajeDto mensajeToMensajeDto(MensajeDto mensaje) {
+        return null;
+    }
+
+    @Override
+    public Comentario comentarioDtoToComentario(Comentario comentario) {
+        return null;
+    }
+
+    @Override
+    public ComentarioDto comentarioToComentarioDto(ComentarioDto comentario) {
+        return null;
+    }
+
+    /**
+     * ///////////////////////////////////////////////////// CONVERTIDOR LISTAS /////////////////////////////////////////////////////////////////
+     */
+    @Override
+    public List<? extends UsuarioDto> UsuariosToUsuariosDto(List<? extends Usuario> usuarios) {
+        return List.of();
+    }
+
+    @Override
+    public List<Usuario> UsuariosDtoToUsuarios(List<? extends UsuarioDto> usuariosDto) {
+        return List.of();
+    }
+
+    @Override
+    public List<PublicacionDto> publicacionesToPublicacionesDto(List<Publicacion> publicaciones) {
+        return List.of();
+    }
+
+    @Override
+    public List<Publicacion> publicacionesDtoToPublicaciones(List<PublicacionDto> publicacionesDto) {
+        return List.of();
+    }
+
+    @Override
+    public List<ProductoDto> productosToProductosDto(List<Producto> productos) {
+        return List.of();
+    }
+
+    @Override
+    public List<Producto> productosDtoToProductos(List<ProductoDto> productosDto) {
+        List<Producto> productos = new ArrayList<>();
+        for (ProductoDto productoDto : productosDto) {
+            productos.add(productoDtoToProducto(productoDto));
+        }
+        return productos;
+    }
+
+    @Override
+    public List<? extends MensajeDto> mensajesToMensajesDto(List<? extends Mensaje> mensajes) {
+        return List.of();
+    }
+
+    @Override
+    public List<? extends Mensaje> mensajesDtoToMensajes(List<? extends MensajeDto> mensajesDto) {
+        return List.of();
+    }
+
+    @Override
+    public List<? extends ComentarioDto> comentariosToComentariosDto(List<? extends Comentario> comentarios) {
+        return List.of();
+    }
+
+    @Override
+    public List<? extends Comentario> comentariosDtosToComentarios(List<? extends ComentarioDto> comentariosDto) {
+        return List.of();
     }
 
 }

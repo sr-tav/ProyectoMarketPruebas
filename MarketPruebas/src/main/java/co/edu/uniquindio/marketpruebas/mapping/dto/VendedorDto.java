@@ -8,15 +8,14 @@ import java.util.List;
 
 public class VendedorDto extends UsuarioDto {
     private String IdVendedor;
-    private List<Vendedor> listaContactos;
-    private List<Producto> listaProductos;
-    private Muro muro;
+    private List<VendedorDto> listaContactos;
+    private List<ProductoDto> listaProductos;
+    private MuroDto muro;
 
     public VendedorDto(String nombre, String apellido, String cedula, String direccion, String usuario, String password, String idVendedor) {
         super(nombre, apellido, cedula, direccion, usuario, password);
         this.IdVendedor = idVendedor;
     }
-
     /**
      * SECCION GETTERS Y SETTERS
      */
@@ -28,27 +27,27 @@ public class VendedorDto extends UsuarioDto {
         IdVendedor = idVendedor;
     }
 
-    public List<Vendedor> getListaContactos() {
-        return listaContactos;
-    }
-
-    public void setListaContactos(List<Vendedor> listaContactos) {
-        this.listaContactos = listaContactos;
-    }
-
-    public List<Producto> getListaProductos() {
-        return listaProductos;
-    }
-
-    public void setListaProductos(List<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
-    }
-
-    public Muro getMuro() {
+    public MuroDto getMuro() {
         return muro;
     }
 
-    public void setMuro(Muro muro) {
+    public void setMuro(MuroDto muro) {
         this.muro = muro;
+    }
+
+    public List<VendedorDto> getListaContactos() {
+        return listaContactos;
+    }
+
+    public void setListaContactos(List<VendedorDto> listaContactos) {
+        this.listaContactos = listaContactos;
+    }
+
+    public List<ProductoDto> getListaProductos() {
+        return listaProductos;
+    }
+
+    public void setListaProductos(List<ProductoDto> listaProductos) {
+        this.listaProductos = listaProductos;
     }
 }

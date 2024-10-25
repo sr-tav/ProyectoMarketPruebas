@@ -14,8 +14,8 @@ public class PublicacionDto {
     private LocalTime horaPublicacion;
     private String descripcion;
     private ProductoDto producto;
-    private List<Comentario> listaComentarios;
-    private List<Vendedor> listaMegustas;
+    private List<ComentarioDto> listaComentarios;
+    private List<VendedorDto> listaMegustas;
 
     public PublicacionDto() {
         listaComentarios = new ArrayList<>();
@@ -65,19 +65,19 @@ public class PublicacionDto {
         this.producto = producto;
     }
 
-    public List<Comentario> getListaComentarios() {
+    public List<ComentarioDto> getListaComentarios() {
         return listaComentarios;
     }
 
-    public void setListaComentarios(List<Comentario> listaComentarios) {
+    public void setListaComentarios(List<ComentarioDto> listaComentarios) {
         this.listaComentarios = listaComentarios;
     }
 
-    public List<Vendedor> getListaMegustas() {
+    public List<VendedorDto> getListaMegustas() {
         return listaMegustas;
     }
 
-    public void setListaMegustas(List<Vendedor> listaMegustas) {
+    public void setListaMegustas(List<VendedorDto> listaMegustas) {
         this.listaMegustas = listaMegustas;
     }
 }

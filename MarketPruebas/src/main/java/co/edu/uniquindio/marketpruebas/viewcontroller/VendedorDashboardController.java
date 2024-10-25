@@ -5,6 +5,7 @@ import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.ProductoDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
+import co.edu.uniquindio.marketpruebas.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketpruebas.model.Muro;
 import co.edu.uniquindio.marketpruebas.model.Producto;
@@ -164,7 +165,7 @@ public class VendedorDashboardController {
             AnchorPane pane = loader.load();
 
             PublicacionViewController controller = loader.getController();
-            controller.setVendedor(vendedor);
+            controller.setVendedor((VendedorDto) new UsuarioDto());
             controller.setInteractVendedor(this.vendedor);
             controller.setData(muro.getListaPublicaciones().get(i));
             gridPaneMuro.add(pane, columna, fila);
@@ -205,6 +206,12 @@ public class VendedorDashboardController {
 
     private ProductoDto productoSeleccionado;
 
+    @FXML
+    private GridPane gridInicio;
+
+    @FXML
+    private ScrollPane scrollInicio;
+
     /**
      * Metodo para que al darle click al inicio se oculten los otros paneles y solo se muestre el inicio
      * @param event
@@ -228,7 +235,7 @@ public class VendedorDashboardController {
     }
 
     @FXML
-    void clickPublicar(ActionEvent event) {
+    void clickPublicar(ActionEvent event) throws IOException {
 
         if (textAreaPublicar.getText() != null) {
             JOptionPane.showMessageDialog(null, "Paso");
@@ -241,6 +248,7 @@ public class VendedorDashboardController {
                 JOptionPane.showMessageDialog(null, "Publicacion realizada con exito");
                 textAreaPublicar.clear();
                 selectProducto.getSelectionModel().clearSelection();
+                mostrarPublicacionesPersonal();
             }else {
                 JOptionPane.showMessageDialog(null, "No se puede agregar el publicacion");
             }
@@ -252,6 +260,23 @@ public class VendedorDashboardController {
 
     }
 
+    public void mostrarPublicacionesPersonal() throws IOException {
+        int columna = 0;
+        int fila = 0;
+        for(int i = 0;i<vendedor.getMuro().getListaPublicaciones().size();i++){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/publicacion.fxml"));
+            AnchorPane pane = loader.load();
+
+            PublicacionViewController controller = loader.getController();
+            controller.setVendedor(this.vendedor);
+            controller.setData(vendedor.getMuro().getListaPublicaciones().get(i));
+
+
+            gridInicio.add(pane, columna, fila);
+            fila ++;
+
+        }
+    }
 
 
     /**
