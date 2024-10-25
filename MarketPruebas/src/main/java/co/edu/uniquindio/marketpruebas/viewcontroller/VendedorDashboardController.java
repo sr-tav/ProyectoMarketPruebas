@@ -95,6 +95,18 @@ public class VendedorDashboardController {
         mostrarContactos();
     }
 
+    /**
+     *  ////////////////////////////////////SECCION PANEL CONTACTOS///////////////////////////////////////////////////
+     */
+
+    @FXML
+    void clickContacto(ActionEvent event) {
+        paneContactos.setVisible(true);
+        paneEstadistica.setVisible(false);
+        paneInicio.setVisible(false);
+        panePerfil.setVisible(false);
+    }
+
     public void mostrarContactos() throws IOException {
         int columna = 0;
         int fila = 0;
@@ -138,14 +150,9 @@ public class VendedorDashboardController {
         }
     }
 
-    @FXML
-    void clickContacto(ActionEvent event) {
-        paneContactos.setVisible(true);
-        paneEstadistica.setVisible(false);
-        paneInicio.setVisible(false);
-        panePerfil.setVisible(false);
-    }
-
+    /**
+     * //////////////////////////////////////////SECCION PANEL ESTADISTICAS/////////////////////////////////////////////
+     */
     @FXML
     void clickEstadistica(ActionEvent event) {
         paneContactos.setVisible(false);
@@ -154,6 +161,9 @@ public class VendedorDashboardController {
         panePerfil.setVisible(false);
     }
 
+    /**
+     * /////////////////////////////////////////// SECCION PANEL INICIO/////////////////////////////////////////////////
+     */
     @FXML
     void clickInicio(ActionEvent event) {
         paneContactos.setVisible(false);
@@ -162,6 +172,10 @@ public class VendedorDashboardController {
         panePerfil.setVisible(false);
     }
 
+
+    /**
+     * //////////////////////////////////////////// SECCION PANEL PERFIL ///////////////////////////////////////////////
+     */
     @FXML
     void clickPerfil(ActionEvent event) {
         paneContactos.setVisible(false);
@@ -169,6 +183,10 @@ public class VendedorDashboardController {
         paneInicio.setVisible(false);
         panePerfil.setVisible(true);
     }
+
+    /**
+     * ///////////////////////////////////////////// SECCION GETTERS Y SETTERS /////////////////////////////////////////
+     */
 
     public ModelFactory getModelFactory() {
         return modelFactory;

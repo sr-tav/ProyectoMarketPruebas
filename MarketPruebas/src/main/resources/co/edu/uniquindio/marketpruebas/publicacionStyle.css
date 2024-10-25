@@ -17,3 +17,7 @@
 .barra_like{
     -fx-background-color: #425d7e;
 }
+.barra_crear_publicacion{
+    -fx-background-color: #7ea9ca;
+    -fx-background-radius: 5;
+}

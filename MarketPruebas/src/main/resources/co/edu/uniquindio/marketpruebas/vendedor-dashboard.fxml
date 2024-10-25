@@ -101,9 +101,43 @@
             </Pane>
             <Pane prefHeight="489.0" prefWidth="723.0">
                <children>
-                  <BorderPane fx:id="paneInicio" prefHeight="484.0" prefWidth="723.0" visible="false">
+                  <BorderPane fx:id="paneInicio" prefHeight="484.0" prefWidth="723.0">
                      <center>
-                        <Label text="Seccion inicio en proceso" BorderPane.alignment="CENTER" />
+                        <VBox prefHeight="484.0" prefWidth="615.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="50.0" right="50.0" top="10.0" />
+                           </BorderPane.margin>
+                           <children>
+                              <Pane prefHeight="97.0" prefWidth="622.0" styleClass="barra_crear_publicacion" stylesheets="@publicacionStyle.css">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="623.0">
+                                       <children>
+                                          <ImageView fitHeight="48.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@profile-userv1.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="15.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="631.0">
+                                             <children>
+                                                <Label text="¡Comparte con tus contactos una publicacion!" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="7.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </VBox>
                      </center>
                   </BorderPane>
                   <BorderPane fx:id="panePerfil" prefHeight="484.0" prefWidth="723.0" visible="false">
@@ -116,7 +150,7 @@
                         <Label text="Seccion estadisticas en proceso" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
-                  <BorderPane fx:id="paneContactos" prefHeight="484.0" prefWidth="723.0" styleClass="fondo_pane" stylesheets="@loginStyle.css">
+                  <BorderPane fx:id="paneContactos" prefHeight="484.0" prefWidth="723.0" styleClass="fondo_pane" stylesheets="@loginStyle.css" visible="false">
                      <center>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="fondo_pane" stylesheets="@loginStyle.css" BorderPane.alignment="CENTER">
                            <children>
