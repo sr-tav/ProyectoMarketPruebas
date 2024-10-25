@@ -7,7 +7,6 @@ import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,7 +14,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -131,7 +129,7 @@ public class VendedorDashboardController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/publicacion.fxml"));
             AnchorPane pane = loader.load();
 
-            PublicacionController controller = loader.getController();
+            PublicacionViewController controller = loader.getController();
             controller.setVendedor(vendedor);
             controller.setInteractVendedor(this.vendedor);
             controller.setData(muro.getListaPublicaciones().get(i));

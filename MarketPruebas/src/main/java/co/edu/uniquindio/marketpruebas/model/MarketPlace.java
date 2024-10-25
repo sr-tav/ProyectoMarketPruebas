@@ -97,4 +97,9 @@ public class MarketPlace implements IInteraccionEntreContactos {
         contacto1.agregarContacto(contacto2);
         contacto2.agregarContacto(contacto1);
     }
+
+    @Override
+    public void darMeGustaPublicacion(Vendedor usuario, Publicacion publicacion) {
+        publicacion.agregarMeGusta(usuario);
+    }
 }

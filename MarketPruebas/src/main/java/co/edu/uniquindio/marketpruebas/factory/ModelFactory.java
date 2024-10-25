@@ -48,6 +48,11 @@ public class ModelFactory implements IModelFactoryService {
         return marketPlace.getUsuarioLogin(usuario.getUsuario(), usuario.getPassword());
     }
 
+    @Override
+    public void darMeGustaPublicacion(UsuarioDto usuario, Publicacion publicacion) {
+        marketPlace.darMeGustaPublicacion((Vendedor) (mapping.usuarioDtoToUsuario(usuario)), publicacion);
+    }
+
     public static Usuario login(String usuario, String password) {
         for(Usuario usuario1 : marketPlace.getListaUsuarios()){
             if (usuario1.getUsuario().equals(usuario) && usuario1.getPassword().equals(password)){

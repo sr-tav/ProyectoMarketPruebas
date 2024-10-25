@@ -1,7 +1,7 @@
 package co.edu.uniquindio.marketpruebas.viewcontroller;
 
+import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
-import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketpruebas.model.Publicacion;
 import co.edu.uniquindio.marketpruebas.model.Vendedor;
@@ -12,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -22,8 +21,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PublicacionController implements Initializable {
-
+public class PublicacionViewController implements Initializable {
+    PublicacionController publicacionController;
     UsuarioController usuarioController;
 
     /**
@@ -34,6 +33,7 @@ public class PublicacionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuarioController = new UsuarioController();
+        publicacionController = new PublicacionController();
     }
 
     @FXML
@@ -117,7 +117,7 @@ public class PublicacionController implements Initializable {
     void clickDarMegusta(ActionEvent event) {
 
         //Dar like solamente una vez
-        publicacion.agregarMeGusta((Vendedor)(usuarioController.getUsuarioCompleto(interactVendedor)));
+        publicacionController.darMeGusta(interactVendedor, publicacion);
         labelNumMegustas.setText(Integer.toString(publicacion.getListaMegustas().size()));
         btnDarMegusta.setDisable(true);
         JOptionPane.showMessageDialog(null,publicacion.getListaMegustas().size());

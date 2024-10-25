@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="872.0" prefWidth="500.0" scaleShape="false" styleClass="fondo_publicacion" stylesheets="@publicacionStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketpruebas.viewcontroller.PublicacionController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="872.0" prefWidth="500.0" scaleShape="false" styleClass="fondo_publicacion" stylesheets="@publicacionStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketpruebas.viewcontroller.PublicacionViewController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="872.0" prefWidth="501.0" styleClass="fondo_publicacion" stylesheets="@publicacionStyle.css">
          <children>
