@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketpruebas.viewcontroller;
 
+import co.edu.uniquindio.marketpruebas.mapping.dto.ComentarioDto;
 import co.edu.uniquindio.marketpruebas.model.Comentario;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -19,9 +20,9 @@ public class ComentarioController {
     @FXML
     private Label labelNombre;
 
-    private Comentario comentario;
+    private ComentarioDto comentario;
 
-    public void setData(Comentario comentario1) {
+    public void setData(ComentarioDto comentario1) {
         labelFecha.setText(comentario1.getFecha().toString());
         labelHora.setText(comentario1.getHora().getHour() + " : " + comentario1.getHora().getMinute());
         labelNombre.setText(comentario1.getUsuario().getNombre());

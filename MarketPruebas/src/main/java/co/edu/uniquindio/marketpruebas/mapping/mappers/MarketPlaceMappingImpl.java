@@ -4,15 +4,19 @@ import co.edu.uniquindio.marketpruebas.mapping.dto.*;
 import co.edu.uniquindio.marketpruebas.model.*;
 import co.edu.uniquindio.marketpruebas.services.IMarketPlaceMapping;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
+@SuppressWarnings("ALL")
 public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     /**
      * ////////////////////////////////////////////////// CONVERTIDOR CLASES ////////////////////////////////////////////////////////////
      */
-    @Override
-    public UsuarioDto usuarioToUsuarioDto(Usuario usuario) {
+    private UsuarioDto usuarioToUsuarioDto(Usuario usuario, Set<Usuario> procesados) {
+        if(procesados.contains(usuario)){
+            return null;
+        }
+        procesados.add(usuario);
+
         if(usuario instanceof Vendedor){
             Vendedor vendedor = (Vendedor)usuario;
             VendedorDto vendedorDto = new VendedorDto(
@@ -25,9 +29,9 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                     vendedor.getApellido()
             );
 
-            vendedorDto.setListaContactos(UsuariosToUsuariosDto(vendedor.getListaContactos()));
-            vendedorDto.setListaProductos(vendedor.getListaProductos());
-            vendedorDto.setMuro(vendedor.getMuro());
+            vendedorDto.setListaContactos(UsuariosToUsuariosDto(vendedor.getListaContactos(),procesados));
+            vendedorDto.setListaProductos(productosToProductosDto(vendedor.getListaProductos()));
+            vendedorDto.setMuro(muroToMuroDto(vendedor.getMuro()));
 
             return vendedorDto;
         }else if(usuario instanceof Administrador){
@@ -60,8 +64,8 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
             vendedor.setPassword(vendedorDto.getPassword());
 
             vendedor.setListaProductos(productosDtoToProductos(vendedorDto.getListaProductos()));
-            vendedor.setMuro(vendedorDto.getMuro());
-            vendedor.setListaContactos(vendedorDto.getListaContactos());
+            vendedor.setMuro(muroDtoToMuro(vendedorDto.getMuro()));
+            vendedor.setListaContactos( UsuariosDtoToUsuarios(vendedorDto.getListaContactos()));
 
             return vendedor;
 
@@ -89,8 +93,8 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         publi.setProducto(productoDtoToProducto(publicacion.getProducto()));
         publi.setHoraPublicacion(publicacion.getHoraPublicacion());
 
-        publi.setListaComentarios(publicacion.getListaComentarios());
-        publi.setListaMegustas(publicacion.getListaMegustas());
+        publi.setListaComentarios(mensajesDtoToMensajes(publicacion.getListaComentarios()));
+        publi.setListaMegustas(UsuariosDtoToUsuarios(publicacion.getListaMegustas()));
 
         return publi;
     }
@@ -104,8 +108,8 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         dto.setProducto(productoToProductoDto(publicacion.getProducto()));
         dto.setHoraPublicacion(publicacion.getHoraPublicacion());
 
-        dto.setListaComentarios(publicacion.getListaComentarios());
-        dto.setListaMegustas(publicacion.getListaMegustas());
+        dto.setListaComentarios(mensajesToMensajesDto(publicacion.getListaComentarios()));
+        //dto.setListaMegustas(UsuariosToUsuariosDto(publicacion.getListaMegustas()));
 
         return dto;
     }
@@ -133,51 +137,119 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     }
 
     @Override
-    public Mensaje mesajeDtoToMensaje(Mensaje mensaje) {
-        return null;
+    public Mensaje mesajeDtoToMensaje(MensajeDto mensaje) {
+        Mensaje m = new Mensaje();
+        m.setMensaje(mensaje.getMensaje());
+        m.setUsuario(usuarioDtoToUsuario(mensaje.getUsuario()));
+        m.setFecha(mensaje.getFecha());
+        m.setHora(mensaje.getHora());
+        return m;
     }
 
     @Override
-    public MensajeDto mensajeToMensajeDto(MensajeDto mensaje) {
-        return null;
+    public MensajeDto mensajeToMensajeDto(Mensaje mensaje) {
+        MensajeDto dto = new MensajeDto();
+        dto.setMensaje(mensaje.getMensaje());
+        dto.setUsuario(usuarioToUsuarioDto(mensaje.getUsuario()));
+        dto.setFecha(mensaje.getFecha());
+        dto.setHora(mensaje.getHora());
+        return dto;
     }
 
     @Override
-    public Comentario comentarioDtoToComentario(Comentario comentario) {
-        return null;
+    public Comentario comentarioDtoToComentario(ComentarioDto comentario) {
+        Comentario com = new Comentario();
+        com.setFecha(comentario.getFecha());
+        com.setHora(comentario.getHora());
+        com.setMensaje(comentario.getMensaje());
+        com.setUsuario(usuarioDtoToUsuario(comentario.getUsuario()));
+        com.setNumMeGustas(comentario.getNumMeGustas());
+        return com;
     }
 
     @Override
-    public ComentarioDto comentarioToComentarioDto(ComentarioDto comentario) {
-        return null;
+    public ComentarioDto comentarioToComentarioDto(Comentario comentario) {
+        ComentarioDto dto = new ComentarioDto();
+        dto.setFecha(comentario.getFecha());
+        dto.setFecha(comentario.getFecha());
+        dto.setUsuario(usuarioToUsuarioDto(comentario.getUsuario()));
+        dto.setMensaje(comentario.getMensaje());
+        dto.setNumMeGustas(comentario.getNumMeGustas());
+        return dto;
+    }
+
+    @Override
+    public Muro muroDtoToMuro(MuroDto muro) {
+        Muro m = new Muro();
+        //m.setListaChats();
+        m.setListaPublicaciones(publicacionesDtoToPublicaciones(muro.getListaPublicaciones()));
+        return m;
+    }
+
+    @Override
+    public MuroDto muroToMuroDto(Muro muro) {
+        MuroDto muroDto = new MuroDto();
+        //muroDto.setListaChats();
+        muroDto.setListaPublicaciones(publicacionesToPublicacionesDto(muro.getListaPublicaciones()));
+        return muroDto;
     }
 
     /**
      * ///////////////////////////////////////////////////// CONVERTIDOR LISTAS /////////////////////////////////////////////////////////////////
      */
+    public UsuarioDto usuarioToUsuarioDto(Usuario usuario){
+        return usuarioToUsuarioDto(usuario, new HashSet<>());
+    }
     @Override
-    public List<? extends UsuarioDto> UsuariosToUsuariosDto(List<? extends Usuario> usuarios) {
-        return List.of();
+    public <T extends UsuarioDto> List<T> UsuariosToUsuariosDto(List<? extends Usuario> usuarios, Set<Usuario> procesados) {
+        List<T> dtos = new ArrayList<>();
+        for (Usuario u : usuarios) {
+            UsuarioDto dto = usuarioToUsuarioDto(u, procesados);
+            if(dto != null){
+                dtos.add((T) dto);
+            }
+        }
+        return dtos;
     }
 
     @Override
-    public List<Usuario> UsuariosDtoToUsuarios(List<? extends UsuarioDto> usuariosDto) {
-        return List.of();
+    public <T extends Usuario> List<T> UsuariosDtoToUsuarios(List<? extends UsuarioDto> usuariosDto) {
+        List<T> usuarios = new ArrayList<>();
+        for (UsuarioDto u : usuariosDto) {
+            if (u instanceof VendedorDto){
+                usuarios.add((T)usuarioDtoToUsuario(u));
+            } else if (u instanceof AdministradorDto) {
+                usuarios.add((T)usuarioDtoToUsuario(u));
+            }
+        }
+        return usuarios;
     }
 
     @Override
     public List<PublicacionDto> publicacionesToPublicacionesDto(List<Publicacion> publicaciones) {
-        return List.of();
+        List<PublicacionDto> dtos = new ArrayList<>();
+        for (Publicacion p : publicaciones) {
+            dtos.add(publicacionToPublicacionDto(p));
+        }
+        return dtos;
     }
 
     @Override
     public List<Publicacion> publicacionesDtoToPublicaciones(List<PublicacionDto> publicacionesDto) {
-        return List.of();
+        List<Publicacion> publicaciones = new ArrayList<>();
+        for (PublicacionDto p : publicacionesDto) {
+            publicaciones.add(publicacionDtoToPublicacion(p));
+        }
+        return publicaciones;
     }
 
     @Override
     public List<ProductoDto> productosToProductosDto(List<Producto> productos) {
-        return List.of();
+        List<ProductoDto> dtos = new ArrayList<>();
+        for (Producto p : productos) {
+            dtos.add(productoToProductoDto(p));
+        }
+        return dtos;
     }
 
     @Override
@@ -190,23 +262,29 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     }
 
     @Override
-    public List<? extends MensajeDto> mensajesToMensajesDto(List<? extends Mensaje> mensajes) {
-        return List.of();
+    public <T extends MensajeDto> List<T> mensajesToMensajesDto(List<? extends Mensaje> mensajes) {
+        List<T> dtos = new ArrayList<>();
+        for (Mensaje m : mensajes) {
+            if(m instanceof Comentario){
+                dtos.add((T)comentarioToComentarioDto((Comentario) m));
+            } else if (m instanceof Mensaje) {
+                dtos.add((T)mensajeToMensajeDto(m));
+            }
+        }
+        return dtos;
     }
 
     @Override
-    public List<? extends Mensaje> mensajesDtoToMensajes(List<? extends MensajeDto> mensajesDto) {
-        return List.of();
-    }
-
-    @Override
-    public List<? extends ComentarioDto> comentariosToComentariosDto(List<? extends Comentario> comentarios) {
-        return List.of();
-    }
-
-    @Override
-    public List<? extends Comentario> comentariosDtosToComentarios(List<? extends ComentarioDto> comentariosDto) {
-        return List.of();
+    public <T extends Mensaje> List<T> mensajesDtoToMensajes(List<? extends MensajeDto> mensajesDto) {
+        List<T> mensajes = new ArrayList<>();
+        for (MensajeDto m : mensajesDto) {
+            if (m instanceof MensajeDto){
+                mensajes.add((T)mesajeDtoToMensaje(m));
+            }else if(m instanceof ComentarioDto){
+                mensajes.add((T)comentarioDtoToComentario((ComentarioDto) m));
+            }
+        }
+        return mensajes;
     }
 
 }

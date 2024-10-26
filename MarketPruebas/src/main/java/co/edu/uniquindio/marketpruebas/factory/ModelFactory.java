@@ -53,8 +53,8 @@ public class ModelFactory implements IModelFactoryService {
     }
 
     @Override
-    public void darMeGustaPublicacion(UsuarioDto usuario, Publicacion publicacion) {
-        marketPlace.darMeGustaPublicacion((Vendedor) (mapping.usuarioDtoToUsuario(usuario)), publicacion);
+    public void darMeGustaPublicacion(UsuarioDto usuario, PublicacionDto publicacion) {
+        marketPlace.darMeGustaPublicacion((Vendedor) (mapping.usuarioDtoToUsuario(usuario)), mapping.publicacionDtoToPublicacion(publicacion));
     }
 
     @Override

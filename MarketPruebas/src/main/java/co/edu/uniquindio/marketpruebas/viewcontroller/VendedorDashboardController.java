@@ -3,10 +3,7 @@ package co.edu.uniquindio.marketpruebas.viewcontroller;
 import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
-import co.edu.uniquindio.marketpruebas.mapping.dto.ProductoDto;
-import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
-import co.edu.uniquindio.marketpruebas.mapping.dto.UsuarioDto;
-import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
+import co.edu.uniquindio.marketpruebas.mapping.dto.*;
 import co.edu.uniquindio.marketpruebas.model.Muro;
 import co.edu.uniquindio.marketpruebas.model.Producto;
 import co.edu.uniquindio.marketpruebas.model.Vendedor;
@@ -107,7 +104,6 @@ public class VendedorDashboardController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg", "*.gif"));
 
         selectProducto.setItems(FXCollections.observableArrayList(usuarioController.getListaProductosDisponibles(vendedor)));
-
         selectProducto.setCellFactory(lv -> new ListCell<ProductoDto>(){
             @Override
             protected void updateItem(ProductoDto item, boolean empty){
@@ -115,7 +111,6 @@ public class VendedorDashboardController {
                 setText(empty ? "" : "Producto = " + item.getNombre() + " / " + item.getEstado());
             }
         });
-
     }
 
     /**
@@ -134,7 +129,7 @@ public class VendedorDashboardController {
         int columna = 0;
         int fila = 0;
         for (int i = 0; i<vendedor.getListaContactos().size(); i++) {
-            Vendedor vendedor1 = vendedor.getListaContactos().get(i);
+            VendedorDto vendedor1 = vendedor.getListaContactos().get(i);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/casillaContacto.fxml"));
             Button boton = loader.load();
 
@@ -156,10 +151,10 @@ public class VendedorDashboardController {
         }
     }
 
-    public void mostrarPublicaciones(Vendedor vendedor) throws IOException {
+    public void mostrarPublicaciones(VendedorDto vendedor) throws IOException {
         int columna = 0;
         int fila = 0;
-        Muro muro = vendedor.getMuro();
+        MuroDto muro = vendedor.getMuro();
         for (int i = 0; i<muro.getListaPublicaciones().size(); i++) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/publicacion.fxml"));
             AnchorPane pane = loader.load();

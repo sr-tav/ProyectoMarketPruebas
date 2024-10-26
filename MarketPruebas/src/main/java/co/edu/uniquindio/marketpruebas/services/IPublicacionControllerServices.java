@@ -9,7 +9,7 @@ import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import java.util.List;
 
 public interface IPublicacionControllerServices {
-    void darMeGusta(UsuarioDto usuario, Publicacion publicacion);
+    void darMeGusta(UsuarioDto usuario, PublicacionDto publicacion);
     List<PublicacionDto> getPublicacionesDto();
     boolean agregarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
     boolean eliminarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);

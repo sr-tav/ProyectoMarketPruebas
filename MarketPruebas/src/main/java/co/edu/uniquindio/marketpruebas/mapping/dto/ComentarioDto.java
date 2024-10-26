@@ -12,6 +12,7 @@ public class ComentarioDto extends MensajeDto{
         super(usuario,fecha,hora,mensaje);
         this.numMeGustas = numMeGustas;
     }
+    public ComentarioDto() {}
 
     public int getNumMeGustas() {
         return numMeGustas;

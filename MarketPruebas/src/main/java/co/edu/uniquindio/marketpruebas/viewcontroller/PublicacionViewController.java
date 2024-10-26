@@ -2,6 +2,7 @@ package co.edu.uniquindio.marketpruebas.viewcontroller;
 
 import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
+import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketpruebas.model.Publicacion;
 import co.edu.uniquindio.marketpruebas.model.Vendedor;
@@ -75,14 +76,14 @@ public class PublicacionViewController implements Initializable {
     @FXML
     private Label labelNombre;
 
-    private Publicacion publicacion;
+    private PublicacionDto publicacion;
 
     private VendedorDto vendedor;
 
     //El vendedor que esta usando el programa
     private VendedorDto interactVendedor;
 
-    public void setData(Publicacion publicacion1) throws IOException {
+    public void setData(PublicacionDto publicacion1) throws IOException {
 
         //llenar los datos de la vista con los de la publicacion
         labelNombre.setText(vendedor.getNombre());

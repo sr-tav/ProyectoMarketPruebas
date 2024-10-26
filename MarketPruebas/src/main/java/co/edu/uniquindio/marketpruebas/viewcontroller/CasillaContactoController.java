@@ -8,21 +8,21 @@ import javafx.scene.input.MouseEvent;
 import javax.swing.*;
 
 public class CasillaContactoController {
-    private Vendedor vendedor;
+    private VendedorDto vendedor;
 
     @FXML
     private Label lablNombre;
 
-    public void setData(Vendedor vendedor) {
+    public void setData(VendedorDto vendedor) {
         this.vendedor = vendedor;
         lablNombre.setText(vendedor.getNombre());
     }
 
-    public Vendedor getVendedor() {
+    public VendedorDto getVendedor() {
         return vendedor;
     }
 
-    public void setVendedor(Vendedor vendedor) {
+    public void setVendedor(VendedorDto vendedor) {
         this.vendedor = vendedor;
     }
 }

@@ -18,7 +18,7 @@ public class PublicacionController implements IPublicacionControllerServices {
     }
 
     @Override
-    public void darMeGusta(UsuarioDto usuario, Publicacion publicacion) {
+    public void darMeGusta(UsuarioDto usuario, PublicacionDto publicacion) {
         modelFactory.darMeGustaPublicacion(usuario, publicacion);
     }
 
