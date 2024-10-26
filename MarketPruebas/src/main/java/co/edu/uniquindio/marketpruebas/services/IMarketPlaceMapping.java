@@ -28,7 +28,7 @@ public interface IMarketPlaceMapping {
 
 
     //Convertidor listas
-    <T extends UsuarioDto> List<T> UsuariosToUsuariosDto(List<? extends Usuario> usuarios, Set<Usuario> procesados);
+    List<VendedorDto> VendedoresToVendedoresDto(List<Vendedor> vendedores);
     <T extends Usuario> List<T> UsuariosDtoToUsuarios(List<? extends UsuarioDto> usuariosDto);
 
     List<PublicacionDto> publicacionesToPublicacionesDto(List<Publicacion> publicaciones);
@@ -37,8 +37,12 @@ public interface IMarketPlaceMapping {
     List<ProductoDto> productosToProductosDto(List<Producto> productos);
     List<Producto> productosDtoToProductos(List<ProductoDto> productosDto);
 
-    <T extends MensajeDto> List<T> mensajesToMensajesDto(List<? extends Mensaje> mensajes);
-    <T extends Mensaje> List<T> mensajesDtoToMensajes(List<? extends MensajeDto> mensajesDto);
+    List<Comentario> comentariosDtoToComentarios(List<ComentarioDto> comentariosDto);
+    List<ComentarioDto> comentariosToComentariosDto(List<Comentario> comentarios);
+
+    List<Mensaje> mensajesDtoToMensajes(List<MensajeDto> mensajesDto);
+    List<MensajeDto> mensajeToMensajesDto(List<Mensaje> mensajes);
+
 
 
 }

@@ -4,6 +4,7 @@ import co.edu.uniquindio.marketpruebas.model.Estado;
 import javafx.scene.image.Image;
 
 public class ProductoDto {
+    private String idVendedor;
     private String nombre;
     private Image imagen;
     private String categoria;
@@ -11,12 +12,13 @@ public class ProductoDto {
     private double precio;
 
     public ProductoDto() {}
-    public ProductoDto(String nombre, Image imagen, String categoria, Estado estado, double precio) {
+    public ProductoDto(String nombre, Image imagen, String categoria, Estado estado, double precio, String idVendedor) {
         this.nombre = nombre;
         this.imagen = imagen;
         this.categoria = categoria;
         this.estado = estado;
         this.precio = precio;
+        this.idVendedor = idVendedor;
     }
 
     /**
@@ -60,5 +62,13 @@ public class ProductoDto {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public String getIdVendedor() {
+        return idVendedor;
+    }
+
+    public void setIdVendedor(String idVendedor) {
+        this.idVendedor = idVendedor;
     }
 }

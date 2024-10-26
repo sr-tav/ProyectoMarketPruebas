@@ -1,5 +1,7 @@
 package co.edu.uniquindio.marketpruebas.model;
 
+import co.edu.uniquindio.marketpruebas.services.IPublicacionControllerServices;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,5 +100,13 @@ public class Vendedor extends Usuario {
 
     public void setMuro(Muro muro) {
         this.muro = muro;
+        darIdATodo();
+    }
+
+    public void darIdATodo(){
+        muro.setIdVendedor(IdVendedor);
+        for (Publicacion publicacion : muro.getListaPublicaciones()){
+            publicacion.setIdVendedor(IdVendedor);
+        }
     }
 }

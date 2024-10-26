@@ -1,9 +1,6 @@
 package co.edu.uniquindio.marketpruebas.factory;
 
-import co.edu.uniquindio.marketpruebas.mapping.dto.ProductoDto;
-import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
-import co.edu.uniquindio.marketpruebas.mapping.dto.UsuarioDto;
-import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
+import co.edu.uniquindio.marketpruebas.mapping.dto.*;
 import co.edu.uniquindio.marketpruebas.mapping.mappers.MarketPlaceMappingImpl;
 import co.edu.uniquindio.marketpruebas.model.*;
 import co.edu.uniquindio.marketpruebas.services.IModelFactoryService;
@@ -101,19 +98,44 @@ public class ModelFactory implements IModelFactoryService {
         return List.of();
     }
 
-
-
-    public static Usuario login(String usuario, String password) {
-        for(Usuario usuario1 : marketPlace.getListaUsuarios()){
-            if (usuario1.getUsuario().equals(usuario) && usuario1.getPassword().equals(password)){
-                return usuario1;
-            }
-        }
-        return null;
+    /**
+     * /////////////////////////////////// RETORNO DE LISTAS ASOCIADAS A UNA CLASE /////////////////////////////////////////
+     */
+    @Override
+    public List<ProductoDto> getListaProductosDto(String id) {
+        return mapping.productosToProductosDto(marketPlace.getListaProductosVendedor(id));
     }
 
+    @Override
+    public List<VendedorDto> getListaContactosDto(String id){
+        return mapping.VendedoresToVendedoresDto(marketPlace.getListaContactos(id));
+    }
+    @Override
+    public List<Vendedor> getListaContactos(String id){
+        return marketPlace.getListaContactos(id);
+    }
+
+    @Override
+    public List<Comentario> getListaComentarios(String id) {
+        return marketPlace.getListaComentarios(id);
+    }
+
+    @Override
+    public List<ComentarioDto> getListaComentariosDto(String id) {
+        return mapping.come(marketPlace.getListaComentarios(id));
+    }
+
+    @Override
+    public List<Vendedor> getListaMeGusta(String id) {
+        return List.of();
+    }
+
+    @Override
+    public List<VendedorDto> getListaMeGustaDto(String id) {
+        return List.of();
+    }
     /**
-     * INICIALIZACION DE DATOS
+     * ///////////////////////////////////////////////////////////////////////////////////INICIALIZACION DE DATOS/////////////////////////////////////////////////////////////////////////////////////////
      */
     private static void inicializarDatos() {
 

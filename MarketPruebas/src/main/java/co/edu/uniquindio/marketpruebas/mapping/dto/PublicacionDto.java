@@ -14,21 +14,17 @@ public class PublicacionDto {
     private LocalTime horaPublicacion;
     private String descripcion;
     private ProductoDto producto;
-    private List<ComentarioDto> listaComentarios;
-    private List<VendedorDto> listaMegustas;
+    private String idVendedor;
 
     public PublicacionDto() {
-        listaComentarios = new ArrayList<>();
-        listaMegustas = new ArrayList<>();
     }
 
-    public PublicacionDto(LocalDate fechaPublicacion, LocalTime horaPublicacion, String descripcion, ProductoDto producto) {
+    public PublicacionDto(LocalDate fechaPublicacion, LocalTime horaPublicacion, String descripcion, ProductoDto producto, String idVendedor) {
         this.fechaPublicacion = fechaPublicacion;
         this.horaPublicacion = horaPublicacion;
         this.descripcion = descripcion;
         this.producto = producto;
-        listaComentarios = new ArrayList<>();
-        listaMegustas = new ArrayList<>();
+        this.idVendedor = idVendedor;
     }
     /**
      * SECCION GETTERS Y SETTERS
@@ -65,19 +61,11 @@ public class PublicacionDto {
         this.producto = producto;
     }
 
-    public List<ComentarioDto> getListaComentarios() {
-        return listaComentarios;
+    public String getIdVendedor() {
+        return idVendedor;
     }
 
-    public void setListaComentarios(List<ComentarioDto> listaComentarios) {
-        this.listaComentarios = listaComentarios;
-    }
-
-    public List<VendedorDto> getListaMegustas() {
-        return listaMegustas;
-    }
-
-    public void setListaMegustas(List<VendedorDto> listaMegustas) {
-        this.listaMegustas = listaMegustas;
+    public void setIdVendedor(String idVendedor) {
+        this.idVendedor = idVendedor;
     }
 }

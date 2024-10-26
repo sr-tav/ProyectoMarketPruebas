@@ -8,8 +8,6 @@ import java.util.List;
 
 public class VendedorDto extends UsuarioDto {
     private String IdVendedor;
-    private List<VendedorDto> listaContactos;
-    private List<ProductoDto> listaProductos;
     private MuroDto muro;
 
     public VendedorDto(String nombre, String apellido, String cedula, String direccion, String usuario, String password, String idVendedor) {
@@ -33,21 +31,5 @@ public class VendedorDto extends UsuarioDto {
 
     public void setMuro(MuroDto muro) {
         this.muro = muro;
-    }
-
-    public List<VendedorDto> getListaContactos() {
-        return listaContactos;
-    }
-
-    public void setListaContactos(List<VendedorDto> listaContactos) {
-        this.listaContactos = listaContactos;
-    }
-
-    public List<ProductoDto> getListaProductos() {
-        return listaProductos;
-    }
-
-    public void setListaProductos(List<ProductoDto> listaProductos) {
-        this.listaProductos = listaProductos;
     }
 }

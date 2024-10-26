@@ -36,7 +36,6 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
             }
         }
     }
-
     public Usuario getUsuarioLogin(String usuario, String password){
         if (verificarUsuario(usuario, password)){
             for (Usuario usuario1 : listaUsuarios){
@@ -67,6 +66,59 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         }
         return false;
     }
+    /**
+     * ////////////////////////////////// RETORNO DE LISTAS ASOCIADAS A UNA CLASE //////////////////////////////////////
+     */
+    /**
+     * Metodo para buscar la lista de productos de un vendedor por id
+     * @param id
+     * @return
+     */
+    public List<Producto> getListaProductosVendedor(String id) {
+        List<Producto> productos = new ArrayList<>();
+        for (Vendedor vendedor : listaVendedores){
+            if(vendedor.getIdVendedor().equals(id)){
+                productos = vendedor.getListaProductos();
+            }
+        }
+        return productos;
+    }
+    public List<Vendedor> getListaContactos(String id){
+        List<Vendedor> contactos = new ArrayList<>();
+        for (Vendedor vendedor : listaVendedores){
+            if(vendedor.getIdVendedor().equals(id)){
+                contactos = vendedor.getListaContactos();
+            }
+        }
+        return contactos;
+    }
+    public List<Comentario> getListaComentarios(String idVendedor){
+        List<Comentario> comentarios = new ArrayList<>();
+        for (Vendedor vendedor : listaVendedores){
+            if(vendedor.getIdVendedor().equals(idVendedor)){
+                for (Publicacion publicacion : vendedor.getMuro().getListaPublicaciones()){
+                    if(publicacion.getIdVendedor().equals(idVendedor)){
+                        comentarios = publicacion.getListaComentarios();
+                    }
+                }
+            }
+        }
+        return comentarios;
+    }
+    public List<Vendedor> getListaMeGusta(String id, String idVendedor){
+        List<Vendedor> meGustas = new ArrayList<>();
+        for (Vendedor vendedor : listaVendedores){
+            if(vendedor.getIdVendedor().equals(idVendedor)){
+                for (Publicacion publicacion : vendedor.getMuro().getListaPublicaciones()){
+                    if(publicacion.getIdVendedor().equals(idVendedor)){
+                        meGustas = publicacion.getListaMegustas();
+                    }
+                }
+            }
+        }
+        return meGustas;
+    }
+
     /**
      * Seccion Getter y Setters
      */

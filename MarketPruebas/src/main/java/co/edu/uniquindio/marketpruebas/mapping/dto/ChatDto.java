@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatDto {
-
+    private String id;
     private final int maxUsuarios = 2;
     private List<UsuarioDto> listaUsuarios;
     private List<MensajeDto> listaMensajes;

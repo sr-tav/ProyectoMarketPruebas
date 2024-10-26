@@ -1,13 +1,7 @@
 package co.edu.uniquindio.marketpruebas.services;
 
-import co.edu.uniquindio.marketpruebas.mapping.dto.ProductoDto;
-import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
-import co.edu.uniquindio.marketpruebas.mapping.dto.UsuarioDto;
-import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
-import co.edu.uniquindio.marketpruebas.model.Muro;
-import co.edu.uniquindio.marketpruebas.model.Publicacion;
-import co.edu.uniquindio.marketpruebas.model.Usuario;
-import co.edu.uniquindio.marketpruebas.model.Vendedor;
+import co.edu.uniquindio.marketpruebas.mapping.dto.*;
+import co.edu.uniquindio.marketpruebas.model.*;
 
 import java.util.List;
 
@@ -21,6 +15,19 @@ public interface IModelFactoryService {
     boolean eliminarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
     boolean actualizarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
     List<PublicacionDto> getListaPublicaciones(Muro muro);
+
+    //Retorno de listas asociadas a clases
+    List<ProductoDto> getListaProductosDto(String id);
+
+    List<VendedorDto> getListaContactosDto(String id);
+    List<Vendedor> getListaContactos(String id);
+
+    List<Comentario> getListaComentarios(String idVendedor);
+    List<ComentarioDto> getListaComentariosDto(String idVendedor);
+
+    List<Vendedor> getListaMeGusta(String idVendedor);
+    List<VendedorDto> getListaMeGustaDto(String idVendedor);
+
 
 
 }
