@@ -1,28 +1,34 @@
 package co.edu.uniquindio.marketpruebas.viewcontroller;
 
+import co.edu.uniquindio.marketpruebas.controller.MuroController;
+import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
+import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
-import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
-import co.edu.uniquindio.marketpruebas.model.Muro;
-import co.edu.uniquindio.marketpruebas.model.Vendedor;
+import co.edu.uniquindio.marketpruebas.mapping.dto.*;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class VendedorDashboardController {
-    private ModelFactory modelFactory;
-
-    private VendedorDto vendedor;
+    ModelFactory modelFactory;
+    VendedorDto vendedor;
+    PublicacionController publicacionController;
+    UsuarioController usuarioController;
+    MuroController muroController;
 
     @FXML
     private Button btnContacto;
@@ -66,6 +72,8 @@ public class VendedorDashboardController {
 
     @FXML
     private GridPane gridContacto;
+
+
     @FXML
     void clickSkip(ActionEvent event) throws IOException {
         int result = JOptionPane.showConfirmDialog (null, "¿Seguro que deseas salir?","LOG OUT", JOptionPane.YES_NO_OPTION);
@@ -81,18 +89,30 @@ public class VendedorDashboardController {
             login.show();
         }
     }
-    @FXML
-    void clickChats(ActionEvent event) {
 
-    }
     /**
      * Metodo para inicializar los datos en el dashboard de un vendedor
      * @param vendedor
      */
     public void inicializarDashboard(VendedorDto vendedor) throws IOException {
         modelFactory = ModelFactory.getInstance();
+        publicacionController = new PublicacionController();
+        usuarioController = new UsuarioController();
+        muroController = new MuroController();
+
         this.vendedor = vendedor;
         mostrarContactos();
+        fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+
+        selectProducto.setItems(FXCollections.observableArrayList(usuarioController.getListaProductosDisponibles(vendedor)));
+        selectProducto.setCellFactory(lv -> new ListCell<ProductoDto>(){
+            @Override
+            protected void updateItem(ProductoDto item, boolean empty){
+                super.updateItem(item, empty);
+                setText(empty ? "" : "Producto = " + item.getNombre() + " / " + item.getEstado());
+            }
+        });
     }
 
     /**
@@ -110,8 +130,8 @@ public class VendedorDashboardController {
     public void mostrarContactos() throws IOException {
         int columna = 0;
         int fila = 0;
-        for (int i = 0; i<vendedor.getListaContactos().size(); i++) {
-            Vendedor vendedor1 = vendedor.getListaContactos().get(i);
+        for (int i = 0; i<usuarioController.getListaContactos(vendedor).size(); i++) {
+            VendedorDto vendedor1 = usuarioController.getListaContactos(vendedor).get(i);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/casillaContacto.fxml"));
             Button boton = loader.load();
 
@@ -125,7 +145,7 @@ public class VendedorDashboardController {
             });
 
             CasillaContactoController controller = loader.getController();
-            controller.setData(vendedor.getListaContactos().get(i));
+            controller.setData(usuarioController.getListaContactos(vendedor).get(i));
 
             gridContacto.add(boton, columna, fila);
 
@@ -133,18 +153,17 @@ public class VendedorDashboardController {
         }
     }
 
-    public void mostrarPublicaciones(Vendedor vendedor) throws IOException {
+    public void mostrarPublicaciones(VendedorDto vendedor) throws IOException {
         int columna = 0;
         int fila = 0;
-        Muro muro = vendedor.getMuro();
-        for (int i = 0; i<muro.getListaPublicaciones().size(); i++) {
+        for (int i = 0; i<muroController.getListaPublicaciones(vendedor).size(); i++) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/publicacion.fxml"));
             AnchorPane pane = loader.load();
 
             PublicacionViewController controller = loader.getController();
-            controller.setVendedor(vendedor);
+            controller.setVendedor((VendedorDto) new UsuarioDto());
             controller.setInteractVendedor(this.vendedor);
-            controller.setData(muro.getListaPublicaciones().get(i));
+            controller.setData(muroController.getListaPublicaciones(vendedor).get(i));
             gridPaneMuro.add(pane, columna, fila);
             fila ++;
         }
@@ -164,12 +183,95 @@ public class VendedorDashboardController {
     /**
      * /////////////////////////////////////////// SECCION PANEL INICIO/////////////////////////////////////////////////
      */
+
+    @FXML
+    private Button btnCargarImagen;
+
+    @FXML
+    private Button btnPublicar;
+
+    @FXML
+    private TextArea textAreaPublicar;
+
+    private FileChooser fileChooser;
+
+    private String rutaImagenCargada;
+
+    @FXML
+    private ComboBox<ProductoDto> selectProducto;
+
+    private ProductoDto productoSeleccionado;
+
+    @FXML
+    private GridPane gridInicio;
+
+    @FXML
+    private ScrollPane scrollInicio;
+
+    /**
+     * Metodo para que al darle click al inicio se oculten los otros paneles y solo se muestre el inicio
+     * @param event
+     */
     @FXML
     void clickInicio(ActionEvent event) {
         paneContactos.setVisible(false);
         paneEstadistica.setVisible(false);
         paneInicio.setVisible(true);
         panePerfil.setVisible(false);
+        rutaImagenCargada = null;
+        textAreaPublicar.clear();
+    }
+
+    @FXML
+    void clickCargarImagen(ActionEvent event) {
+        File archivo = fileChooser.showOpenDialog(null);
+        if (archivo != null) {
+            this.rutaImagenCargada = archivo.toURI().toString();
+        }
+    }
+
+    @FXML
+    void clickPublicar(ActionEvent event) throws IOException {
+
+        if (textAreaPublicar.getText() != null) {
+            JOptionPane.showMessageDialog(null, "Paso");
+            PublicacionDto dto = new PublicacionDto();
+            dto.setDescripcion(textAreaPublicar.getText());
+            dto.setHoraPublicacion(LocalTime.now());
+            dto.setFechaPublicacion(LocalDate.now());
+            dto.setProducto(selectProducto.getSelectionModel().getSelectedItem());
+            if (publicacionController.agregarPublicacion(dto,vendedor)){
+                JOptionPane.showMessageDialog(null, "Publicacion realizada con exito");
+                textAreaPublicar.clear();
+                selectProducto.getSelectionModel().clearSelection();
+                mostrarPublicacionesPersonal();
+            }else {
+                JOptionPane.showMessageDialog(null, "No se puede agregar el publicacion");
+            }
+
+
+        }else {
+            JOptionPane.showMessageDialog(null, "Escribe una descripcion para poder realizar la publicacion");
+        }
+
+    }
+
+    public void mostrarPublicacionesPersonal() throws IOException {
+        int columna = 0;
+        int fila = 0;
+        for(int i = 0;i<muroController.getListaPublicaciones(vendedor).size();i++){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/publicacion.fxml"));
+            AnchorPane pane = loader.load();
+
+            PublicacionViewController controller = loader.getController();
+            controller.setVendedor(this.vendedor);
+            controller.setData(muroController.getListaPublicaciones(vendedor).get(i));
+
+
+            gridInicio.add(pane, columna, fila);
+            fila ++;
+
+        }
     }
 
 
@@ -182,6 +284,14 @@ public class VendedorDashboardController {
         paneEstadistica.setVisible(false);
         paneInicio.setVisible(false);
         panePerfil.setVisible(true);
+    }
+    /**
+     * ///////////////////////////////////////////// SECCION PANEL CHATS ///////////////////////////////////////////////
+     */
+
+    @FXML
+    void clickChats(ActionEvent event) {
+
     }
 
     /**

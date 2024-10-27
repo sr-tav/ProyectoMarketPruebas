@@ -6,5 +6,5 @@ import co.edu.uniquindio.marketpruebas.model.Vendedor;
 
 public interface IInteraccionEntreContactos {
     public void agregarContactosEntreSi(Vendedor contacto1, Vendedor contacto2);
-    public void darMeGustaPublicacion(Vendedor usuario, Publicacion publicacion);
+    public void darMeGustaPublicacion(Vendedor usuario, String id);
 }

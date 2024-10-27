@@ -11,13 +11,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        ModelFactory modelFactory = ModelFactory.getInstance();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 468, 531);
-        LoginViewController loginViewController = fxmlLoader.getController();
-        loginViewController.setModelFactory(modelFactory);
-        stage.setScene(scene);
-        stage.show();
+        try{
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 468, 531);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+
+        }
+
     }
 
     public static void main(String[] args) {

@@ -1,8 +1,9 @@
-package co.edu.uniquindio.marketpruebas.model;
+package co.edu.uniquindio.marketpruebas.mapping.dto;
 
+import co.edu.uniquindio.marketpruebas.model.Estado;
 import javafx.scene.image.Image;
 
-public class Producto {
+public class ProductoDto {
     private String idVendedor;
     private String nombre;
     private Image imagen;
@@ -10,14 +11,16 @@ public class Producto {
     private Estado estado;
     private double precio;
 
-    public Producto(String nombre, String rutaImagen, String categoria, Estado estado, double precio) {
+    public ProductoDto() {}
+    public ProductoDto(String nombre, Image imagen, String categoria, Estado estado, double precio, String idVendedor) {
         this.nombre = nombre;
-        this.imagen = new Image(getClass().getResource(rutaImagen).toString());
+        this.imagen = imagen;
         this.categoria = categoria;
         this.estado = estado;
         this.precio = precio;
+        this.idVendedor = idVendedor;
     }
-    public Producto(){}
+
     /**
      * SECCION GETTERS Y SETTERS
      */
@@ -69,3 +72,4 @@ public class Producto {
         this.idVendedor = idVendedor;
     }
 }
+

@@ -16,6 +16,7 @@ public class UsuarioDto {
         this.usuario = usuario;
         this.password = password;
     }
+    public UsuarioDto() {}
     /**
      * SECCION GETTERS Y SETTERS
      */

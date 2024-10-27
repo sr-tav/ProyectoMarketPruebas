@@ -1,11 +1,11 @@
 package co.edu.uniquindio.marketpruebas.model;
 
-import co.edu.uniquindio.marketpruebas.services.IRealizarPublicacion;
+import co.edu.uniquindio.marketpruebas.services.IPublicacionControllerServices;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vendedor extends Usuario implements IRealizarPublicacion {
+public class Vendedor extends Usuario {
     private final int maxContactos = 10;
     private String IdVendedor;
     private List<Vendedor> listaContactos;
@@ -47,16 +47,23 @@ public class Vendedor extends Usuario implements IRealizarPublicacion {
         }
     }
 
+    public List<Producto> getListaProductosDisponibles(){
+        ArrayList<Producto> disponibles = new ArrayList<>();
+
+        for (Producto producto : listaProductos){
+            if (producto.getEstado() != Estado.PUBLICADO){
+                disponibles.add(producto);
+            }
+        }
+        return disponibles;
+    }
+
     /**
      * Metodo para agregar productos
      * @param producto
      */
     public void agregarProducto(Producto producto) {
         listaProductos.add(producto);
-    }
-    @Override
-    public void publicar(Muro muro, Producto producto) {
-
     }
 
     public int getMaxContactos() {
@@ -93,5 +100,13 @@ public class Vendedor extends Usuario implements IRealizarPublicacion {
 
     public void setMuro(Muro muro) {
         this.muro = muro;
+        darIdATodo();
+    }
+
+    public void darIdATodo(){
+        muro.setIdVendedor(IdVendedor);
+        for (Publicacion publicacion : muro.getListaPublicaciones()){
+            publicacion.setIdVendedor(IdVendedor);
+        }
     }
 }

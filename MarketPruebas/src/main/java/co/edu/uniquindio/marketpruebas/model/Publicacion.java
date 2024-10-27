@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Publicacion implements IInteractuar {
+    private String idVendedor;
+
     private LocalDate fechaPublicacion;
     private LocalTime horaPublicacion;
     private String descripcion;
@@ -19,7 +21,6 @@ public class Publicacion implements IInteractuar {
         this.fechaPublicacion = fechaPublicacion;
         this.horaPublicacion = horaPublicacion;
         this.producto = producto;
-        listaComentarios = new ArrayList<>();
         listaComentarios = new ArrayList<Comentario>();
         this.descripcion = descripcion;
         listaMegustas = new ArrayList<>();
@@ -98,5 +99,13 @@ public class Publicacion implements IInteractuar {
 
     public void setListaMegustas(List<Vendedor> listaMegustas) {
         this.listaMegustas = listaMegustas;
+    }
+
+    public String getIdVendedor() {
+        return idVendedor;
+    }
+
+    public void setIdVendedor(String idVendedor) {
+        this.idVendedor = idVendedor;
     }
 }
