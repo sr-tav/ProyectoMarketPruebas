@@ -29,7 +29,7 @@ public interface IMarketPlaceMapping {
 
     //Convertidor listas
     List<VendedorDto> VendedoresToVendedoresDto(List<Vendedor> vendedores);
-    <T extends Usuario> List<T> UsuariosDtoToUsuarios(List<? extends UsuarioDto> usuariosDto);
+    List<Vendedor> VendedoresDtoToVendedores(List<VendedorDto> vendedores);
 
     List<PublicacionDto> publicacionesToPublicacionesDto(List<Publicacion> publicaciones);
     List<Publicacion> publicacionesDtoToPublicaciones(List<PublicacionDto> publicacionesDto);

@@ -1,12 +1,10 @@
 package co.edu.uniquindio.marketpruebas.viewcontroller;
 
+import co.edu.uniquindio.marketpruebas.controller.MuroController;
 import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.*;
-import co.edu.uniquindio.marketpruebas.model.Muro;
-import co.edu.uniquindio.marketpruebas.model.Producto;
-import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,10 +24,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class VendedorDashboardController {
-    private ModelFactory modelFactory;
-    private VendedorDto vendedor;
-    private PublicacionController publicacionController;
-    private UsuarioController usuarioController;
+    ModelFactory modelFactory;
+    VendedorDto vendedor;
+    PublicacionController publicacionController;
+    UsuarioController usuarioController;
+    MuroController muroController;
 
     @FXML
     private Button btnContacto;
@@ -73,6 +72,8 @@ public class VendedorDashboardController {
 
     @FXML
     private GridPane gridContacto;
+
+
     @FXML
     void clickSkip(ActionEvent event) throws IOException {
         int result = JOptionPane.showConfirmDialog (null, "¿Seguro que deseas salir?","LOG OUT", JOptionPane.YES_NO_OPTION);
@@ -82,8 +83,8 @@ public class VendedorDashboardController {
             Stage login = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/login.fxml"));
             Scene scene = new Scene(loader.load(), 468, 531);
-            LoginController loginController = loader.getController();
-            loginController.setModelFactory(modelFactory);
+            LoginViewController loginViewController = loader.getController();
+            loginViewController.setModelFactory(modelFactory);
             login.setScene(scene);
             login.show();
         }
@@ -97,6 +98,7 @@ public class VendedorDashboardController {
         modelFactory = ModelFactory.getInstance();
         publicacionController = new PublicacionController();
         usuarioController = new UsuarioController();
+        muroController = new MuroController();
 
         this.vendedor = vendedor;
         mostrarContactos();
@@ -128,8 +130,8 @@ public class VendedorDashboardController {
     public void mostrarContactos() throws IOException {
         int columna = 0;
         int fila = 0;
-        for (int i = 0; i<vendedor.getListaContactos().size(); i++) {
-            VendedorDto vendedor1 = vendedor.getListaContactos().get(i);
+        for (int i = 0; i<usuarioController.getListaContactos(vendedor).size(); i++) {
+            VendedorDto vendedor1 = usuarioController.getListaContactos(vendedor).get(i);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/casillaContacto.fxml"));
             Button boton = loader.load();
 
@@ -143,7 +145,7 @@ public class VendedorDashboardController {
             });
 
             CasillaContactoController controller = loader.getController();
-            controller.setData(vendedor.getListaContactos().get(i));
+            controller.setData(usuarioController.getListaContactos(vendedor).get(i));
 
             gridContacto.add(boton, columna, fila);
 
@@ -154,15 +156,14 @@ public class VendedorDashboardController {
     public void mostrarPublicaciones(VendedorDto vendedor) throws IOException {
         int columna = 0;
         int fila = 0;
-        MuroDto muro = vendedor.getMuro();
-        for (int i = 0; i<muro.getListaPublicaciones().size(); i++) {
+        for (int i = 0; i<muroController.getListaPublicaciones(vendedor).size(); i++) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/publicacion.fxml"));
             AnchorPane pane = loader.load();
 
             PublicacionViewController controller = loader.getController();
             controller.setVendedor((VendedorDto) new UsuarioDto());
             controller.setInteractVendedor(this.vendedor);
-            controller.setData(muro.getListaPublicaciones().get(i));
+            controller.setData(muroController.getListaPublicaciones(vendedor).get(i));
             gridPaneMuro.add(pane, columna, fila);
             fila ++;
         }
@@ -258,13 +259,13 @@ public class VendedorDashboardController {
     public void mostrarPublicacionesPersonal() throws IOException {
         int columna = 0;
         int fila = 0;
-        for(int i = 0;i<vendedor.getMuro().getListaPublicaciones().size();i++){
+        for(int i = 0;i<muroController.getListaPublicaciones(vendedor).size();i++){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/publicacion.fxml"));
             AnchorPane pane = loader.load();
 
             PublicacionViewController controller = loader.getController();
             controller.setVendedor(this.vendedor);
-            controller.setData(vendedor.getMuro().getListaPublicaciones().get(i));
+            controller.setData(muroController.getListaPublicaciones(vendedor).get(i));
 
 
             gridInicio.add(pane, columna, fila);

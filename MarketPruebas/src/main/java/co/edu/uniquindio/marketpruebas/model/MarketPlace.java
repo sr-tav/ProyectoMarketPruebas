@@ -105,7 +105,7 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         }
         return comentarios;
     }
-    public List<Vendedor> getListaMeGusta(String id, String idVendedor){
+    public List<Vendedor> getListaMeGusta(String idVendedor){
         List<Vendedor> meGustas = new ArrayList<>();
         for (Vendedor vendedor : listaVendedores){
             if(vendedor.getIdVendedor().equals(idVendedor)){
@@ -118,7 +118,17 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         }
         return meGustas;
     }
-
+    public List<Publicacion> getListaPublicaciones(String idVendedor){
+        List<Publicacion> publicaciones = new ArrayList<>();
+        for (Vendedor vendedor : listaVendedores){
+            if(vendedor.getIdVendedor().equals(idVendedor)){
+                for(Publicacion p : vendedor.getMuro().getListaPublicaciones()){
+                    publicaciones.add(p);
+                }
+            }
+        }
+        return publicaciones;
+    }
     /**
      * Seccion Getter y Setters
      */
@@ -154,8 +164,16 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
     }
 
     @Override
-    public void darMeGustaPublicacion(Vendedor usuario, Publicacion publicacion) {
-        publicacion.agregarMeGusta(usuario);
+    public void darMeGustaPublicacion(Vendedor usuario, String id) {
+        for(Vendedor vendedor : listaVendedores){
+            if(vendedor.getIdVendedor().equals(id)){
+                for (Publicacion p : vendedor.getMuro().getListaPublicaciones()){
+                    if(p.getIdVendedor().equals(id)){
+                        p.agregarMeGusta(usuario);
+                    }
+                }
+            }
+        }
     }
 
     /**

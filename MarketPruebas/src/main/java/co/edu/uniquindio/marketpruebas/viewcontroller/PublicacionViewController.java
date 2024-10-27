@@ -91,20 +91,20 @@ public class PublicacionViewController implements Initializable {
         labelTitulo.setText(publicacion1.getProducto().getNombre());
         labelDescrip.setText(publicacion1.getDescripcion());
         labelPrecio.setText(Double.toString(publicacion1.getProducto().getPrecio()));
-        labelNumMegustas.setText(Integer.toString(publicacion1.getListaMegustas().size()));
+        labelNumMegustas.setText(Integer.toString(publicacionController.getListaMeGustas(publicacion1.getIdVendedor()).size()));
         labelFecha.setText(publicacion1.getFechaPublicacion().toString());
         labelHora.setText(publicacion1.getHoraPublicacion().getHour() + " : " + publicacion1.getHoraPublicacion().getMinute());
-        labelComentarios.setText(Integer.toString(publicacion1.getListaComentarios().size()));
+        labelComentarios.setText(Integer.toString(publicacionController.getListaMeGustas(publicacion1.getIdVendedor()).size()));
 
         //llenar los comentarios de la vista con los de la publicacion
         int columna = 0;
         int fila = 0;
-        for (int i = 0; i < publicacion1.getListaComentarios().size(); i++) {
+        for (int i = 0; i < publicacionController.getListaComentarios(vendedor.getIdVendedor()).size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/comentario.fxml"));
             AnchorPane anchorPane = fxmlLoader.load();
 
             ComentarioController comentarioController = fxmlLoader.getController();
-            comentarioController.setData(publicacion1.getListaComentarios().get(i));
+            comentarioController.setData(publicacionController.getListaComentarios(vendedor.getIdVendedor()).get(i));
 
             grindPaneComentarios.add(anchorPane, columna, fila);
             fila++;
@@ -118,10 +118,10 @@ public class PublicacionViewController implements Initializable {
     void clickDarMegusta(ActionEvent event) {
 
         //Dar like solamente una vez
-        publicacionController.darMeGusta(interactVendedor, publicacion);
-        labelNumMegustas.setText(Integer.toString(publicacion.getListaMegustas().size()));
+        publicacionController.darMeGusta(interactVendedor, vendedor.getIdVendedor());
+        labelNumMegustas.setText(Integer.toString(publicacionController.getListaMeGustas(vendedor.getIdVendedor()).size()));
         btnDarMegusta.setDisable(true);
-        JOptionPane.showMessageDialog(null,publicacion.getListaMegustas().size());
+        JOptionPane.showMessageDialog(null,publicacionController.getListaMeGustas(vendedor.getIdVendedor()).size());
     }
     @FXML
     void clickComentar(ActionEvent event) {

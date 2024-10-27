@@ -5,9 +5,6 @@ import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.AdministradorDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
-import co.edu.uniquindio.marketpruebas.model.Administrador;
-import co.edu.uniquindio.marketpruebas.model.Usuario;
-import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +16,7 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.IOException;
 
-public class LoginController {
+public class LoginViewController {
     private ModelFactory modelFactory;
     private UsuarioController usuarioController;
 

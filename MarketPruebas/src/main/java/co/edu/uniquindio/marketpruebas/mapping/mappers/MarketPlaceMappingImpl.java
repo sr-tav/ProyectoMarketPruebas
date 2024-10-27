@@ -183,7 +183,7 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
 
         m.setIdVendedor(muro.getIdVendedor());
         //m.setListaChats();
-        m.setListaPublicaciones(publicacionesDtoToPublicaciones(muro.getListaPublicaciones()));
+        m.setListaPublicaciones(modelFactory.getListaPublicaciones(muro.getIdVendedor()));
         return m;
     }
 
@@ -205,19 +205,15 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         }
         return vendedoresDto;
     }
-
     @Override
-    public <T extends Usuario> List<T> UsuariosDtoToUsuarios(List<? extends UsuarioDto> usuariosDto) {
-        List<T> usuarios = new ArrayList<>();
-        for (UsuarioDto u : usuariosDto) {
-            if (u instanceof VendedorDto){
-                usuarios.add((T)usuarioDtoToUsuario(u));
-            } else if (u instanceof AdministradorDto) {
-                usuarios.add((T)usuarioDtoToUsuario(u));
-            }
+    public List<Vendedor>  VendedoresDtoToVendedores(List<VendedorDto> dto) {
+        List<Vendedor> vendedores = new ArrayList<Vendedor>();
+        for (VendedorDto vendedor : dto) {
+            vendedores.add((Vendedor) usuarioDtoToUsuario(vendedor));
         }
-        return usuarios;
+        return vendedores;
     }
+
 
     @Override
     public List<PublicacionDto> publicacionesToPublicacionesDto(List<Publicacion> publicaciones) {
@@ -257,22 +253,38 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
 
     @Override
     public List<Comentario> comentariosDtoToComentarios(List<ComentarioDto> comentariosDto) {
-        return List.of();
+        List<Comentario> comentarios = new ArrayList<>();
+        for (ComentarioDto comentarioDto : comentariosDto) {
+            comentarios.add(comentarioDtoToComentario(comentarioDto));
+        }
+        return comentarios;
     }
 
     @Override
     public List<ComentarioDto> comentariosToComentariosDto(List<Comentario> comentarios) {
-        return List.of();
+        List<ComentarioDto> dtos = new ArrayList<>();
+        for (Comentario comentario : comentarios) {
+            dtos.add(comentarioToComentarioDto(comentario));
+        }
+        return dtos;
     }
 
     @Override
     public List<Mensaje> mensajesDtoToMensajes(List<MensajeDto> mensajesDto) {
-        return List.of();
+        List<Mensaje> mensajes = new ArrayList<>();
+        for (MensajeDto mensajeDto : mensajesDto) {
+            mensajes.add(mesajeDtoToMensaje(mensajeDto));
+        }
+        return mensajes;
     }
 
     @Override
     public List<MensajeDto> mensajeToMensajesDto(List<Mensaje> mensajes) {
-        return List.of();
+        List<MensajeDto> mensajesDto = new ArrayList<>();
+        for (Mensaje mensaje : mensajes) {
+            mensajesDto.add(mensajeToMensajeDto(mensaje));
+        }
+        return mensajesDto;
     }
 
 

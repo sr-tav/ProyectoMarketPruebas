@@ -1,6 +1,7 @@
 package co.edu.uniquindio.marketpruebas.controller;
 
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
+import co.edu.uniquindio.marketpruebas.mapping.dto.ComentarioDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
@@ -18,13 +19,18 @@ public class PublicacionController implements IPublicacionControllerServices {
     }
 
     @Override
-    public void darMeGusta(UsuarioDto usuario, PublicacionDto publicacion) {
-        modelFactory.darMeGustaPublicacion(usuario, publicacion);
+    public void darMeGusta(UsuarioDto usuario, String idVendedor) {
+        modelFactory.darMeGustaPublicacion(usuario, idVendedor);
     }
 
     @Override
-    public List<PublicacionDto> getPublicacionesDto() {
-        return List.of();
+    public List<VendedorDto> getListaMeGustas(String id) {
+        return modelFactory.getListaMeGustaDto(id);
+    }
+
+    @Override
+    public List<ComentarioDto> getListaComentarios(String id) {
+        return modelFactory.getListaComentariosDto(id);
     }
 
     @Override

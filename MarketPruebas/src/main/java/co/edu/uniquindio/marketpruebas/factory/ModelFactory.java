@@ -50,8 +50,8 @@ public class ModelFactory implements IModelFactoryService {
     }
 
     @Override
-    public void darMeGustaPublicacion(UsuarioDto usuario, PublicacionDto publicacion) {
-        marketPlace.darMeGustaPublicacion((Vendedor) (mapping.usuarioDtoToUsuario(usuario)), mapping.publicacionDtoToPublicacion(publicacion));
+    public void darMeGustaPublicacion(UsuarioDto usuario, String idVendedor) {
+        marketPlace.darMeGustaPublicacion((Vendedor) mapping.usuarioDtoToUsuario(usuario), idVendedor);
     }
 
     @Override
@@ -122,18 +122,29 @@ public class ModelFactory implements IModelFactoryService {
 
     @Override
     public List<ComentarioDto> getListaComentariosDto(String id) {
-        return mapping.come(marketPlace.getListaComentarios(id));
+        return mapping.comentariosToComentariosDto(marketPlace.getListaComentarios(id));
     }
 
     @Override
     public List<Vendedor> getListaMeGusta(String id) {
-        return List.of();
+        return marketPlace.getListaMeGusta(id);
     }
 
     @Override
     public List<VendedorDto> getListaMeGustaDto(String id) {
-        return List.of();
+        return mapping.VendedoresToVendedoresDto(marketPlace.getListaMeGusta(id));
     }
+
+    @Override
+    public List<Publicacion> getListaPublicaciones(String idVendedor) {
+        return marketPlace.getListaPublicaciones(idVendedor);
+    }
+
+    @Override
+    public List<PublicacionDto> getListaPublicacionesDto(String idVendedor) {
+        return mapping.publicacionesToPublicacionesDto(marketPlace.getListaPublicaciones(idVendedor));
+    }
+
     /**
      * ///////////////////////////////////////////////////////////////////////////////////INICIALIZACION DE DATOS/////////////////////////////////////////////////////////////////////////////////////////
      */
