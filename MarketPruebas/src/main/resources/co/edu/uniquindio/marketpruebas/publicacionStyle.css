@@ -21,3 +21,15 @@
     -fx-background-color: #7ea9ca;
     -fx-background-radius: 5;
 }
+.btn_cargar_imagen{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 30;
+}
+.btn_cargar_imagen:hover{
+    -fx-background-color: #b9c8cc;
+    -fx-background-radius: 30;
+}
+.combo-box{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+}

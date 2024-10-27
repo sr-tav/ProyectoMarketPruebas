@@ -161,7 +161,7 @@ public class VendedorDashboardController {
             AnchorPane pane = loader.load();
 
             PublicacionViewController controller = loader.getController();
-            controller.setVendedor((VendedorDto) new UsuarioDto());
+            controller.setVendedor(vendedor);
             controller.setInteractVendedor(this.vendedor);
             controller.setData(muroController.getListaPublicaciones(vendedor).get(i));
             gridPaneMuro.add(pane, columna, fila);
