@@ -123,7 +123,9 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         for (Vendedor vendedor : listaVendedores){
             if(vendedor.getIdVendedor().equals(idVendedor)){
                 for(Publicacion p : vendedor.getMuro().getListaPublicaciones()){
-                    publicaciones.add(p);
+                    if (p.getIdVendedor().equals(idVendedor)){
+                        publicaciones.add(p);
+                    }
                 }
             }
         }

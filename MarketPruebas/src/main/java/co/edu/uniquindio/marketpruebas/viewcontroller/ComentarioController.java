@@ -26,7 +26,6 @@ public class ComentarioController {
 
     public void setData(ComentarioDto comentario1) {
         labelFecha.setText(comentario1.getFecha().toString());
-        System.out.println(comentario1.getHora().toString());
         labelHora.setText(comentario1.getHora().getHour() + " : " + comentario1.getHora().getMinute());
         labelNombre.setText(comentario1.getUsuario().getNombre());
         areaComentario.setText(comentario1.getMensaje());
