@@ -75,8 +75,8 @@ public class VendedorDashboardController {
             Stage login = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/login.fxml"));
             Scene scene = new Scene(loader.load(), 468, 531);
-            LoginController loginController = loader.getController();
-            loginController.setModelFactory(modelFactory);
+            LoginViewController loginViewController = loader.getController();
+            loginViewController.setModelFactory(modelFactory);
             login.setScene(scene);
             login.show();
         }
