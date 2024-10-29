@@ -119,13 +119,13 @@ public class ModelFactory implements IModelFactoryService {
     }
 
     @Override
-    public List<Comentario> getListaComentarios(String id) {
-        return marketPlace.getListaComentarios(id);
+    public List<Comentario> getListaComentarios(String id, PublicacionDto publicacion) {
+        return marketPlace.getListaComentarios(id, publicacion.getFechaPublicacion(), publicacion.getHoraPublicacion());
     }
 
     @Override
-    public List<ComentarioDto> getListaComentariosDto(String id) {
-        return mapping.comentariosToComentariosDto(marketPlace.getListaComentarios(id));
+    public List<ComentarioDto> getListaComentariosDto(String id, PublicacionDto publicacion) {
+        return mapping.comentariosToComentariosDto(marketPlace.getListaComentarios(id,publicacion.getFechaPublicacion(), publicacion.getHoraPublicacion()));
     }
 
     @Override

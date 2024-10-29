@@ -22,8 +22,8 @@ public interface IModelFactoryService {
     List<VendedorDto> getListaContactosDto(String id);
     List<Vendedor> getListaContactos(String id);
 
-    List<Comentario> getListaComentarios(String idVendedor);
-    List<ComentarioDto> getListaComentariosDto(String idVendedor);
+    List<Comentario> getListaComentarios(String idVendedor, PublicacionDto publicacion);
+    List<ComentarioDto> getListaComentariosDto(String idVendedor, PublicacionDto publicacion);
 
     List<Vendedor> getListaMeGusta(String idVendedor);
     List<VendedorDto> getListaMeGustaDto(String idVendedor);

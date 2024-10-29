@@ -103,7 +103,7 @@
             </Pane>
             <Pane prefHeight="771.0" prefWidth="1012.0">
                <children>
-                  <BorderPane fx:id="paneInicio" prefHeight="771.0" prefWidth="1012.0">
+                  <BorderPane fx:id="paneInicio" prefHeight="771.0" prefWidth="1012.0" visible="false">
                      <center>
                         <VBox prefHeight="484.0" prefWidth="615.0" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
@@ -183,23 +183,23 @@
                         </VBox>
                      </center>
                   </BorderPane>
-                  <BorderPane fx:id="panePerfil" prefHeight="484.0" prefWidth="723.0" visible="false">
+                  <BorderPane fx:id="panePerfil" prefHeight="771.0" prefWidth="1012.0" visible="false">
                      <center>
                         <Label text="Seccion perfil en proceso" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
-                  <BorderPane fx:id="paneEstadistica" prefHeight="484.0" prefWidth="723.0" visible="false">
+                  <BorderPane fx:id="paneEstadistica" prefHeight="771.0" prefWidth="1012.0" visible="false">
                      <center>
                         <Label text="Seccion estadisticas en proceso" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
-                  <BorderPane fx:id="paneContactos" prefHeight="484.0" prefWidth="723.0" styleClass="fondo_pane" stylesheets="@loginStyle.css" visible="false">
+                  <BorderPane fx:id="paneContactos" prefHeight="771.0" prefWidth="1012.0" styleClass="fondo_pane" stylesheets="@loginStyle.css">
                      <center>
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="fondo_pane" stylesheets="@loginStyle.css" BorderPane.alignment="CENTER">
                            <children>
-                              <Pane fx:id="paneCon1" prefHeight="484.0" prefWidth="564.0" styleClass="fondo_pane" stylesheets="@loginStyle.css">
+                              <Pane fx:id="paneCon1" prefHeight="771.0" prefWidth="853.0" styleClass="fondo_pane" stylesheets="@loginStyle.css">
                                  <children>
-                                    <VBox alignment="TOP_CENTER" prefHeight="484.0" prefWidth="563.0" styleClass="fondo_pane" stylesheets="@loginStyle.css">
+                                    <VBox alignment="TOP_CENTER" prefHeight="771.0" prefWidth="854.0" styleClass="fondo_pane" stylesheets="@loginStyle.css">
                                        <children>
                                           <Label fx:id="labelNombreMuro" textFill="#a1caff">
                                              <font>
@@ -209,7 +209,7 @@
                                                 <Insets bottom="10.0" top="10.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <ScrollPane fx:id="scrollPaneMuro" fitToWidth="true" prefHeight="484.0" prefWidth="536.0" stylesheets="@scrollContactos.css">
+                                          <ScrollPane fx:id="scrollPaneMuro" fitToWidth="true" prefHeight="736.0" prefWidth="854.0" stylesheets="@scrollContactos.css">
                                              <content>
                                                 <GridPane fx:id="gridPaneMuro" prefHeight="0.0" prefWidth="0.0" styleClass="fondo_pane" stylesheets="@loginStyle.css" vgap="20.0">
                                                   <columnConstraints>
@@ -221,7 +221,7 @@
                                                 </GridPane>
                                              </content>
                                              <VBox.margin>
-                                                <Insets />
+                                                <Insets left="170.0" right="146.0" />
                                              </VBox.margin>
                                           </ScrollPane>
                                        </children>
@@ -239,10 +239,10 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets bottom="20.0" top="20.0" />
+                                    <Insets bottom="50.0" top="50.0" />
                                  </VBox.margin>
                               </Label>
-                              <ScrollPane fx:id="scrollContacto" fitToWidth="true" prefHeight="425.0" prefWidth="160.0" stylesheets="@scrollContactos.css">
+                              <ScrollPane fx:id="scrollContacto" fitToWidth="true" prefHeight="715.0" prefWidth="154.0" stylesheets="@scrollContactos.css">
                                  <content>
                                     <GridPane fx:id="gridContacto" prefHeight="0.0" prefWidth="158.0" stylesheets="@loginStyle.css" vgap="10.0">
                                       <columnConstraints>

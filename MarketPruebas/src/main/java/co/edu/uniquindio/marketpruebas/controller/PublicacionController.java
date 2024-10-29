@@ -29,8 +29,8 @@ public class PublicacionController implements IPublicacionControllerServices {
     }
 
     @Override
-    public List<ComentarioDto> getListaComentarios(String id) {
-        return modelFactory.getListaComentariosDto(id);
+    public List<ComentarioDto> getListaComentarios(String id, PublicacionDto dto) {
+        return modelFactory.getListaComentariosDto(id, dto);
     }
 
     @Override

@@ -94,17 +94,17 @@ public class PublicacionViewController implements Initializable {
         labelNumMegustas.setText(Integer.toString(publicacionController.getListaMeGustas(publicacion1.getIdVendedor()).size()));
         labelFecha.setText(publicacion1.getFechaPublicacion().toString());
         labelHora.setText(publicacion1.getHoraPublicacion().getHour() + " : " + publicacion1.getHoraPublicacion().getMinute());
-        labelComentarios.setText(Integer.toString(publicacionController.getListaComentarios(vendedor.getIdVendedor()).size()));
+        labelComentarios.setText(Integer.toString(publicacionController.getListaComentarios(vendedor.getIdVendedor(), publicacion1).size()));
 
         //llenar los comentarios de la vista con los de la publicacion
         int columna = 0;
         int fila = 0;
-        for (int i = 0; i < publicacionController.getListaComentarios(vendedor.getIdVendedor()).size(); i++) {
+        for (int i = 0; i < publicacionController.getListaComentarios(vendedor.getIdVendedor(),publicacion1).size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/comentario.fxml"));
             AnchorPane anchorPane = fxmlLoader.load();
 
             ComentarioController comentarioController = fxmlLoader.getController();
-            comentarioController.setData(publicacionController.getListaComentarios(vendedor.getIdVendedor()).get(i));
+            comentarioController.setData(publicacionController.getListaComentarios(vendedor.getIdVendedor(), publicacion1).get(i));
 
             grindPaneComentarios.add(anchorPane, columna, fila);
             fila++;

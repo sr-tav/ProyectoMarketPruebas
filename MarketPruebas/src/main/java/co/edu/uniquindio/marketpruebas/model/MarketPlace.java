@@ -5,6 +5,8 @@ import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
 import co.edu.uniquindio.marketpruebas.services.ICrudPublicacion;
 import co.edu.uniquindio.marketpruebas.services.IInteraccionEntreContactos;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,13 +94,27 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         }
         return contactos;
     }
-    public List<Comentario> getListaComentarios(String idVendedor){
+    public List<Comentario> getListaComentariosGenerales(String idVendedor){
         List<Comentario> comentarios = new ArrayList<>();
         for (Vendedor vendedor : listaVendedores){
             if(vendedor.getIdVendedor().equals(idVendedor)){
                 for (Publicacion publicacion : vendedor.getMuro().getListaPublicaciones()){
                     if(publicacion.getIdVendedor().equals(idVendedor)){
-                        comentarios = publicacion.getListaComentarios();
+                        comentarios.addAll(publicacion.getListaComentarios());
+                    }
+                }
+            }
+        }
+        return comentarios;
+    }
+    public List<Comentario> getListaComentarios(String idVendedor, LocalDate fecha, LocalTime hora){
+        List<Comentario> comentarios = new ArrayList<>();
+        for (Vendedor vendedor : listaVendedores){
+            if(vendedor.getIdVendedor().equals(idVendedor)){
+                for (Publicacion p : vendedor.getMuro().getListaPublicaciones()){
+                    if(p.getFechaPublicacion() == fecha && p.getHoraPublicacion() == hora){
+                        comentarios = p.getListaComentarios();
+                        break;
                     }
                 }
             }
