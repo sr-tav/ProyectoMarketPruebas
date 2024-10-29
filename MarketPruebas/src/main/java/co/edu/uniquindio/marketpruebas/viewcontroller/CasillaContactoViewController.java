@@ -1,13 +1,9 @@
 package co.edu.uniquindio.marketpruebas.viewcontroller;
 import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
-import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 
-import javax.swing.*;
-
-public class CasillaContactoController {
+public class CasillaContactoViewController {
     private VendedorDto vendedor;
 
     @FXML

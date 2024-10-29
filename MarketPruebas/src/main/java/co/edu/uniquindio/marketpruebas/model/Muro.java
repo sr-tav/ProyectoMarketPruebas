@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketpruebas.model;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,9 @@ public class Muro {
         listaChats = new ArrayList<Chat>();
     }
     public void agregarPublicacion(Publicacion publicacion){
+        publicacion.setIdVendedor(idVendedor);
         listaPublicaciones.add(publicacion);
+        JOptionPane.showMessageDialog(null, "Publicacion agregada con exito");
     }
     public void agregarChat(Chat chat){
         listaChats.add(chat);

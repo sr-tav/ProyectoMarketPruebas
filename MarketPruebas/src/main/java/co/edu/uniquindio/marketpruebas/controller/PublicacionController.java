@@ -35,7 +35,7 @@ public class PublicacionController implements IPublicacionControllerServices {
 
     @Override
     public boolean agregarPublicacion(PublicacionDto publicacion, VendedorDto vendedor) {
-        return modelFactory.agregarPublicacion(publicacion, vendedor);
+        return modelFactory.agregarPublicacion(publicacion, vendedor.getIdVendedor());
     }
 
     @Override

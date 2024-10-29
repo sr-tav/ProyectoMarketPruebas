@@ -4,8 +4,6 @@ import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
-import co.edu.uniquindio.marketpruebas.model.Publicacion;
-import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -103,8 +101,8 @@ public class PublicacionViewController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/comentario.fxml"));
             AnchorPane anchorPane = fxmlLoader.load();
 
-            ComentarioController comentarioController = fxmlLoader.getController();
-            comentarioController.setData(publicacionController.getListaComentarios(vendedor.getIdVendedor(), publicacion1).get(i));
+            ComentarioViewController comentarioViewController = fxmlLoader.getController();
+            comentarioViewController.setData(publicacionController.getListaComentarios(vendedor.getIdVendedor(), publicacion1).get(i));
 
             grindPaneComentarios.add(anchorPane, columna, fila);
             fila++;

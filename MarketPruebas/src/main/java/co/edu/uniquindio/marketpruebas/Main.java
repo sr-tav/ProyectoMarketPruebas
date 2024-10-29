@@ -12,13 +12,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try{
-            System.out.println("Hola");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/login.fxml"));
-            System.out.println("Hola2");
             Scene scene = new Scene(fxmlLoader.load(), 468, 531);
-            System.out.println("Hola3");
             stage.setScene(scene);
-            System.out.println("Hola4");
             stage.show();
 
         } catch (RuntimeException e) {

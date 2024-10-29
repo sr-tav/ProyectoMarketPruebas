@@ -55,7 +55,7 @@ public class LoginViewController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/vendedor-dashboard.fxml"));
             Scene scene = new Scene(fxmlLoader.load(),1012,809);
             Stage stage = new Stage();
-            VendedorDashboardController controller = fxmlLoader.getController();
+            VendedorDashboardViewController controller = fxmlLoader.getController();
             controller.inicializarDashboard((VendedorDto)usuario);
             stage.setScene(scene);
 

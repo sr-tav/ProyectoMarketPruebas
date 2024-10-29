@@ -11,7 +11,6 @@ public interface IModelFactoryService {
     public Usuario getUsuarioCompleto(UsuarioDto usuario);
     public void darMeGustaPublicacion(UsuarioDto usuario, String idVendedor);
     public List<ProductoDto> getListaProductosDisponibles(UsuarioDto usuario);
-    boolean agregarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
     boolean eliminarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
     boolean actualizarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
     List<PublicacionDto> getListaPublicaciones(Muro muro);
@@ -31,6 +30,7 @@ public interface IModelFactoryService {
     List<Publicacion> getListaPublicaciones(String idVendedor);
     List<PublicacionDto> getListaPublicacionesDto(String idVendedor);
 
-
+    // CRUD PUBLICACION
+    boolean agregarPublicacion(PublicacionDto publicacion, String idVendedor);
 
 }

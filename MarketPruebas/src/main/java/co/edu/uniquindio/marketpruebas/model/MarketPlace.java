@@ -5,6 +5,7 @@ import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
 import co.edu.uniquindio.marketpruebas.services.ICrudPublicacion;
 import co.edu.uniquindio.marketpruebas.services.IInteraccionEntreContactos;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -216,9 +217,7 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
     public boolean verificarPublicacionExiste(Publicacion publicacion){
         List<Publicacion> publicaciones = new ArrayList<>();
         for (Vendedor vendedor: listaVendedores){
-            for(Publicacion p : vendedor.getMuro().getListaPublicaciones()){
-                publicaciones.add(p);
-            }
+            publicaciones.addAll(vendedor.getMuro().getListaPublicaciones());
         }
 
         for (Publicacion p: publicaciones){
@@ -230,10 +229,14 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
     }
 
     @Override
-    public boolean crearPublicacion(Publicacion publicacion, Vendedor vendedor) {
-        if(verificarPublicacionExiste(publicacion)){
-            vendedor.getMuro().agregarPublicacion(publicacion);
-            return true;
+    public boolean crearPublicacion(Publicacion publicacion, String id) {
+        if(!verificarPublicacionExiste(publicacion)){
+            for (Vendedor vendedor: listaVendedores){
+                if(vendedor.getIdVendedor().equals(id)){
+                    vendedor.getMuro().agregarPublicacion(publicacion);
+                    return true;
+                }
+            }
         }
         return false;
     }

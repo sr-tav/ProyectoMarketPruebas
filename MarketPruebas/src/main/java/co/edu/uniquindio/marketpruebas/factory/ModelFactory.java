@@ -21,7 +21,6 @@ public class ModelFactory implements IModelFactoryService {
         inicializarDatos();
         mapping = new MarketPlaceMappingImpl();
         mapping.setModelFactory(this);
-        System.out.println(mapping.getModelFactory());
     }
 
     public static ModelFactory getInstance() {
@@ -74,14 +73,13 @@ public class ModelFactory implements IModelFactoryService {
      */
 
     @Override
-    public boolean agregarPublicacion(PublicacionDto publicacion, VendedorDto vendedor) {
+    public boolean agregarPublicacion(PublicacionDto publicacion, String id) {
         Publicacion p = mapping.publicacionDtoToPublicacion(publicacion);
-        Vendedor v = (Vendedor) mapping.usuarioDtoToUsuario(vendedor);
 
-        if (marketPlace.crearPublicacion(p,v)){
+        if (marketPlace.crearPublicacion(p, id)){
             return true;
         }else {
-            return true;
+            return false;
         }
 
     }

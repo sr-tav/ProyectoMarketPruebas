@@ -1,14 +1,11 @@
 package co.edu.uniquindio.marketpruebas.viewcontroller;
 
 import co.edu.uniquindio.marketpruebas.mapping.dto.ComentarioDto;
-import co.edu.uniquindio.marketpruebas.model.Comentario;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
-import java.sql.SQLOutput;
-
-public class ComentarioController {
+public class ComentarioViewController {
 
     @FXML
     private TextArea areaComentario;

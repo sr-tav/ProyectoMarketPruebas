@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class VendedorDashboardController {
+public class VendedorDashboardViewController {
     ModelFactory modelFactory;
     VendedorDto vendedor;
     PublicacionController publicacionController;
@@ -144,7 +144,7 @@ public class VendedorDashboardController {
                 }
             });
 
-            CasillaContactoController controller = loader.getController();
+            CasillaContactoViewController controller = loader.getController();
             controller.setData(usuarioController.getListaContactos(vendedor).get(i));
 
             gridContacto.add(boton, columna, fila);
@@ -233,25 +233,35 @@ public class VendedorDashboardController {
     @FXML
     void clickPublicar(ActionEvent event) throws IOException {
 
-        if (textAreaPublicar.getText() != null) {
-            JOptionPane.showMessageDialog(null, "Paso");
+        if (!textAreaPublicar.getText().isEmpty() && selectProducto.getSelectionModel().getSelectedItem() != null) {
             PublicacionDto dto = new PublicacionDto();
             dto.setDescripcion(textAreaPublicar.getText());
             dto.setHoraPublicacion(LocalTime.now());
             dto.setFechaPublicacion(LocalDate.now());
             dto.setProducto(selectProducto.getSelectionModel().getSelectedItem());
-            if (publicacionController.agregarPublicacion(dto,vendedor)){
+
+            if (publicacionController.agregarPublicacion(dto, vendedor) ){
                 JOptionPane.showMessageDialog(null, "Publicacion realizada con exito");
                 textAreaPublicar.clear();
                 selectProducto.getSelectionModel().clearSelection();
+                JOptionPane.showMessageDialog(null, muroController.getListaPublicaciones(vendedor).size());
                 mostrarPublicacionesPersonal();
+
             }else {
                 JOptionPane.showMessageDialog(null, "No se puede agregar el publicacion");
+
             }
 
 
-        }else {
+        }else if (textAreaPublicar.getText().isEmpty() && selectProducto.getSelectionModel().getSelectedItem() != null) {
             JOptionPane.showMessageDialog(null, "Escribe una descripcion para poder realizar la publicacion");
+
+        }else if (!textAreaPublicar.getText().isEmpty() && selectProducto.getSelectionModel().getSelectedItem() == null){
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un producto para publicar,\n " +
+                    "Si no lo tienes ningun producto, agregalo! (implementar boton para agregar producto desde ahi)");
+
+        }else if (textAreaPublicar.getText().isEmpty() && selectProducto.getSelectionModel().getSelectedItem() == null){
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un producto y escribir una descripcion!");
         }
 
     }
