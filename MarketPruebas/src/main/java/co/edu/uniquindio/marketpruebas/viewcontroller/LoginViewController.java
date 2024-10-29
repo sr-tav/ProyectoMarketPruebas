@@ -53,7 +53,7 @@ public class LoginViewController {
         if (usuario instanceof VendedorDto){
             JOptionPane.showMessageDialog(null, "Bienvenido Vendedor "+ usuario.getNombre());
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/vendedor-dashboard.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(),723,525);
+            Scene scene = new Scene(fxmlLoader.load(),1012,809);
             Stage stage = new Stage();
             VendedorDashboardController controller = fxmlLoader.getController();
             controller.inicializarDashboard((VendedorDto)usuario);
