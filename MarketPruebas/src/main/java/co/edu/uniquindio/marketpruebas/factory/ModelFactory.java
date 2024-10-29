@@ -187,10 +187,14 @@ public class ModelFactory implements IModelFactoryService {
         //Creacion de comentarios
         Comentario comentario = new Comentario(vendedor4,LocalDate.now(),LocalTime.now(),"JAJAJAJAJ el parcerito mas alucin");
         Comentario comentario2 = new Comentario(vendedor2,LocalDate.now().plusDays(2),LocalTime.now(),"Esta feo");
+        Comentario comentario3 = new Comentario(vendedor1, LocalDate.now().plusDays(3),LocalTime.now(),"Un saludo");
+        Comentario comentario4 = new Comentario(vendedor3,LocalDate.now().plusDays(4),LocalTime.now(),"Gas");
 
         //Agregar comentario a publicaciones
         publicacion4.agregarComentario(comentario);
         publicacion.agregarComentario(comentario2);
+        publicacion2.agregarComentario(comentario3);
+        publicacion3.agregarComentario(comentario4);
 
         //Creacion de muros
         Muro muro = new Muro();

@@ -94,7 +94,7 @@ public class PublicacionViewController implements Initializable {
         labelNumMegustas.setText(Integer.toString(publicacionController.getListaMeGustas(publicacion1.getIdVendedor()).size()));
         labelFecha.setText(publicacion1.getFechaPublicacion().toString());
         labelHora.setText(publicacion1.getHoraPublicacion().getHour() + " : " + publicacion1.getHoraPublicacion().getMinute());
-        labelComentarios.setText(Integer.toString(publicacionController.getListaMeGustas(publicacion1.getIdVendedor()).size()));
+        labelComentarios.setText(Integer.toString(publicacionController.getListaComentarios(vendedor.getIdVendedor()).size()));
 
         //llenar los comentarios de la vista con los de la publicacion
         int columna = 0;
