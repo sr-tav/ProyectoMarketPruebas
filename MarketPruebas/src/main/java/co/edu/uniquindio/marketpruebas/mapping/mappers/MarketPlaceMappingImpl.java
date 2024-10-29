@@ -165,7 +165,7 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     public ComentarioDto comentarioToComentarioDto(Comentario comentario) {
         ComentarioDto dto = new ComentarioDto();
         dto.setFecha(comentario.getFecha());
-        dto.setFecha(comentario.getFecha());
+        dto.setHora(comentario.getHora());
         dto.setUsuario(usuarioToUsuarioDto(comentario.getUsuario()));
         dto.setMensaje(comentario.getMensaje());
         dto.setNumMeGustas(comentario.getNumMeGustas());
