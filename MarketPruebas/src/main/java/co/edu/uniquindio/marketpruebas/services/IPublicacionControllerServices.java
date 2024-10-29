@@ -10,10 +10,10 @@ import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import java.util.List;
 
 public interface IPublicacionControllerServices {
-    void darMeGusta(UsuarioDto usuario, String idVendedor);
+    void darMeGusta(UsuarioDto usuario, String idVendedor, PublicacionDto publicacion);
     boolean agregarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
     boolean eliminarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
     boolean actualizarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
-    List<VendedorDto> getListaMeGustas(String idVendedor);
+    List<VendedorDto> getListaMeGustas(String idVendedor, PublicacionDto dto);
     List<ComentarioDto> getListaComentarios(String idPublicacion, PublicacionDto dto);
 }

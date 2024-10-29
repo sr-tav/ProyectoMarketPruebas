@@ -43,4 +43,9 @@ public class UsuarioController implements IUsuarioControllerService {
     public List<VendedorDto> getListaContactos(UsuarioDto usuario) {
         return modelFactory.getListaContactosDto(((VendedorDto)usuario).getIdVendedor());
     }
+
+    @Override
+    public UsuarioDto getUsuarioPorId(String id) {
+        return modelFactory.getUsuarioPorId(id);
+    }
 }

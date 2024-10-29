@@ -9,7 +9,7 @@ public interface IModelFactoryService {
     public UsuarioDto getUsuario(UsuarioDto usuario);
     public boolean validarLogin(UsuarioDto usuario);
     public Usuario getUsuarioCompleto(UsuarioDto usuario);
-    public void darMeGustaPublicacion(UsuarioDto usuario, String idVendedor);
+    public void darMeGustaPublicacion(UsuarioDto usuario, String idVendedor, PublicacionDto dto);
     public List<ProductoDto> getListaProductosDisponibles(UsuarioDto usuario);
     boolean eliminarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
     boolean actualizarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
@@ -24,8 +24,8 @@ public interface IModelFactoryService {
     List<Comentario> getListaComentarios(String idVendedor, PublicacionDto publicacion);
     List<ComentarioDto> getListaComentariosDto(String idVendedor, PublicacionDto publicacion);
 
-    List<Vendedor> getListaMeGusta(String idVendedor);
-    List<VendedorDto> getListaMeGustaDto(String idVendedor);
+    List<Vendedor> getListaMeGusta(String idVendedor, PublicacionDto dto);
+    List<VendedorDto> getListaMeGustaDto(String idVendedor, PublicacionDto dto);
 
     List<Publicacion> getListaPublicaciones(String idVendedor);
     List<PublicacionDto> getListaPublicacionesDto(String idVendedor);

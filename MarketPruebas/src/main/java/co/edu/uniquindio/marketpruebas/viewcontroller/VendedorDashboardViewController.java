@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class VendedorDashboardViewController {
     ModelFactory modelFactory;
@@ -213,13 +215,14 @@ public class VendedorDashboardViewController {
      * @param event
      */
     @FXML
-    void clickInicio(ActionEvent event) {
+    void clickInicio(ActionEvent event) throws IOException {
         paneContactos.setVisible(false);
         paneEstadistica.setVisible(false);
         paneInicio.setVisible(true);
         panePerfil.setVisible(false);
         rutaImagenCargada = null;
         textAreaPublicar.clear();
+        modeloRecomendacion();
     }
 
     @FXML
@@ -245,7 +248,6 @@ public class VendedorDashboardViewController {
                 textAreaPublicar.clear();
                 selectProducto.getSelectionModel().clearSelection();
                 JOptionPane.showMessageDialog(null, muroController.getListaPublicaciones(vendedor).size());
-                mostrarPublicacionesPersonal();
 
             }else {
                 JOptionPane.showMessageDialog(null, "No se puede agregar el publicacion");
@@ -265,6 +267,76 @@ public class VendedorDashboardViewController {
         }
 
     }
+    /**
+     * Metodo que genera una lista de publicaciones dependiendo de las interacciones que tenga un usuario con sus contactos
+     * @return
+     */
+    public void modeloRecomendacion() throws IOException {
+        List<PublicacionDto> publicaciones = new ArrayList<>();
+        Map<VendedorDto, Integer> interaccionesMap = new HashMap<>();
+
+        for (VendedorDto v: usuarioController.getListaContactos(vendedor)) {
+            int interacciones = contadorDeInteraccion(muroController.getListaPublicaciones(v), v.getIdVendedor());
+            interaccionesMap.put(v, interacciones);
+        }
+
+        List<VendedorDto> vendedoresOrdenados = interaccionesMap.entrySet().stream()
+                .filter(entry -> entry.getValue() > 0)
+                .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
+                .map(Map.Entry::getKey)
+                .toList();
+
+        for (VendedorDto v: vendedoresOrdenados){
+            publicaciones.addAll(muroController.getListaPublicaciones(v));
+        }
+
+        llenarInicio(vendedoresOrdenados);
+    }
+
+    /**
+     * Metodo que cuenta la cantidad de veces que aparece un usuario en los likes de una publicacion
+     * @return
+     */
+    public int contadorDeInteraccion(List<PublicacionDto> publicaciones, String id) {
+        int cont = 0;
+        for (PublicacionDto p: publicaciones) {
+            for (VendedorDto dto : publicacionController.getListaMeGustas(id, p)){
+                if (dto.getIdVendedor().equals(vendedor.getIdVendedor())) {
+                    cont++;
+                }
+            }
+        }
+        return cont;
+    }
+
+    public void llenarInicio(List<VendedorDto> vendedores) throws IOException {
+        int columna = 0;
+        int fila = 0;
+        for (VendedorDto v: vendedores) {
+            for(int i = 0; i < muroController.getListaPublicaciones(v).size() ; i++){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/publicacion.fxml"));
+                AnchorPane pane = loader.load();
+
+                PublicacionViewController controller = loader.getController();
+                controller.setVendedor(v);
+                controller.setData(muroController.getListaPublicaciones(v).get(i));
+
+
+                gridInicio.add(pane, columna, fila);
+                fila ++;
+            }
+        }
+    }
+    /**
+     * //////////////////////////////////////////// SECCION PANEL PERFIL ///////////////////////////////////////////////
+     */
+    @FXML
+    void clickPerfil(ActionEvent event) {
+        paneContactos.setVisible(false);
+        paneEstadistica.setVisible(false);
+        paneInicio.setVisible(false);
+        panePerfil.setVisible(true);
+    }
 
     public void mostrarPublicacionesPersonal() throws IOException {
         int columna = 0;
@@ -282,18 +354,6 @@ public class VendedorDashboardViewController {
             fila ++;
 
         }
-    }
-
-
-    /**
-     * //////////////////////////////////////////// SECCION PANEL PERFIL ///////////////////////////////////////////////
-     */
-    @FXML
-    void clickPerfil(ActionEvent event) {
-        paneContactos.setVisible(false);
-        paneEstadistica.setVisible(false);
-        paneInicio.setVisible(false);
-        panePerfil.setVisible(true);
     }
     /**
      * ///////////////////////////////////////////// SECCION PANEL CHATS ///////////////////////////////////////////////

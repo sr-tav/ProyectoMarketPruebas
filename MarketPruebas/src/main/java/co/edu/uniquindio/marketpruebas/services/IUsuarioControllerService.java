@@ -13,4 +13,5 @@ public interface IUsuarioControllerService {
     public Usuario getUsuarioCompleto(UsuarioDto usuario);
     public List<ProductoDto> getListaProductosDisponibles(UsuarioDto usuario);
     public List<VendedorDto> getListaContactos(UsuarioDto usuario);
+    public UsuarioDto getUsuarioPorId(String id);
 }

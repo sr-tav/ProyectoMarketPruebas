@@ -37,7 +37,9 @@ public class ModelFactory implements IModelFactoryService {
         }
         return null;
     }
-
+    public UsuarioDto getUsuarioPorId(String id) {
+        return mapping.usuarioToUsuarioDto(marketPlace.getUsuarioPorId(id));
+    }
     @Override
     public boolean validarLogin(UsuarioDto usuario) {
         if (marketPlace.verificarUsuario(usuario.getUsuario(), usuario.getPassword())) {
@@ -52,8 +54,8 @@ public class ModelFactory implements IModelFactoryService {
     }
 
     @Override
-    public void darMeGustaPublicacion(UsuarioDto usuario, String idVendedor) {
-        marketPlace.darMeGustaPublicacion((Vendedor) mapping.usuarioDtoToUsuario(usuario), idVendedor);
+    public void darMeGustaPublicacion(UsuarioDto usuario, String idVendedor, PublicacionDto dto) {
+        marketPlace.darMeGustaPublicacion((Vendedor) mapping.usuarioDtoToUsuario(usuario), idVendedor, dto.getFechaPublicacion(), dto.getHoraPublicacion());
     }
 
     @Override
@@ -127,13 +129,13 @@ public class ModelFactory implements IModelFactoryService {
     }
 
     @Override
-    public List<Vendedor> getListaMeGusta(String id) {
-        return marketPlace.getListaMeGusta(id);
+    public List<Vendedor> getListaMeGusta(String id, PublicacionDto publicacionDto) {
+        return marketPlace.getListaMeGusta(id, publicacionDto.getFechaPublicacion(), publicacionDto.getHoraPublicacion());
     }
 
     @Override
-    public List<VendedorDto> getListaMeGustaDto(String id) {
-        return mapping.VendedoresToVendedoresDto(marketPlace.getListaMeGusta(id));
+    public List<VendedorDto> getListaMeGustaDto(String id, PublicacionDto dto) {
+        return mapping.VendedoresToVendedoresDto(marketPlace.getListaMeGusta(id, dto.getFechaPublicacion(), dto.getHoraPublicacion()));
     }
 
     @Override
@@ -193,6 +195,10 @@ public class ModelFactory implements IModelFactoryService {
         publicacion.agregarComentario(comentario2);
         publicacion2.agregarComentario(comentario3);
         publicacion3.agregarComentario(comentario4);
+
+        //Agregar interaccion a una publicacion
+        publicacion4.agregarMeGusta(vendedor1);
+        publicacion.agregarMeGusta(vendedor2);
 
         //Creacion de muros
         Muro muro = new Muro();

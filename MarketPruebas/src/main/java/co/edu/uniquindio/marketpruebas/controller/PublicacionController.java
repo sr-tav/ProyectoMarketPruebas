@@ -19,13 +19,13 @@ public class PublicacionController implements IPublicacionControllerServices {
     }
 
     @Override
-    public void darMeGusta(UsuarioDto usuario, String idVendedor) {
-        modelFactory.darMeGustaPublicacion(usuario, idVendedor);
+    public void darMeGusta(UsuarioDto usuario, String idVendedor, PublicacionDto dto) {
+        modelFactory.darMeGustaPublicacion(usuario, idVendedor, dto);
     }
 
     @Override
-    public List<VendedorDto> getListaMeGustas(String id) {
-        return modelFactory.getListaMeGustaDto(id);
+    public List<VendedorDto> getListaMeGustas(String id, PublicacionDto dto) {
+        return modelFactory.getListaMeGustaDto(id, dto);
     }
 
     @Override

@@ -90,7 +90,7 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         publi.setHoraPublicacion(publicacion.getHoraPublicacion());
 
         publi.setListaComentarios(modelFactory.getListaComentarios(publicacion.getIdVendedor(), publicacion));
-        publi.setListaMegustas(modelFactory.getListaMeGusta(publicacion.getIdVendedor()));
+        publi.setListaMegustas(modelFactory.getListaMeGusta(publicacion.getIdVendedor(), publicacion));
 
         return publi;
     }

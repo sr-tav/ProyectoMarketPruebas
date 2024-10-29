@@ -89,7 +89,7 @@ public class PublicacionViewController implements Initializable {
         labelTitulo.setText(publicacion1.getProducto().getNombre());
         labelDescrip.setText(publicacion1.getDescripcion());
         labelPrecio.setText(Double.toString(publicacion1.getProducto().getPrecio()));
-        labelNumMegustas.setText(Integer.toString(publicacionController.getListaMeGustas(publicacion1.getIdVendedor()).size()));
+        labelNumMegustas.setText(Integer.toString(publicacionController.getListaMeGustas(publicacion1.getIdVendedor(), publicacion1).size()));
         labelFecha.setText(publicacion1.getFechaPublicacion().toString());
         labelHora.setText(publicacion1.getHoraPublicacion().getHour() + " : " + publicacion1.getHoraPublicacion().getMinute());
         labelComentarios.setText(Integer.toString(publicacionController.getListaComentarios(vendedor.getIdVendedor(), publicacion1).size()));
@@ -116,10 +116,10 @@ public class PublicacionViewController implements Initializable {
     void clickDarMegusta(ActionEvent event) {
 
         //Dar like solamente una vez
-        publicacionController.darMeGusta(interactVendedor, vendedor.getIdVendedor());
-        labelNumMegustas.setText(Integer.toString(publicacionController.getListaMeGustas(vendedor.getIdVendedor()).size()));
+        publicacionController.darMeGusta(interactVendedor, vendedor.getIdVendedor(), publicacion);
+        labelNumMegustas.setText(Integer.toString(publicacionController.getListaMeGustas(vendedor.getIdVendedor(), publicacion).size()));
         btnDarMegusta.setDisable(true);
-        JOptionPane.showMessageDialog(null,publicacionController.getListaMeGustas(vendedor.getIdVendedor()).size());
+        JOptionPane.showMessageDialog(null,publicacionController.getListaMeGustas(vendedor.getIdVendedor(), publicacion).size());
     }
     @FXML
     void clickComentar(ActionEvent event) {

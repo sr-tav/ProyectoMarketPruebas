@@ -16,7 +16,6 @@ public class Muro {
     public void agregarPublicacion(Publicacion publicacion){
         publicacion.setIdVendedor(idVendedor);
         listaPublicaciones.add(publicacion);
-        JOptionPane.showMessageDialog(null, "Publicacion agregada con exito");
     }
     public void agregarChat(Chat chat){
         listaChats.add(chat);

@@ -49,7 +49,14 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         }
         return null;
     }
-
+    public Usuario getUsuarioPorId(String id){
+        for (Vendedor vendedor : listaVendedores){
+            if (vendedor.getIdVendedor().equals(id)){
+                return vendedor;
+            }
+        }
+        return null;
+    }
     public Usuario getUsuario(String usuario, String password){
         if (verificarUsuario(usuario, password)){
             for (Usuario usuario1 : listaUsuarios){
@@ -122,18 +129,17 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         }
         return comentarios;
     }
-    public List<Vendedor> getListaMeGusta(String idVendedor){
-        List<Vendedor> meGustas = new ArrayList<>();
+    public List<Vendedor> getListaMeGusta(String idVendedor, LocalDate fecha, LocalTime hora){
         for (Vendedor vendedor : listaVendedores){
             if(vendedor.getIdVendedor().equals(idVendedor)){
                 for (Publicacion publicacion : vendedor.getMuro().getListaPublicaciones()){
-                    if(publicacion.getIdVendedor().equals(idVendedor)){
-                        meGustas = publicacion.getListaMegustas();
+                    if(publicacion.getFechaPublicacion() == fecha && publicacion.getHoraPublicacion() == hora){
+                        return publicacion.getListaMegustas();
                     }
                 }
             }
         }
-        return meGustas;
+        return null;
     }
     public List<Publicacion> getListaPublicaciones(String idVendedor){
         List<Publicacion> publicaciones = new ArrayList<>();
@@ -183,12 +189,13 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
     }
 
     @Override
-    public void darMeGustaPublicacion(Vendedor usuario, String id) {
+    public void darMeGustaPublicacion(Vendedor usuario, String id, LocalDate fecha, LocalTime hora) {
         for(Vendedor vendedor : listaVendedores){
             if(vendedor.getIdVendedor().equals(id)){
                 for (Publicacion p : vendedor.getMuro().getListaPublicaciones()){
-                    if(p.getIdVendedor().equals(id)){
+                    if(p.getFechaPublicacion() == fecha && p.getHoraPublicacion() == hora){
                         p.agregarMeGusta(usuario);
+                        break;
                     }
                 }
             }
