@@ -27,6 +27,7 @@ import javafx.util.Duration;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -188,7 +189,7 @@ public class VendedorDashboardViewController {
     }
 
     /**
-     * //////////////////////////////////////////SECCION PANEL ESTADISTICAS/////////////////////////////////////////////
+     * /////////////////////////////////////////////////////////////SECCION PANEL ESTADISTICAS//////////////////////////////////////////////////////////////////
      */
     @FXML
     private Label labelNombreEstadistica;
@@ -235,8 +236,32 @@ public class VendedorDashboardViewController {
     }
 
     @FXML
-    void clickExportarInforme(ActionEvent event) {
+    void clickExportarInforme(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Exportar informe de estadisticas");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos de texto (*.txt)", "*.txt"));
 
+        Stage stage = new Stage();
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            try (FileWriter fw = new FileWriter(file)) {
+                fw.write(generarReporteEstadisticas());
+                System.out.println("Reporte exportado correctamente!");
+            } catch (IOException e) {
+                System.err.println("Error al escribir en el archivo: " + e.getMessage());
+            }
+        } else {
+            System.out.println("El reporte no se pudo exportar");
+        }
+
+    }
+    public String generarReporteEstadisticas() {
+        String info = "//////////////////////////////////////////////////////////////////////////////////////////////\n";
+        info+= "REPORTE DE ESTADISTICAS\n"+ "FECHA: " + LocalDate.now() + "\n" + "Reporte realizado por: "+ vendedor.getNombre() + " " + vendedor.getApellido() + "\n"
+                     +"//////////////////////////////////////////////////////////////////////////////////////////////\n"
+                + "Informacion del reporte: blasblablablabalbalbab";
+        return info;
     }
     public void inicializarDiagrama(){
         axisFecha.setLabel("Dia");
@@ -385,7 +410,7 @@ public class VendedorDashboardViewController {
         }
     }
     /**
-     * /////////////////////////////////////////// SECCION PANEL INICIO/////////////////////////////////////////////////
+     * ///////////////////////////////////////////////////////////// SECCION PANEL INICIO//////////////////////////////////////////////////////////////////
      */
 
     @FXML
@@ -502,6 +527,7 @@ public class VendedorDashboardViewController {
     public int contadorDeInteraccion(List<PublicacionDto> publicaciones, String id) {
         int cont = 0;
         for (PublicacionDto p: publicaciones) {
+            JOptionPane.showMessageDialog(null, id);
             for (VendedorDto dto : publicacionController.getListaMeGustas(id, p)){
                 if (dto.getIdVendedor().equals(vendedor.getIdVendedor())) {
                     cont++;
@@ -530,7 +556,7 @@ public class VendedorDashboardViewController {
         }
     }
     /**
-     * //////////////////////////////////////////// SECCION PANEL PERFIL ///////////////////////////////////////////////
+     * ////////////////////////////////////////////////////////// SECCION PANEL PERFIL ////////////////////////////////////////////////////////////
      */
     @FXML
     void clickPerfil(ActionEvent event) {
@@ -558,7 +584,7 @@ public class VendedorDashboardViewController {
         }
     }
     /**
-     * ///////////////////////////////////////////// SECCION PANEL CHATS ///////////////////////////////////////////////
+     * /////////////////////////////////////////////////////////// SECCION PANEL CHATS //////////////////////////////////////////////////////////////////////
      */
 
     @FXML
@@ -567,7 +593,7 @@ public class VendedorDashboardViewController {
     }
 
     /**
-     * ///////////////////////////////////////////// SECCION GETTERS Y SETTERS /////////////////////////////////////////
+     * //////////////////////////////////////////////////////// SECCION GETTERS Y SETTERS /////////////////////////////////////////////////////////////////////////
      */
 
     public ModelFactory getModelFactory() {
