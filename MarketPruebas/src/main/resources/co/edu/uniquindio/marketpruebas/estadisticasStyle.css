@@ -40,8 +40,41 @@
     -fx-background-color: #7eb9c3;
     -fx-background-radius: 100;
 }
+.menu_contacto_estadisticas:hover{
+    -fx-background-color: #5b8d98;
+    -fx-background-radius: 100;
+}
 .menu-button .arrow {
     -fx-background-color: #ffffff;
+}
+.menu-item {
+    -fx-background-color: #ffffff; /* Color de fondo */
+    -fx-text-fill: #15263c; /* Color del texto */
+    -fx-font-size: 10px; /* Tamaño de la fuente */
+    -fx-font-weight: bold;
+}
+
+/* Cambia el color de fondo cuando se pasa el ratón por encima de una opción */
+.menu-item:hover {
+    -fx-background-color: #b4cae1;
+    -fx-text-fill: #1e3659;
+}
+
+/* Cambia el diseño del borde de cada opción */
+.menu-item {
+    -fx-border-color: transparent;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-padding: 5px 10px;
+}
+
+/* Cambia el estilo del popup (fondo general de todas las opciones) */
+.menu-button .context-menu {
+    -fx-background-color: #1e3659;
+    -fx-background-radius: 0px;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0px;
+    -fx-padding: 0px;
 }
 .chart {
     -fx-background-color: #476381;

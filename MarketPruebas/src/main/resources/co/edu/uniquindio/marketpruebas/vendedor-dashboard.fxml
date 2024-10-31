@@ -9,7 +9,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
@@ -393,7 +392,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER" prefHeight="240.0" prefWidth="1012.0" stylesheets="@estadisticasStyle.css">
+                              <HBox alignment="CENTER" prefHeight="240.0" prefWidth="1012.0">
                                  <VBox.margin>
                                     <Insets top="15.0" />
                                  </VBox.margin>
@@ -419,10 +418,13 @@
                                                 <Insets bottom="2.0" left="2.0" right="2.0" top="42.0" />
                                              </StackPane.margin>
                                              <content>
-                                                <GridPane fx:id="gridTop" prefHeight="0.0" prefWidth="0.0">
+                                                <GridPane fx:id="gridTop" prefHeight="0.0" prefWidth="0.0" vgap="10.0">
                                                   <columnConstraints>
                                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                   </columnConstraints>
+                                                   <padding>
+                                                      <Insets top="2.0" />
+                                                   </padding>
                                                 </GridPane>
                                              </content>
                                           </ScrollPane>
@@ -431,7 +433,7 @@
                                           <Insets right="40.0" />
                                        </HBox.margin>
                                     </StackPane>
-                                    <StackPane prefHeight="230.0" prefWidth="285.0" styleClass="pane-con-sombra" stylesheets="@estadisticasStyle.css">
+                                    <StackPane prefHeight="230.0" prefWidth="285.0" stylesheets="@estadisticasStyle.css">
                                        <children>
                                           <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7eb9c3" height="193.0" stroke="#7ca9d3" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_top_info" width="278.0" />
                                           <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dcf9ff" height="52.0" stroke="#7ca9d3" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_top_info" width="278.0">
@@ -446,21 +448,9 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                    <HBox.margin>
-                                                      <Insets top="10.0" />
+                                                      <Insets right="100.0" top="10.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <MenuButton fx:id="menuButtonContacto" mnemonicParsing="false" onAction="#clickMenuButtonContacto" popupSide="TOP" styleClass="menu_contacto_estadisticas" stylesheets="@estadisticasStyle.css" text="Contacto" textFill="WHITE">
-                                                  <items>
-                                                    <MenuItem mnemonicParsing="false" text="Action 1" />
-                                                    <MenuItem mnemonicParsing="false" text="Action 2" />
-                                                  </items>
-                                                   <font>
-                                                      <Font name="System Bold" size="13.0" />
-                                                   </font>
-                                                   <HBox.margin>
-                                                      <Insets right="9.0" top="12.0" />
-                                                   </HBox.margin>
-                                                </MenuButton>
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -476,6 +466,14 @@
                                                 </Label>
                                              </children>
                                           </HBox>
+                                          <MenuButton fx:id="menuButtonContacto" mnemonicParsing="false" styleClass="menu_contacto_estadisticas" stylesheets="@estadisticasStyle.css" text="Contacto" textFill="WHITE">
+                                             <StackPane.margin>
+                                                <Insets bottom="195.0" left="160.0" />
+                                             </StackPane.margin>
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </MenuButton>
                                        </children>
                                     </StackPane>
                                  </children>

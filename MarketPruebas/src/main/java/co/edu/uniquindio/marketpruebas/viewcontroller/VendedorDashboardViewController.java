@@ -5,6 +5,8 @@ import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,15 +16,18 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
@@ -105,11 +110,14 @@ public class VendedorDashboardViewController {
         usuarioController = new UsuarioController();
         muroController = new MuroController();
 
+
+        //Seccion contactos
         this.vendedor = vendedor;
         mostrarContactos();
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg", "*.gif"));
 
+        //Seccion Inicio
         selectProducto.setItems(FXCollections.observableArrayList(usuarioController.getListaProductosDisponibles(vendedor)));
         selectProducto.setCellFactory(lv -> new ListCell<ProductoDto>(){
             @Override
@@ -118,6 +126,10 @@ public class VendedorDashboardViewController {
                 setText(empty ? "" : "Producto = " + item.getNombre() + " / " + item.getEstado());
             }
         });
+
+        // Seccion estadisticas
+        actualizarEstadisticas();
+        inicializarTimeLine();
     }
 
     /**
@@ -210,6 +222,9 @@ public class VendedorDashboardViewController {
     @FXML
     private BarChart<?, ?> chartPublicaciones;
 
+    private Timeline timeline;
+    private int segEnlapso = 0;
+
     @FXML
     void clickEstadistica(ActionEvent event) {
         paneContactos.setVisible(false);
@@ -217,15 +232,131 @@ public class VendedorDashboardViewController {
         paneInicio.setVisible(false);
         panePerfil.setVisible(false);
     }
+
     @FXML
     void clickExportarInforme(ActionEvent event) {
 
     }
-    @FXML
-    void clickMenuButtonContacto(ActionEvent event) {
 
+    public void actualizarEstadisticas() throws IOException {
+        labelNombreEstadistica.setText(vendedor.getNombre()+" "+vendedor.getApellido());
+        labelCantProductosPublicados.setText(Integer.toString(muroController.getListaPublicaciones(vendedor).size()));
+        labelCantidadContactos.setText(Integer.toString(usuarioController.getListaContactos(vendedor).size()));
+        inicializarMenuBtnEstadisticas();
+        inicializarTop(getTopProductos());
     }
 
+    private void inicializarTimeLine(){
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> actualizarTimer()));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private void actualizarTimer(){
+        segEnlapso++;
+        int hora = segEnlapso/3600;
+        int minutos = (segEnlapso%3600)/60;
+        int seg = segEnlapso%60;
+        labelTiempoUso.setText(String.format("%02d:%02d:%02d", hora, minutos, seg));
+    }
+
+    public void inicializarMenuBtnEstadisticas(){
+        for (VendedorDto v :usuarioController.getListaContactos(vendedor)) {
+            MenuItem item = new MenuItem(v.getNombre());
+
+            item.setOnAction(event -> {menuButtonContacto.setText(v.getNombre());
+                seleccionarContactoEstadistica(v);
+            });
+            menuButtonContacto.getItems().add(item);
+        }
+    }
+
+    public void seleccionarContactoEstadistica(VendedorDto v){
+        labelNumMensajesEstadistic.setText(Integer.toString(usuarioController.getListaContactos(v).size()));
+    }
+
+    public List<PublicacionDto> getTopProductos(){
+        Map<PublicacionDto, Integer> publicaciones = new HashMap<>();
+        for (PublicacionDto p : muroController.getListaPublicaciones(vendedor)) {
+            int cont= publicacionController.getListaMeGustas(vendedor.getIdVendedor(), p).size();
+            publicaciones.put(p, cont);
+        }
+        return publicaciones.entrySet().stream()
+                .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
+                .map(Map.Entry::getKey)
+                .toList();
+    }
+
+    public void inicializarTop(List<PublicacionDto> publicaciones) throws IOException {
+        int columna = 0;
+        int fila = 0;
+        for (int i = 0; i<11; i++) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/publicacion-top-estadisticas.fxml"));
+            AnchorPane anchorPane = loader.load();
+
+            PublicacionTopViewController controller = loader.getController();
+            if (i<publicaciones.size()) {
+                controller.setData(publicaciones.get(i));
+                URL url;
+                switch (i){
+                    case 0:
+                        url = getClass().getResource("/co/edu/uniquindio/marketpruebas/number-1-yelllow.png");
+                        assert url != null;
+                        controller.setImgenPuesto(new ImageView(url.toExternalForm()));
+                        break;
+                    case 1:
+                        url = getClass().getResource("/co/edu/uniquindio/marketpruebas/number-2.png");
+                        assert url != null;
+                        controller.setImgenPuesto(new ImageView(url.toExternalForm()));
+                        break;
+                    case 2:
+                        url = getClass().getResource("/co/edu/uniquindio/marketpruebas/number-3.png");
+                        assert url != null;
+                        controller.setImgenPuesto(new ImageView(url.toExternalForm()));
+                        break;
+                    case 3:
+                        url = getClass().getResource("/co/edu/uniquindio/marketpruebas/4.png");
+                        assert url != null;
+                        controller.setImgenPuesto(new ImageView(url.toExternalForm()));
+                        break;
+                    case 4:
+                        url = getClass().getResource("/co/edu/uniquindio/marketpruebas/5.png");
+                        assert url != null;
+                        controller.setImgenPuesto(new ImageView(url.toExternalForm()));
+                        break;
+                    case 5:
+                        url = getClass().getResource("/co/edu/uniquindio/marketpruebas/6.png");
+                        assert url != null;
+                        controller.setImgenPuesto(new ImageView(url.toExternalForm()));
+                        break;
+                    case 6:
+                        url = getClass().getResource("/co/edu/uniquindio/marketpruebas/7.png");
+                        assert url != null;
+                        controller.setImgenPuesto(new ImageView(url.toExternalForm()));
+                        break;
+                    case 7:
+                        url = getClass().getResource("/co/edu/uniquindio/marketpruebas/8.png");
+                        assert url != null;
+                        controller.setImgenPuesto(new ImageView(url.toExternalForm()));
+                        break;
+                    case 8:
+                        url = getClass().getResource("/co/edu/uniquindio/marketpruebas/9.png");
+                        assert url != null;
+                        controller.setImgenPuesto(new ImageView(url.toExternalForm()));
+                        break;
+                    case 9:
+                        url = getClass().getResource("/co/edu/uniquindio/marketpruebas/10.png");
+                        assert url != null;
+                        controller.setImgenPuesto(new ImageView(url.toExternalForm()));
+                        break;
+                    default:
+                        break;
+                }
+                gridTop.add(anchorPane, columna, fila);
+                fila++;
+            }
+        }
+    }
     /**
      * /////////////////////////////////////////// SECCION PANEL INICIO/////////////////////////////////////////////////
      */
