@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -220,7 +221,7 @@ public class VendedorDashboardViewController {
     private NumberAxis axisNumero;
 
     @FXML
-    private BarChart<?, ?> chartPublicaciones;
+    private BarChart<String, Number> chartPublicaciones;
 
     private Timeline timeline;
     private int segEnlapso = 0;
@@ -237,13 +238,39 @@ public class VendedorDashboardViewController {
     void clickExportarInforme(ActionEvent event) {
 
     }
+    public void inicializarDiagrama(){
+        axisFecha.setLabel("Dia");
+        axisNumero.setLabel("Numero de publicaciones");
 
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Publicaciones");
+
+        List<PublicacionDto> publicaciones = muroController.getListaPublicaciones(vendedor);
+
+        for (int i = 0; i<32;i++){
+            LocalDate date = LocalDate.now().plusDays(i);
+            int num = buscarPublicacionesPorDia(date, publicaciones);
+            series.getData().add(new XYChart.Data<>(date.toString(), num));
+        }
+        chartPublicaciones.getData().add(series);
+
+    }
+    public int buscarPublicacionesPorDia(LocalDate date, List<PublicacionDto> publicaciones){
+        int cont = 0;
+        for(PublicacionDto dto: publicaciones){
+            if (dto.getFechaPublicacion().equals(date)){
+                cont++;
+            }
+        }
+        return cont;
+    }
     public void actualizarEstadisticas() throws IOException {
         labelNombreEstadistica.setText(vendedor.getNombre()+" "+vendedor.getApellido());
         labelCantProductosPublicados.setText(Integer.toString(muroController.getListaPublicaciones(vendedor).size()));
         labelCantidadContactos.setText(Integer.toString(usuarioController.getListaContactos(vendedor).size()));
         inicializarMenuBtnEstadisticas();
         inicializarTop(getTopProductos());
+        inicializarDiagrama();
     }
 
     private void inicializarTimeLine(){
