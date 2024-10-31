@@ -10,6 +10,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -175,11 +178,52 @@ public class VendedorDashboardViewController {
      * //////////////////////////////////////////SECCION PANEL ESTADISTICAS/////////////////////////////////////////////
      */
     @FXML
+    private Label labelNombreEstadistica;
+
+    @FXML
+    private Button btnExportar;
+
+    @FXML
+    private Label labelCantProductosPublicados;
+
+    @FXML
+    private Label labelCantidadContactos;
+
+    @FXML
+    private Label labelTiempoUso;
+
+    @FXML
+    private GridPane gridTop;
+
+    @FXML
+    private Label labelNumMensajesEstadistic;
+
+    @FXML
+    private MenuButton menuButtonContacto;
+
+    @FXML
+    private CategoryAxis axisFecha;
+
+    @FXML
+    private NumberAxis axisNumero;
+
+    @FXML
+    private BarChart<?, ?> chartPublicaciones;
+
+    @FXML
     void clickEstadistica(ActionEvent event) {
         paneContactos.setVisible(false);
         paneEstadistica.setVisible(true);
         paneInicio.setVisible(false);
         panePerfil.setVisible(false);
+    }
+    @FXML
+    void clickExportarInforme(ActionEvent event) {
+
+    }
+    @FXML
+    void clickMenuButtonContacto(ActionEvent event) {
+
     }
 
     /**

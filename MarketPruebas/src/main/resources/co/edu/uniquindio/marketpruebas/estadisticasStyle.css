@@ -1,0 +1,70 @@
+.panel_info{
+    -fx-background-color: #7ca9d3;
+    -fx-background-radius: 15;
+}
+.rectangle_info{
+    -fx-fill: #5c86a8;
+    -fx-arc-width: 35;
+    -fx-arc-height: 35;
+}
+.rectangle_info_void{
+    -fx-arc-width: 35;
+    -fx-arc-height: 35;
+}
+.rectangle_top_info{
+    -fx-arc-width: 20;
+    -fx-arc-height: 20;
+}
+
+.rectangle_bottom_info{
+    -fx-fill: #ffffff;
+    -fx-arc-width: 35;
+    -fx-arc-height: 35;
+}
+.pane-con-sombra {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.30), 30, 0, 0, 0);
+}
+.btn_exportar{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 100;
+}
+.btn_exportar:hover{
+    -fx-background-color: #c2c9d3;
+    -fx-background-radius: 100;
+}
+.publicacion_top{
+    -fx-background-color: #3b556c;
+    -fx-background-radius: 20;
+}
+.menu_contacto_estadisticas{
+    -fx-background-color: #7eb9c3;
+    -fx-background-radius: 100;
+}
+.menu-button .arrow {
+    -fx-background-color: #ffffff;
+}
+.chart {
+    -fx-background-color: #476381;
+}
+
+/* Cambia el color de las barras */
+.default-color0.chart-bar {
+    -fx-bar-fill: #3498db;
+}
+.default-color1.chart-bar {
+    -fx-bar-fill: #e74c3c;
+}
+
+.chart-legend {
+    -fx-text-fill: #ffffff; /* Color del texto de la leyenda */
+}
+.axis-label {
+    -fx-text-fill: #ffffff; /* Color de las etiquetas de los ejes */
+}
+.chart-plot-background {
+    -fx-background-color: #476381;
+}
+.axis {
+    -fx-tick-label-fill: #ffffff;
+    -fx-tick-mark-stroke: #ffffff;
+}
