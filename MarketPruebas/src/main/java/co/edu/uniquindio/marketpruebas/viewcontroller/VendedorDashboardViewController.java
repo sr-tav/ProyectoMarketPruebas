@@ -33,7 +33,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 public class VendedorDashboardViewController {
     ModelFactory modelFactory;
@@ -257,12 +257,64 @@ public class VendedorDashboardViewController {
 
     }
     public String generarReporteEstadisticas() {
-        String info = "//////////////////////////////////////////////////////////////////////////////////////////////\n";
-        info+= "REPORTE DE ESTADISTICAS\n"+ "FECHA: " + LocalDate.now() + "\n" + "Reporte realizado por: "+ vendedor.getNombre() + " " + vendedor.getApellido() + "\n"
-                     +"//////////////////////////////////////////////////////////////////////////////////////////////\n"
-                + "Informacion del reporte: blasblablablabalbalbab";
-        return info;
+        StringBuilder info = new StringBuilder();
+        List<PublicacionDto> top = getTopProductos();
+
+        info.append("█////////////////////////////////////////////////////////////////////////////////////////////█\n");
+        info.append("█                       R E P O R T E   D E   E S T A D I S T I C A S                        █\n");
+        info.append("█                                     FECHA: ").append(LocalDate.now()).append("                                      \n");
+        info.append("█                            Reporte generado por: ").append(vendedor.getNombre()).append(" ").append(vendedor.getApellido()).append("                              \n");
+        info.append("█////////////////////////////////////////////////////////////////////////////////////////////█\n");
+        info.append("█--------------------------------------------------------------------------------------------█\n");
+        info.append("█                                   DETALLE DEL REPORTE                                      █\n");
+        info.append("█--------------------------------------------------------------------------------------------█\n");
+        info.append("█ Cantidad de productos publicados: ").append(labelCantProductosPublicados.getText()).append("\n");
+        info.append("█ Cantidad de contactos: ").append(labelCantidadContactos.getText()).append("\n");
+        info.append("█ Tiempo de uso en la aplicacion: ").append(labelTiempoUso.getText()).append("\n");
+        info.append("█ Cantidad de mensajes enviados con ").append(menuButtonContacto.getText()).append(" : ").append(labelNumMensajesEstadistic.getText()).append("\n");
+
+        info.append("█--------------------------------------------------------------------------------------------█\n");
+        info.append("█                              = TOP 1O PUBLICACIONES CON MAS LIKES =                        █\n");
+        info.append("█--------------------------------------------------------------------------------------------█\n");
+        for (int i = 0; i < 10; i++) {
+            if (i < top.size()) {
+                PublicacionDto pub = top.get(i);
+                int likes = publicacionController.getListaMeGustas(pub.getIdVendedor(), pub).size();
+                info.append(String.format("█ %2d: %-30s / %s / Me gustas: %d\n",
+                        i + 1,
+                        pub.getProducto().getNombre(),
+                        pub.getFechaPublicacion(),
+                        likes));
+            } else {
+                info.append(String.format("█ %2d: %-30s                                          \n", i + 1, "Sin datos"));
+            }
+        }
+        info.append("█--------------------------------------------------------------------------------------------█\n");
+        info.append("█                 DIAGRAMA DE BARRAS: PUBLICACIONES POR LOS ULTIMOS 30 DIAS                  █\n");
+        info.append("█--------------------------------------------------------------------------------------------█\n");
+        if (!chartPublicaciones.getData().isEmpty()) {
+            XYChart.Series<String, Number> series = chartPublicaciones.getData().getFirst();
+            int maxValor = series.getData().stream().mapToInt(data -> data.getYValue().intValue()).max().orElse(1);
+
+            for (XYChart.Data<String, Number> data : series.getData()) {
+                String fecha = data.getXValue();
+                int publicaciones = data.getYValue().intValue();
+                int longitudBarra = (int) ((double) publicaciones / maxValor * 30);
+
+                info.append(String.format("█ %-12s | %s %3d █\n", fecha, "█".repeat(longitudBarra), publicaciones));
+            }
+
+        } else {
+            info.append("█ No hay datos de publicaciones disponibles para mostrar.                                   █\n");
+        }
+
+        info.append("█--------------------------------------------------------------------------------------------█\n");
+        info.append("█ Nota: Este es un informe generado automáticamente.                                         █\n");
+        info.append("█////////////////////////////////////////////////////////////////////////////////////////////█\n");
+
+        return info.toString();
     }
+
     public void inicializarDiagrama(){
         axisFecha.setLabel("Dia");
         axisNumero.setLabel("Numero de publicaciones");
@@ -280,6 +332,7 @@ public class VendedorDashboardViewController {
         chartPublicaciones.getData().add(series);
 
     }
+
     public int buscarPublicacionesPorDia(LocalDate date, List<PublicacionDto> publicaciones){
         int cont = 0;
         for(PublicacionDto dto: publicaciones){
@@ -289,6 +342,7 @@ public class VendedorDashboardViewController {
         }
         return cont;
     }
+
     public void actualizarEstadisticas() throws IOException {
         labelNombreEstadistica.setText(vendedor.getNombre()+" "+vendedor.getApellido());
         labelCantProductosPublicados.setText(Integer.toString(muroController.getListaPublicaciones(vendedor).size()));
