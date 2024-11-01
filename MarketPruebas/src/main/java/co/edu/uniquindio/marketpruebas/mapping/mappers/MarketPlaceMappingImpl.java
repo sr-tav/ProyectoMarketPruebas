@@ -5,6 +5,7 @@ import co.edu.uniquindio.marketpruebas.mapping.dto.*;
 import co.edu.uniquindio.marketpruebas.model.*;
 import co.edu.uniquindio.marketpruebas.services.IMarketPlaceMapping;
 
+import javax.swing.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -195,8 +196,10 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     @Override
     public List<VendedorDto>  VendedoresToVendedoresDto(List<Vendedor> vendedores) {
         List<VendedorDto> vendedoresDto = new ArrayList<VendedorDto>();
-        for (Vendedor vendedor : vendedores) {
-            vendedoresDto.add((VendedorDto) usuarioToUsuarioDto(vendedor));
+        if (vendedores != null){
+            for (Vendedor vendedor : vendedores) {
+                vendedoresDto.add((VendedorDto) usuarioToUsuarioDto(vendedor));
+            }
         }
         return vendedoresDto;
     }

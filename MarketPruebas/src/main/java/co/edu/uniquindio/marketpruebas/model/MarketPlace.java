@@ -129,16 +129,17 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         }
         return comentarios;
     }
-    public List<Vendedor> getListaMeGusta(String idVendedor, LocalDate fecha, LocalTime hora){
+    public List<Vendedor> getListaMeGusta(String idVendedor, Producto producto){
         for (Vendedor vendedor : listaVendedores){
             if(vendedor.getIdVendedor().equals(idVendedor)){
                 for (Publicacion publicacion : vendedor.getMuro().getListaPublicaciones()){
-                    if(publicacion.getFechaPublicacion() == fecha && publicacion.getHoraPublicacion() == hora){
+                    if(publicacion.getProducto().getImagen() == producto.getImagen()){
                         return publicacion.getListaMegustas();
                     }
                 }
             }
         }
+        System.out.println(" ");
         return null;
     }
     public List<Publicacion> getListaPublicaciones(String idVendedor){
@@ -240,6 +241,7 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         if(!verificarPublicacionExiste(publicacion)){
             for (Vendedor vendedor: listaVendedores){
                 if(vendedor.getIdVendedor().equals(id)){
+                    vendedor.setEstadoProducto(publicacion.getProducto());
                     vendedor.getMuro().agregarPublicacion(publicacion);
                     return true;
                 }

@@ -6,6 +6,7 @@ import co.edu.uniquindio.marketpruebas.model.*;
 import co.edu.uniquindio.marketpruebas.services.IModelFactoryService;
 
 import javax.swing.*;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -76,7 +77,12 @@ public class ModelFactory implements IModelFactoryService {
 
     @Override
     public boolean agregarPublicacion(PublicacionDto publicacion, String id) {
-        Publicacion p = mapping.publicacionDtoToPublicacion(publicacion);
+        Publicacion p = new Publicacion();
+        p.setDescripcion(publicacion.getDescripcion());
+        p.setFechaPublicacion(publicacion.getFechaPublicacion());
+        p.setIdVendedor(publicacion.getIdVendedor());
+        p.setHoraPublicacion(publicacion.getHoraPublicacion());
+        p.setProducto(mapping.productoDtoToProducto(publicacion.getProducto()));
 
         if (marketPlace.crearPublicacion(p, id)){
             return true;
@@ -130,12 +136,13 @@ public class ModelFactory implements IModelFactoryService {
 
     @Override
     public List<Vendedor> getListaMeGusta(String id, PublicacionDto publicacionDto) {
-        return marketPlace.getListaMeGusta(id, publicacionDto.getFechaPublicacion(), publicacionDto.getHoraPublicacion());
+        return marketPlace.getListaMeGusta(id, mapping.productoDtoToProducto(publicacionDto.getProducto()));
     }
 
     @Override
     public List<VendedorDto> getListaMeGustaDto(String id, PublicacionDto dto) {
-        return mapping.VendedoresToVendedoresDto(marketPlace.getListaMeGusta(id, dto.getFechaPublicacion(), dto.getHoraPublicacion()));
+        System.out.println(dto.getProducto());
+        return mapping.VendedoresToVendedoresDto(marketPlace.getListaMeGusta(id, mapping.productoDtoToProducto(dto.getProducto())));
     }
 
     @Override
@@ -160,7 +167,7 @@ public class ModelFactory implements IModelFactoryService {
         Producto producto2 = new Producto("Nintendo Switch", "/co/edu/uniquindio/marketpruebas/imagenes/Nintendo-Switch.jpg","Consolas de video",Estado.PUBLICADO, 500000);
         Producto producto3 = new Producto("Closet de dos puertas", "/co/edu/uniquindio/marketpruebas/imagenes/Closet-dos.png","Muebles para el hogar",Estado.PUBLICADO, 450000);
         Producto producto4 = new Producto("Iphone 25", "/co/edu/uniquindio/marketpruebas/imagenes/iphone 25.jpeg","Celulares",Estado.PUBLICADO, 450000);
-        Producto producto5 = new Producto("Moto cualquiera","/co/edu/uniquindio/marketpruebas/imagenes/Moto.png", "Vehiculos",null,2500000);
+        Producto producto5 = new Producto("Moto cualquiera","/co/edu/uniquindio/marketpruebas/imagenes/Moto.png", "Vehiculos",Estado.DISPONIBLE,2500000);
 
         //Creacion de publicaciones
         Publicacion publicacion = new Publicacion(LocalDate.now(), LocalTime.now(), producto1,"Flamante vehiculo mazda dos dias de uso, mas informacion al interno");

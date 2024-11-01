@@ -51,7 +51,7 @@ public class Vendedor extends Usuario {
         ArrayList<Producto> disponibles = new ArrayList<>();
 
         for (Producto producto : listaProductos){
-            if (producto.getEstado() != Estado.PUBLICADO){
+            if (producto.getEstado() == Estado.DISPONIBLE){
                 disponibles.add(producto);
             }
         }
@@ -89,7 +89,13 @@ public class Vendedor extends Usuario {
     public List<Producto> getListaProductos() {
         return listaProductos;
     }
-
+    public void setEstadoProducto(Producto pr) {
+        for (Producto producto : listaProductos){
+            if (pr.getImagen().equals(producto.getImagen())){
+                producto.setEstado(Estado.PUBLICADO);
+            }
+        }
+    }
     public void setListaProductos(List<Producto> listaProductos) {
         this.listaProductos = listaProductos;
     }

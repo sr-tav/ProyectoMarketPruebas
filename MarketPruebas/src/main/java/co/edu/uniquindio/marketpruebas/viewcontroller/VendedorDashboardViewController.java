@@ -5,6 +5,7 @@ import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.*;
+import co.edu.uniquindio.marketpruebas.model.Estado;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -120,14 +121,7 @@ public class VendedorDashboardViewController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg", "*.gif"));
 
         //Seccion Inicio
-        selectProducto.setItems(FXCollections.observableArrayList(usuarioController.getListaProductosDisponibles(vendedor)));
-        selectProducto.setCellFactory(lv -> new ListCell<ProductoDto>(){
-            @Override
-            protected void updateItem(ProductoDto item, boolean empty){
-                super.updateItem(item, empty);
-                setText(empty ? "" : "Producto = " + item.getNombre() + " / " + item.getEstado());
-            }
-        });
+        actualizarSelectProductoInicio();
 
         // Seccion estadisticas
         actualizarEstadisticas();
@@ -228,11 +222,12 @@ public class VendedorDashboardViewController {
     private int segEnlapso = 0;
 
     @FXML
-    void clickEstadistica(ActionEvent event) {
+    void clickEstadistica(ActionEvent event) throws IOException {
         paneContactos.setVisible(false);
         paneEstadistica.setVisible(true);
         paneInicio.setVisible(false);
         panePerfil.setVisible(false);
+        actualizarEstadisticas();
     }
 
     @FXML
@@ -316,6 +311,7 @@ public class VendedorDashboardViewController {
     }
 
     public void inicializarDiagrama(){
+        chartPublicaciones.getData().clear();
         axisFecha.setLabel("Dia");
         axisNumero.setLabel("Numero de publicaciones");
 
@@ -478,8 +474,6 @@ public class VendedorDashboardViewController {
 
     private FileChooser fileChooser;
 
-    private String rutaImagenCargada;
-
     @FXML
     private ComboBox<ProductoDto> selectProducto;
 
@@ -501,17 +495,9 @@ public class VendedorDashboardViewController {
         paneEstadistica.setVisible(false);
         paneInicio.setVisible(true);
         panePerfil.setVisible(false);
-        rutaImagenCargada = null;
+        selectProducto.setItems(FXCollections.observableArrayList(usuarioController.getListaProductosDisponibles(vendedor)));
         textAreaPublicar.clear();
         modeloRecomendacion();
-    }
-
-    @FXML
-    void clickCargarImagen(ActionEvent event) {
-        File archivo = fileChooser.showOpenDialog(null);
-        if (archivo != null) {
-            this.rutaImagenCargada = archivo.toURI().toString();
-        }
     }
 
     @FXML
@@ -521,14 +507,15 @@ public class VendedorDashboardViewController {
             PublicacionDto dto = new PublicacionDto();
             dto.setDescripcion(textAreaPublicar.getText());
             dto.setHoraPublicacion(LocalTime.now());
-            dto.setFechaPublicacion(LocalDate.now());
+            dto.setFechaPublicacion(LocalDate.now().plusDays(10));
             dto.setProducto(selectProducto.getSelectionModel().getSelectedItem());
 
             if (publicacionController.agregarPublicacion(dto, vendedor) ){
                 JOptionPane.showMessageDialog(null, "Publicacion realizada con exito");
-                textAreaPublicar.clear();
                 selectProducto.getSelectionModel().clearSelection();
-                JOptionPane.showMessageDialog(null, muroController.getListaPublicaciones(vendedor).size());
+                selectProducto.getItems().clear();
+                actualizarSelectProductoInicio();
+                textAreaPublicar.clear();
 
             }else {
                 JOptionPane.showMessageDialog(null, "No se puede agregar el publicacion");
@@ -538,15 +525,27 @@ public class VendedorDashboardViewController {
 
         }else if (textAreaPublicar.getText().isEmpty() && selectProducto.getSelectionModel().getSelectedItem() != null) {
             JOptionPane.showMessageDialog(null, "Escribe una descripcion para poder realizar la publicacion");
+            selectProducto.getSelectionModel().clearSelection();
 
         }else if (!textAreaPublicar.getText().isEmpty() && selectProducto.getSelectionModel().getSelectedItem() == null){
             JOptionPane.showMessageDialog(null, "Debes seleccionar un producto para publicar,\n " +
                     "Si no lo tienes ningun producto, agregalo! (implementar boton para agregar producto desde ahi)");
+            textAreaPublicar.clear();
 
         }else if (textAreaPublicar.getText().isEmpty() && selectProducto.getSelectionModel().getSelectedItem() == null){
             JOptionPane.showMessageDialog(null, "Debes seleccionar un producto y escribir una descripcion!");
         }
 
+    }
+    public void actualizarSelectProductoInicio() {
+        selectProducto.setItems(FXCollections.observableArrayList(usuarioController.getListaProductosDisponibles(vendedor)));
+        selectProducto.setCellFactory(lv -> new ListCell<ProductoDto>(){
+            @Override
+            protected void updateItem(ProductoDto item, boolean empty){
+                super.updateItem(item, empty);
+                setText(empty ? "" : "Producto = " + item.getNombre() + " / " + item.getEstado());
+            }
+        });
     }
     /**
      * Metodo que genera una lista de publicaciones dependiendo de las interacciones que tenga un usuario con sus contactos
@@ -581,7 +580,6 @@ public class VendedorDashboardViewController {
     public int contadorDeInteraccion(List<PublicacionDto> publicaciones, String id) {
         int cont = 0;
         for (PublicacionDto p: publicaciones) {
-            JOptionPane.showMessageDialog(null, id);
             for (VendedorDto dto : publicacionController.getListaMeGustas(id, p)){
                 if (dto.getIdVendedor().equals(vendedor.getIdVendedor())) {
                     cont++;
