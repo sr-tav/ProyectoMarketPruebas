@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketpruebas.viewcontroller.ComentarioViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="645.0" styleClass="fondo-comentario" stylesheets="@publicacionStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketpruebas.viewcontroller.ComentarioViewController">
    <children>
-      <HBox alignment="CENTER" layoutX="-1.0" prefHeight="100.0" prefWidth="500.0">
+      <HBox alignment="CENTER" layoutX="-1.0" prefHeight="126.0" prefWidth="668.0">
          <children>
-            <FontAwesomeIcon glyphName="USER" size="3em" wrappingWidth="31.285715103149414">
+            <ImageView fitHeight="60.0" fitWidth="70.0" opacity="0.73" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@profile-userv1.png" />
+               </image>
                <HBox.margin>
-                  <Insets bottom="50.0" />
+                  <Insets left="20.0" right="20.0" />
                </HBox.margin>
-            </FontAwesomeIcon>
-            <VBox prefHeight="100.0" prefWidth="421.0">
+            </ImageView>
+            <VBox prefHeight="126.0" prefWidth="612.0">
                <children>
-                  <Label fx:id="labelNombre" text="Nombre de usuario">
+                  <Label fx:id="labelNombre" opacity="0.75" text="Nombre de usuario" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="10.0" top="10.0" />
                      </VBox.margin>
@@ -30,15 +33,19 @@
                   </Label>
                   <HBox prefHeight="18.0" prefWidth="421.0">
                      <children>
-                        <Label fx:id="labelFecha" text="Fecha">
+                        <Label fx:id="labelFecha" opacity="0.51" text="Fecha" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="10.0" right="10.0" />
+                              <Insets left="20.0" right="10.0" />
                            </HBox.margin>
                         </Label>
-                        <Label fx:id="labelHora" text="Hora" />
+                        <Label fx:id="labelHora" opacity="0.51" text="Hora" textFill="WHITE" />
                      </children>
                   </HBox>
-                  <TextArea fx:id="areaComentario" editable="false" prefHeight="43.0" prefWidth="409.0" text="Comentario" />
+                  <Label fx:id="labelMensaje" alignment="TOP_LEFT" prefHeight="59.0" prefWidth="528.0" text="dfdfdfdf" textFill="WHITE" wrapText="true">
+                     <VBox.margin>
+                        <Insets left="6.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
                </children>
             </VBox>
          </children>

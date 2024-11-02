@@ -1,11 +1,11 @@
 .scroll-pane{
-    -fx-background-color: #7596cd;
+    -fx-background-color: transparent;
     -fx-background-radius: 0 0 25px 25px;
     -fx-border-radius: 0 0 25px 25px;;
 }
 
 .scroll-pane .viewport {
-    -fx-background-color: #7596cd;
+    -fx-background-color: transparent;
     -fx-background-radius: 25;
 }
 

@@ -591,6 +591,7 @@ public class VendedorDashboardViewController {
     }
 
     public void llenarInicio(List<VendedorDto> vendedores) throws IOException {
+        gridInicio.getChildren().clear();
         int columna = 0;
         int fila = 0;
         for (VendedorDto v: vendedores) {

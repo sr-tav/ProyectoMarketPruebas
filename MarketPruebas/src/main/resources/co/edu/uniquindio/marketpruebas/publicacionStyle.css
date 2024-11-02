@@ -1,10 +1,12 @@
 .fondo_publicacion{
-    -fx-background-color: #5f7ea6;
+    -fx-background-color: #547c97;
     -fx-background-radius: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.30), 30, 0, 0, 0);
 }
 .arriba{
-    -fx-background-color: #7596cd;
+    -fx-background-color: #a5ccea;
     -fx-background-radius: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.30), 30, 0, 0, 0);
 }
 .btn_gusta_comentario{
     -fx-background-color: #7ab5ec;
@@ -15,7 +17,8 @@
     -fx-background-radius: 5;
 }
 .barra_like{
-    -fx-background-color: #425d7e;
+    -fx-background-color: #2f5063;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.30), 30, 0, 0, 0);
 }
 .barra_crear_publicacion{
     -fx-background-color: #7ea9ca;
@@ -32,4 +35,11 @@
 .combo-box{
     -fx-background-color: #ffffff;
     -fx-background-radius: 10;
+}
+.label-titulo{
+    -fx-text-fill: #4b6586;
+}
+.fondo-comentario{
+    -fx-background-color: #3b556c;
+    -fx-background-radius: 20;
 }
