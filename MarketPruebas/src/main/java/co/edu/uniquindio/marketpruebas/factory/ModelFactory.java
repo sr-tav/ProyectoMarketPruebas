@@ -108,6 +108,24 @@ public class ModelFactory implements IModelFactoryService {
     }
 
     /**
+     * //////////////////////////////////////////////////////// CRUD COMENTARIO ////////////////////////////////////////////////////////////
+     */
+    @Override
+    public boolean agregarComentario(ComentarioDto comentario, PublicacionDto publicacion) {
+        return marketPlace.agregarComentario(mapping.comentarioDtoToComentario(comentario), mapping.publicacionDtoToPublicacion(publicacion));
+    }
+
+    @Override
+    public void darLikeComentario(ComentarioDto comentario, PublicacionDto publicacion) {
+        marketPlace.darLikeComentario(mapping.comentarioDtoToComentario(comentario), mapping.publicacionDtoToPublicacion(publicacion));
+    }
+
+    @Override
+    public int getLikesComentario(ComentarioDto dto, PublicacionDto publicacion) {
+        return marketPlace.getLikesComentario(mapping.comentarioDtoToComentario(dto), mapping.publicacionDtoToPublicacion(publicacion));
+    }
+
+    /**
      *  ///////////////////////////////////////////////////// CRUD USUARIO //////////////////////////////////////////////////////////////
      */
     @Override

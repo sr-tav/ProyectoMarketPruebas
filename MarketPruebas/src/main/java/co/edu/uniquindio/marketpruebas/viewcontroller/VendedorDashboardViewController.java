@@ -122,6 +122,7 @@ public class VendedorDashboardViewController {
 
         //Seccion Inicio
         actualizarSelectProductoInicio();
+        modeloRecomendacion();
 
         // Seccion estadisticas
         actualizarEstadisticas();
@@ -601,6 +602,7 @@ public class VendedorDashboardViewController {
 
                 PublicacionViewController controller = loader.getController();
                 controller.setVendedor(v);
+                controller.setInteractVendedor(this.vendedor);
                 controller.setData(muroController.getListaPublicaciones(v).get(i));
 
 

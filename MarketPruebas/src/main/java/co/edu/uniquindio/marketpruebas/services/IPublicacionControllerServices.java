@@ -16,4 +16,7 @@ public interface IPublicacionControllerServices {
     boolean actualizarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
     List<VendedorDto> getListaMeGustas(String idVendedor, PublicacionDto dto);
     List<ComentarioDto> getListaComentarios(String idPublicacion, PublicacionDto dto);
+    boolean agregarComentario(ComentarioDto dto, PublicacionDto publicacion);
+    void darLikeComentario(ComentarioDto dto, PublicacionDto publicacion);
+    int getLikesComentario(ComentarioDto dto, PublicacionDto publicacion);
 }

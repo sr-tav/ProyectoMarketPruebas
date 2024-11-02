@@ -43,3 +43,36 @@
     -fx-background-color: #3b556c;
     -fx-background-radius: 20;
 }
+.fondo_agregar_comentario{
+    -fx-background-color: #accbd9;
+    -fx-background-radius: 0 0 30px 30px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.30), 30, 0, 0, 10);
+}
+.text-field {
+    -fx-background-radius: 15;
+    -fx-background-color: #ffffff;
+    -fx-prompt-text-fill: #606467;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.30), 30, 0, 0, 0);
+}
+
+.text-field:focused {
+    -fx-border-color: #8dbfda;
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.30), 30, 0, 0, 0);
+}
+.btn_enviar_comentario{
+    -fx-background-color: #528cad;
+    -fx-background-radius: 20px;
+}
+.btn_enviar_comentario:hover{
+    -fx-background-color: #74abd1;
+    -fx-background-radius: 20px;
+}
+.btn_like_comentario{
+    -fx-background-color: #4f6f8c;
+    -fx-background-radius: 30px;
+}
+.btn_like_comentario:hover{
+    -fx-background-color: #6d96b9;
+    -fx-background-radius: 50px;
+}

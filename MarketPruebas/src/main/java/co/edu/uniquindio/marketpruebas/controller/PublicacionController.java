@@ -34,6 +34,21 @@ public class PublicacionController implements IPublicacionControllerServices {
     }
 
     @Override
+    public boolean agregarComentario(ComentarioDto dto, PublicacionDto publicacion) {
+        return modelFactory.agregarComentario(dto, publicacion);
+    }
+
+    @Override
+    public void darLikeComentario(ComentarioDto dto, PublicacionDto publicacion) {
+        modelFactory.darLikeComentario(dto, publicacion);
+    }
+
+    @Override
+    public int getLikesComentario(ComentarioDto dto, PublicacionDto publicacion) {
+        return modelFactory.getLikesComentario(dto, publicacion);
+    }
+
+    @Override
     public boolean agregarPublicacion(PublicacionDto publicacion, VendedorDto vendedor) {
         return modelFactory.agregarPublicacion(publicacion, vendedor.getIdVendedor());
     }

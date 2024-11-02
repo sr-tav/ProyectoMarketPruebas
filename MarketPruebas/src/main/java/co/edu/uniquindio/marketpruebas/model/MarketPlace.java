@@ -6,6 +6,7 @@ import co.edu.uniquindio.marketpruebas.services.ICrudPublicacion;
 import co.edu.uniquindio.marketpruebas.services.IInteraccionEntreContactos;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -261,6 +262,54 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
 
     }
 
+    public boolean agregarComentario(Comentario comentario, Publicacion publicacion){
+        for (Vendedor v : listaVendedores){
+            if (v.getIdVendedor().equals(publicacion.getIdVendedor())){
+                for (Publicacion p : v.getMuro().getListaPublicaciones()){
+                    if (p.getFechaPublicacion().equals(publicacion.getFechaPublicacion())
+                            && p.getHoraPublicacion().equals(publicacion.getHoraPublicacion())){
+                        p.agregarComentario(comentario);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public void darLikeComentario(Comentario comentario, Publicacion publicacion){
+        for (Vendedor v : listaVendedores){
+            if (v.getIdVendedor().equals(publicacion.getIdVendedor())){
+                for (Publicacion p : v.getMuro().getListaPublicaciones()){
+                    if (p.getFechaPublicacion().equals(publicacion.getFechaPublicacion())
+                            && p.getHoraPublicacion().equals(publicacion.getHoraPublicacion())){
+                        for (Comentario c : p.getListaComentarios()){
+                            if (c.getHora().equals(comentario.getHora()) && c.getFecha().equals(comentario.getFecha())){
+                                c.setNumMeGustas(c.getNumMeGustas() + 1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public int getLikesComentario(Comentario comentario, Publicacion publicacion){
+        for (Vendedor v : listaVendedores){
+            if (v.getIdVendedor().equals(publicacion.getIdVendedor())){
+                for (Publicacion p : v.getMuro().getListaPublicaciones()){
+                    if (p.getFechaPublicacion().equals(publicacion.getFechaPublicacion())
+                            && p.getHoraPublicacion().equals(publicacion.getHoraPublicacion())){
+                        for (Comentario c : p.getListaComentarios()){
+                            if (c.getHora().equals(comentario.getHora()) && c.getFecha().equals(comentario.getFecha())){
+                                return c.getNumMeGustas();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return 0;
+    }
     @Override
     public boolean eliminarPublicacion(Publicacion publicacion, Vendedor vendedor) {
         return false;
