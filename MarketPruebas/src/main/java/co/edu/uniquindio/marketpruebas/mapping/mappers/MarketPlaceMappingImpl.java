@@ -176,10 +176,11 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     @Override
     public Muro muroDtoToMuro(MuroDto muro) {
         Muro m = new Muro();
-
-        m.setIdVendedor(muro.getIdVendedor());
-        //m.setListaChats();
-        m.setListaPublicaciones(modelFactory.getListaPublicaciones(muro.getIdVendedor()));
+        if (muro != null){
+            m.setIdVendedor(muro.getIdVendedor());
+            //m.setListaChats();
+            m.setListaPublicaciones(modelFactory.getListaPublicaciones(muro.getIdVendedor()));
+        }
         return m;
     }
 

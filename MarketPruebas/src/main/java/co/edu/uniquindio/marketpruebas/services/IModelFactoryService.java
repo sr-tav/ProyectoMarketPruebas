@@ -14,6 +14,7 @@ public interface IModelFactoryService {
     boolean eliminarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
     boolean actualizarPublicacion(PublicacionDto publicacion, VendedorDto vendedor);
     List<PublicacionDto> getListaPublicaciones(Muro muro);
+    boolean crearUsuario(VendedorDto vendedor);
 
     //Retorno de listas asociadas a clases
     List<ProductoDto> getListaProductosDto(String id);

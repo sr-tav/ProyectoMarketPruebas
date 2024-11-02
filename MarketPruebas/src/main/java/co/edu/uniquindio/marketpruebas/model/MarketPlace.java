@@ -250,6 +250,17 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         return false;
     }
 
+    public boolean crearUsuario(Vendedor vendedor){
+        if (vendedor !=null){
+            listaVendedores.add(vendedor);
+            listaUsuarios.add(vendedor);
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+
     @Override
     public boolean eliminarPublicacion(Publicacion publicacion, Vendedor vendedor) {
         return false;

@@ -89,6 +89,11 @@ public class LoginViewController {
         Scene scene = new Scene(loader.load(),951,633);
         Stage stage = new Stage();
         stage.setScene(scene);
+
+        //Cerrar la ventana actual
+        Stage stageCerrar = (Stage) btnIngresar.getScene().getWindow();
+        stageCerrar.close();
+
         stage.show();
     }
     @FXML

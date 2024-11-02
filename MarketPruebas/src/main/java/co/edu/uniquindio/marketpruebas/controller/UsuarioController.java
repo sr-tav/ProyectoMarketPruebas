@@ -48,4 +48,9 @@ public class UsuarioController implements IUsuarioControllerService {
     public UsuarioDto getUsuarioPorId(String id) {
         return modelFactory.getUsuarioPorId(id);
     }
+
+    @Override
+    public boolean crearUsuario(VendedorDto vendedor) {
+        return modelFactory.crearUsuario(vendedor);
+    }
 }

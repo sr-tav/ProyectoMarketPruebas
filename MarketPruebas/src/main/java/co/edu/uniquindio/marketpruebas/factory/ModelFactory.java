@@ -108,6 +108,14 @@ public class ModelFactory implements IModelFactoryService {
     }
 
     /**
+     *  ///////////////////////////////////////////////////// CRUD USUARIO //////////////////////////////////////////////////////////////
+     */
+    @Override
+    public boolean crearUsuario(VendedorDto vendedor) {
+        return marketPlace.crearUsuario((Vendedor) mapping.usuarioDtoToUsuario(vendedor));
+    }
+
+    /**
      * /////////////////////////////////// RETORNO DE LISTAS ASOCIADAS A UNA CLASE /////////////////////////////////////////
      */
     @Override

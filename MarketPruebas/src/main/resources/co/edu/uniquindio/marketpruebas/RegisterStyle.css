@@ -13,6 +13,7 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.30), 30, 0, 0, 0);
 }
 .text-field {
+    -fx-background-radius: 5;
     -fx-background-color: #b9c1ca;
     -fx-prompt-text-fill: #606467;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.30), 30, 0, 0, 0);
@@ -46,4 +47,12 @@
 
 .check-box:selected .box {
     -fx-background-color: #28a3f4;
+}
+.btn-vision-eye{
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
+}
+.btn-vision-eye:hover{
+    -fx-background-color: #496081;
+    -fx-background-radius: 30;
 }

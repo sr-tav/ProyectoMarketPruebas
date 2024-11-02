@@ -4,6 +4,7 @@ import co.edu.uniquindio.marketpruebas.mapping.dto.ProductoDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketpruebas.model.Usuario;
+import co.edu.uniquindio.marketpruebas.model.Vendedor;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface IUsuarioControllerService {
     public List<ProductoDto> getListaProductosDisponibles(UsuarioDto usuario);
     public List<VendedorDto> getListaContactos(UsuarioDto usuario);
     public UsuarioDto getUsuarioPorId(String id);
+    boolean crearUsuario(VendedorDto vendedor);
 }
