@@ -84,8 +84,12 @@ public class LoginViewController {
     }
 
     @FXML
-    void clickRegistrarse(ActionEvent event) {
-        JOptionPane.showMessageDialog(null, "Aun estamos trabajandon en esto");
+    void clickRegistrarse(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/registro.fxml"));
+        Scene scene = new Scene(loader.load(),951,633);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
     @FXML
     void clickUsuario(ActionEvent event) {

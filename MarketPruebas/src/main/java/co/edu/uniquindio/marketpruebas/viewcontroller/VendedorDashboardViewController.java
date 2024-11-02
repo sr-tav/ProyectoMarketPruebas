@@ -363,6 +363,7 @@ public class VendedorDashboardViewController {
     }
 
     public void inicializarMenuBtnEstadisticas(){
+        menuButtonContacto.getItems().clear();
         for (VendedorDto v :usuarioController.getListaContactos(vendedor)) {
             MenuItem item = new MenuItem(v.getNombre());
 

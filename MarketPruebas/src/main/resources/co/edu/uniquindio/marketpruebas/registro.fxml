@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="633.0" prefWidth="951.0" styleClass="pane_fondo" stylesheets="@RegisterStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketpruebas.viewcontroller.RegisterViewController">
+   
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="951.0">
+         <children>
+            <Label opacity="0.53" stylesheets="@RegisterStyle.css" text="F o r m u l a r i o   d e" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Label>
+            <Label opacity="0.53" stylesheets="@RegisterStyle.css" text="R e g i s t r o" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="53.0" layoutY="95.0" prefHeight="502.0" prefWidth="809.0">
+         <children>
+            <StackPane prefHeight="409.0" prefWidth="858.0" styleClass="pane-con-sombra" stylesheets="@RegisterStyle.css">
+               <children>
+                  <Pane prefHeight="502.0" prefWidth="715.0" styleClass="pane_fondo2" stylesheets="@RegisterStyle.css" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0f0ff" height="501.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle_top_info" width="430.0">
+                     <StackPane.margin>
+                        <Insets right="428.0" />
+                     </StackPane.margin>
+                  </Rectangle>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <StackPane.margin>
+                        <Insets left="430.0" />
+                     </StackPane.margin>
+                     <children>
+                        <StackPane prefHeight="512.0" prefWidth="428.0">
+                           <children>
+                              <Label opacity="0.75" prefHeight="63.0" prefWidth="145.0" text="Crea tu cuenta" textFill="#91caff">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                                 <StackPane.margin>
+                                    <Insets bottom="350.0" left="40.0" right="140.0" />
+                                 </StackPane.margin>
+                              </Label>
+                              <Label opacity="0.48" text="Tu nombre" textFill="#91caff">
+                                 <StackPane.margin>
+                                    <Insets bottom="260.0" right="270.0" />
+                                 </StackPane.margin>
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label opacity="0.48" text="Tu apellido" textFill="#91caff">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                                 <StackPane.margin>
+                                    <Insets bottom="260.0" left="85.0" />
+                                 </StackPane.margin>
+                              </Label>
+                              <TextField fx:id="txtNombre" prefHeight="25.0" prefWidth="173.0" promptText="Pepito" styleClass="text-field">
+                                 <StackPane.margin>
+                                    <Insets bottom="200.0" left="50.0" right="225.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                              <TextField fx:id="txtApellido" prefHeight="25.0" prefWidth="173.0" promptText="Gutierrez">
+                                 <StackPane.margin>
+                                    <Insets bottom="200.0" left="225.0" right="50.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                              <Label opacity="0.48" text="Tu cedula" textFill="#91caff">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                                 <StackPane.margin>
+                                    <Insets bottom="130.0" right="280.0" />
+                                 </StackPane.margin>
+                              </Label>
+                              <Label opacity="0.48" text="Tu direccion" textFill="#91caff">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                                 <StackPane.margin>
+                                    <Insets bottom="130.0" left="85.0" />
+                                 </StackPane.margin>
+                              </Label>
+                              <TextField fx:id="txtCedula" prefHeight="25.0" prefWidth="173.0" promptText="123456789">
+                                 <StackPane.margin>
+                                    <Insets bottom="80.0" left="50.0" right="225.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                              <TextField fx:id="txtDireccion" prefHeight="25.0" prefWidth="173.0" promptText="Cr 15 #14-80 Armenia - Quindio">
+                                 <StackPane.margin>
+                                    <Insets bottom="80.0" left="225.0" right="50.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                              <FontAwesomeIcon fill="#91caff" glyphName="PLUS" opacity="0.78" selectionFill="#91caff" size="2em" wrappingWidth="20.14285659790039">
+                                 <StackPane.margin>
+                                    <Insets bottom="350.0" right="300.0" />
+                                 </StackPane.margin>
+                              </FontAwesomeIcon>
+                              <TextField fx:id="txtPass" prefHeight="25.0" prefWidth="173.0" promptText="contraseña1234">
+                                 <StackPane.margin>
+                                    <Insets left="225.0" right="50.0" top="40.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                              <TextField fx:id="txtUsuario" prefHeight="25.0" prefWidth="173.0" promptText="usuarioEjemplo">
+                                 <StackPane.margin>
+                                    <Insets left="50.0" right="225.0" top="40.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                              <Label opacity="0.48" text="Tu contraseña" textFill="#91caff">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                                 <StackPane.margin>
+                                    <Insets bottom="10.0" left="100.0" />
+                                 </StackPane.margin>
+                              </Label>
+                              <Label opacity="0.48" text="Tu usuario" textFill="#91caff">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                                 <StackPane.margin>
+                                    <Insets bottom="10.0" right="270.0" />
+                                 </StackPane.margin>
+                              </Label>
+                              <TextField fx:id="txtConfirmarPass" prefHeight="25.0" prefWidth="173.0" promptText="123456789">
+                                 <StackPane.margin>
+                                    <Insets left="225.0" right="50.0" top="160.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                              <TextField fx:id="txtId" prefHeight="25.0" prefWidth="173.0" promptText="02">
+                                 <StackPane.margin>
+                                    <Insets left="50.0" right="225.0" top="160.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                              <Label opacity="0.48" text="Confirmar contraseña" textFill="#91caff">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                                 <StackPane.margin>
+                                    <Insets left="140.0" top="110.0" />
+                                 </StackPane.margin>
+                              </Label>
+                              <Label opacity="0.48" text="Tu id" textFill="#91caff">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                                 <StackPane.margin>
+                                    <Insets right="300.0" top="110.0" />
+                                 </StackPane.margin>
+                              </Label>
+                              <Button fx:id="btnCrearCuenta" mnemonicParsing="false" onAction="#clickCrearCuenta" styleClass="btn_crear" text="Crear cuenta" textFill="WHITE">
+                                 <StackPane.margin>
+                                    <Insets top="320.0" />
+                                 </StackPane.margin>
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                              <CheckBox fx:id="checkTerminos" mnemonicParsing="false" opacity="0.53" text="He leido y acepto los terminos y condiciones" textFill="#91caff">
+                                 <StackPane.margin>
+                                    <Insets right="70.0" top="235.0" />
+                                 </StackPane.margin>
+                              </CheckBox>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="502.0" prefWidth="432.0">
+                     <children>
+                        <ImageView fitHeight="127.0" fitWidth="121.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@profile-user-blue.png" />
+                           </image>
+                        </ImageView>
+                        <Label prefHeight="46.0" prefWidth="214.0" text="¡Bienvenido!" textFill="#5077a8">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label opacity="0.72" prefHeight="41.0" prefWidth="244.0" text="Rellena los datos para crear tu cuenta en MarketPlace" textAlignment="CENTER" textFill="#5077a8" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <StackPane.margin>
+                        <Insets right="428.0" />
+                     </StackPane.margin>
+                  </VBox>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </StackPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

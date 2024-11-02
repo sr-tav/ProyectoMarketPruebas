@@ -141,7 +141,6 @@ public class ModelFactory implements IModelFactoryService {
 
     @Override
     public List<VendedorDto> getListaMeGustaDto(String id, PublicacionDto dto) {
-        System.out.println(dto.getProducto());
         return mapping.VendedoresToVendedoresDto(marketPlace.getListaMeGusta(id, mapping.productoDtoToProducto(dto.getProducto())));
     }
 
