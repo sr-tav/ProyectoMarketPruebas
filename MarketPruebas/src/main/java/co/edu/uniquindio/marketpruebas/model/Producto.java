@@ -1,6 +1,10 @@
 package co.edu.uniquindio.marketpruebas.model;
 
+import co.edu.uniquindio.marketpruebas.services.Observer;
 import javafx.scene.image.Image;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Producto {
     private String idVendedor;
@@ -9,6 +13,7 @@ public class Producto {
     private String categoria;
     private Estado estado;
     private double precio;
+    private List<Observer> observers = new ArrayList();
 
     public Producto(String nombre, String rutaImagen, String categoria, Estado estado, double precio) {
         this.nombre = nombre;
@@ -16,6 +21,21 @@ public class Producto {
         this.categoria = categoria;
         this.estado = estado;
         this.precio = precio;
+    }
+    public void agregarObserver(Observer o) {
+        observers.add(o);
+    }
+    public void eliminarObserver(Observer o) {
+        observers.remove(o);
+    }
+    public void setPrecioNotify(double precio){
+        this.precio = precio;
+        notificarObservers();
+    }
+    public void notificarObservers(){
+        for(Observer o : observers){
+            o.actualizar(precio);
+        }
     }
     public Producto(){}
     /**
