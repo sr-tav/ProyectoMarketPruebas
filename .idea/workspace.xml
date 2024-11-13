@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ecdd4df0-b9cd-4dc4-9a77-a7666a0bf574" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/MarketPruebas/src/main/resources/co/edu/uniquindio/marketpruebas/vendedor-dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MarketPruebas/src/main/resources/co/edu/uniquindio/marketpruebas/vendedor-dashboard.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="ecdd4df0-b9cd-4dc4-9a77-a7666a0bf574" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,9 +13,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "sr-tav"
+  }
 }]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/sr-tav/ProyectoMarketPruebas.git",
+    "accountId": "808cb31e-d99e-4bcc-ae7f-c1e42c43f486"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2nwW0jr1e5az8eluZQ9kdz7p36v" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -27,9 +37,9 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "#2 on test/Funcionav2",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/tomaz/OneDrive/Documentos/Cositas mias/Universidad/Uni Quindio/Tercer Semestre/Programacion2/ProyectoFinalRedSocial/ProyectoMarketPruebas/MarketPruebas",
+    "last_opened_file_path": "C:/Users/Admin/Desktop/Test/MarketPruebas",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -37,8 +47,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.387" />
-        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.387" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
       </set>
     </attachedChunks>
   </component>
@@ -51,6 +61,7 @@
       <option name="presentableId" value="Default" />
       <updated>1729884397472</updated>
       <workItem from="1729884398529" duration="131000" />
+      <workItem from="1731512082735" duration="206000" />
     </task>
     <servers />
   </component>
