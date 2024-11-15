@@ -5,10 +5,12 @@ import java.util.List;
 
 public class Chat {
     private final int maxUsuarios = 2;
+    private String idChat;
     private List<Usuario> listaUsuarios;
     private List<Mensaje> listaMensajes;
 
-    public Chat() {
+    public Chat(String idChat) {
+        this.idChat = idChat;
         listaUsuarios = new ArrayList<Usuario>();
         listaMensajes = new ArrayList<Mensaje>();
     }

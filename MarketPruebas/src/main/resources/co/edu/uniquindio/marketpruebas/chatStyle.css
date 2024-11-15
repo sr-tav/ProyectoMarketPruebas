@@ -1,0 +1,21 @@
+.btn_vaciar{
+    -fx-background-color: #7da2b3;
+    -fx-background-radius: 20px;
+}
+.btn_vaciar:hover{
+    -fx-background-color: #61818f;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 20px;
+}
+.btn_enviar_mj{
+    -fx-background-color: #597985;
+    -fx-background-radius: 40px;
+}
+.btn_enviar_mj:hover{
+    -fx-background-color: #4a6771;
+    -fx-background-radius: 40px;
+}
+.text-field{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 40px;
+}

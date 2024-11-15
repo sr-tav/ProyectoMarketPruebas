@@ -4,12 +4,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Mensaje {
+    private String idMensaje;
     private Usuario usuario;
     private LocalDate fecha;
     private LocalTime hora;
     private String mensaje;
 
-    public Mensaje(Usuario usuario, LocalDate fecha, LocalTime hora, String mensaje) {
+    public Mensaje(Usuario usuario, LocalDate fecha, LocalTime hora, String mensaje, String idMensaje) {
+        this.idMensaje = idMensaje;
         this.usuario = usuario;
         this.fecha = fecha;
         this.hora = hora;

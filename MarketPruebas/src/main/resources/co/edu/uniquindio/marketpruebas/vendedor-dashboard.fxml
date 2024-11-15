@@ -11,6 +11,7 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,7 +25,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1012.0" styleClass="fondo_pane" stylesheets="@loginStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketpruebas.viewcontroller.VendedorDashboardViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1012.0" styleClass="fondo_pane" stylesheets="@loginStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketpruebas.viewcontroller.VendedorDashboardViewController">
    <children>
       <VBox layoutY="1.0" prefHeight="809.0" prefWidth="1012.0">
          <children>
@@ -109,7 +110,7 @@
             </Pane>
             <Pane prefHeight="771.0" prefWidth="1012.0">
                <children>
-                  <BorderPane fx:id="paneInicio" prefHeight="771.0" prefWidth="1012.0">
+                  <BorderPane fx:id="paneInicio" prefHeight="771.0" prefWidth="1012.0" visible="false">
                      <center>
                         <VBox prefHeight="484.0" prefWidth="615.0" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
@@ -559,6 +560,107 @@
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                       </columnConstraints>
+                                    </GridPane>
+                                 </content>
+                                 <VBox.margin>
+                                    <Insets left="3.0" right="3.0" />
+                                 </VBox.margin>
+                              </ScrollPane>
+                           </children>
+                        </VBox>
+                     </left>
+                  </BorderPane>
+                  <BorderPane fx:id="paneChat" prefHeight="771.0" prefWidth="1012.0" styleClass="fondo_pane" stylesheets="@loginStyle.css">
+                     <center>
+                        <Pane prefHeight="200.0" prefWidth="200.0" styleClass="fondo_pane" stylesheets="@loginStyle.css" BorderPane.alignment="CENTER">
+                           <children>
+                              <Pane fx:id="paneCon11" prefHeight="771.0" prefWidth="853.0" styleClass="fondo_pane" stylesheets="@loginStyle.css">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" prefHeight="771.0" prefWidth="854.0" styleClass="fondo_pane" stylesheets="@loginStyle.css">
+                                       <children>
+                                          <StackPane prefHeight="103.0" prefWidth="854.0">
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a5c4e1" height="83.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="859.0" />
+                                                <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@profile-userv1.png" />
+                                                   </image>
+                                                   <StackPane.margin>
+                                                      <Insets right="750.0" />
+                                                   </StackPane.margin>
+                                                </ImageView>
+                                                <Label fx:id="labelNombreChat" text="NombreContacto" textFill="#4b5e86">
+                                                   <font>
+                                                      <Font name="System Bold" size="21.0" />
+                                                   </font>
+                                                   <StackPane.margin>
+                                                      <Insets right="470.0" />
+                                                   </StackPane.margin>
+                                                </Label>
+                                                <Button mnemonicParsing="false" onAction="#clickVaciasChat" styleClass="btn_vaciar" stylesheets="@chatStyle.css" text="Vaciar Chat" textFill="#3b3f46">
+                                                   <StackPane.margin>
+                                                      <Insets left="750.0" />
+                                                   </StackPane.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </StackPane>
+                                          <ScrollPane fitToWidth="true" prefHeight="688.0" prefWidth="814.0" stylesheets="@scrollContactos.css">
+                                             <content>
+                                                <GridPane fx:id="gridMensajes" prefHeight="0.0" prefWidth="863.0" styleClass="fondo_pane" stylesheets="@loginStyle.css" vgap="20.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                   </columnConstraints>
+                                                   <padding>
+                                                      <Insets left="30.0" right="50.0" top="40.0" />
+                                                   </padding>
+                                                </GridPane>
+                                             </content>
+                                          </ScrollPane>
+                                          <StackPane prefHeight="170.0" prefWidth="859.0">
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7ca7a8" height="88.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="863.0" />
+                                                <TextField fx:id="txtEscribir" prefHeight="50.0" prefWidth="833.0" stylesheets="@chatStyle.css">
+                                                   <StackPane.margin>
+                                                      <Insets left="30.0" right="100.0" />
+                                                   </StackPane.margin>
+                                                </TextField>
+                                                <Button fx:id="btnEnviar" mnemonicParsing="false" onAction="#clickEnviarMensaje" prefHeight="46.0" prefWidth="52.0" styleClass="btn_enviar_mj" stylesheets="@chatStyle.css">
+                                                   <StackPane.margin>
+                                                      <Insets left="750.0" />
+                                                   </StackPane.margin>
+                                                   <graphic>
+                                                      <FontAwesomeIcon fill="WHITE" glyphName="SEND" size="2em" />
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </StackPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </center>
+                     <left>
+                        <VBox alignment="CENTER" prefHeight="494.0" prefWidth="160.0" styleClass="barra_contactos" stylesheets="@loginStyle.css" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="Tus contactos" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" top="50.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ScrollPane fx:id="scrollContacto1" fitToWidth="true" prefHeight="715.0" prefWidth="154.0" stylesheets="@scrollContactos.css">
+                                 <content>
+                                    <GridPane fx:id="gridContactoChat" prefHeight="0.0" prefWidth="158.0" stylesheets="@loginStyle.css" vgap="10.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
                                     </GridPane>
                                  </content>
                                  <VBox.margin>

@@ -222,6 +222,27 @@ public class ModelFactory implements IModelFactoryService {
         Comentario comentario3 = new Comentario(vendedor1, LocalDate.now().plusDays(3),LocalTime.now(),"Un saludo");
         Comentario comentario4 = new Comentario(vendedor3,LocalDate.now().plusDays(4),LocalTime.now(),"Gas");
 
+        //Creacion de chats
+        Chat chat1 = new Chat("01");
+
+        //agregar usuarios a un chat
+        chat1.agregarUsuario(vendedor1);
+        chat1.agregarUsuario(vendedor2);
+
+        //Mensajes
+        Mensaje mensaje1 = new Mensaje(vendedor1, LocalDate.now().minusDays(5), LocalTime.now().minusHours(2), "Hola holaaa", "01");
+        Mensaje mensaje2 = new Mensaje(vendedor1, LocalDate.now().minusDays(5), LocalTime.now().minusHours(2).plusMinutes(2), "Como estas?", "02");
+        Mensaje mensaje3 = new Mensaje(vendedor1, LocalDate.now().minusDays(5), LocalTime.now().minusHours(2).plusMinutes(5), "Que pena molestar, tu sabes a que horas es mañana la induccion?", "03");
+        Mensaje mensaje4 = new Mensaje(vendedor1, LocalDate.now().minusDays(5), LocalTime.now().minusHours(1), "Hey que tal, no me acuerdo, espera busco donde anote la hora", "04");
+        Mensaje mensaje5 = new Mensaje(vendedor1, LocalDate.now().minusDays(5), LocalTime.now().minusHours(1).plusMinutes(5), "Okey okey", "05");
+
+        //Agregar mensajes al chat
+        chat1.agregarMensaje(mensaje1);
+        chat1.agregarMensaje(mensaje2);
+        chat1.agregarMensaje(mensaje3);
+        chat1.agregarMensaje(mensaje4);
+        chat1.agregarMensaje(mensaje5);
+
         //Agregar comentario a publicaciones
         publicacion4.agregarComentario(comentario);
         publicacion.agregarComentario(comentario2);

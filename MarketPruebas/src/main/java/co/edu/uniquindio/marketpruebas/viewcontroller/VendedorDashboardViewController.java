@@ -44,6 +44,9 @@ public class VendedorDashboardViewController {
     MuroController muroController;
 
     @FXML
+    private BorderPane paneChat;
+
+    @FXML
     private Button btnContacto;
 
     @FXML
@@ -139,6 +142,7 @@ public class VendedorDashboardViewController {
         paneEstadistica.setVisible(false);
         paneInicio.setVisible(false);
         panePerfil.setVisible(false);
+        paneChat.setVisible(false);
     }
 
     public void mostrarContactos() throws IOException {
@@ -228,6 +232,7 @@ public class VendedorDashboardViewController {
         paneEstadistica.setVisible(true);
         paneInicio.setVisible(false);
         panePerfil.setVisible(false);
+        paneChat.setVisible(false);
         actualizarEstadisticas();
     }
 
@@ -497,6 +502,7 @@ public class VendedorDashboardViewController {
         paneEstadistica.setVisible(false);
         paneInicio.setVisible(true);
         panePerfil.setVisible(false);
+        paneChat.setVisible(false);
         selectProducto.setItems(FXCollections.observableArrayList(usuarioController.getListaProductosDisponibles(vendedor)));
         textAreaPublicar.clear();
         modeloRecomendacion();
@@ -620,6 +626,7 @@ public class VendedorDashboardViewController {
         paneEstadistica.setVisible(false);
         paneInicio.setVisible(false);
         panePerfil.setVisible(true);
+        paneChat.setVisible(false);
     }
 
     public void mostrarPublicacionesPersonal() throws IOException {
@@ -642,9 +649,58 @@ public class VendedorDashboardViewController {
     /**
      * /////////////////////////////////////////////////////////// SECCION PANEL CHATS //////////////////////////////////////////////////////////////////////
      */
+    @FXML
+    private Label labelNombreChat;
 
     @FXML
-    void clickChats(ActionEvent event) {
+    private TextField txtEscribir;
+
+    @FXML
+    private GridPane gridContactoChat;
+
+    @FXML
+    void clickChats(ActionEvent event) throws IOException {
+        paneContactos.setVisible(false);
+        paneEstadistica.setVisible(false);
+        paneInicio.setVisible(false);
+        panePerfil.setVisible(false);
+        paneChat.setVisible(true);
+        mostrarContactosChat();
+    }
+    public void mostrarContactosChat() throws IOException {
+        int columna = 0;
+        int fila = 0;
+        for (int i = 0; i<usuarioController.getListaContactos(vendedor).size(); i++) {
+            VendedorDto vendedor1 = usuarioController.getListaContactos(vendedor).get(i);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/casillaContacto.fxml"));
+            Button boton = loader.load();
+
+            boton.setOnAction(event -> {
+                try {
+                    mostrarChat(vendedor1, vendedor);
+                    labelNombreChat.setText(vendedor1.getNombre());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            CasillaContactoViewController controller = loader.getController();
+            controller.setData(usuarioController.getListaContactos(vendedor).get(i));
+
+            gridContactoChat.add(boton, columna, fila);
+
+            fila ++;
+        }
+    }
+    public void mostrarChat(VendedorDto vendedor1, VendedorDto vendedor) throws IOException {
+
+    }
+    @FXML
+    void clickEnviarMensaje(ActionEvent event) {
+
+    }
+    @FXML
+    void clickVaciasChat(ActionEvent event) {
 
     }
 
