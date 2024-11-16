@@ -1,11 +1,14 @@
 package co.edu.uniquindio.marketpruebas.viewcontroller;
 
+import co.edu.uniquindio.marketpruebas.controller.MensajeController;
 import co.edu.uniquindio.marketpruebas.controller.MuroController;
 import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.*;
+import co.edu.uniquindio.marketpruebas.model.Chat;
 import co.edu.uniquindio.marketpruebas.model.Estado;
+import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -42,6 +45,7 @@ public class VendedorDashboardViewController {
     PublicacionController publicacionController;
     UsuarioController usuarioController;
     MuroController muroController;
+    MensajeController mensajeController;
 
     @FXML
     private BorderPane paneChat;
@@ -115,6 +119,7 @@ public class VendedorDashboardViewController {
         publicacionController = new PublicacionController();
         usuarioController = new UsuarioController();
         muroController = new MuroController();
+        mensajeController = new MensajeController();
 
 
         //Seccion contactos
@@ -659,6 +664,9 @@ public class VendedorDashboardViewController {
     private GridPane gridContactoChat;
 
     @FXML
+    private GridPane gridMensajes;
+
+    @FXML
     void clickChats(ActionEvent event) throws IOException {
         paneContactos.setVisible(false);
         paneEstadistica.setVisible(false);
@@ -692,8 +700,21 @@ public class VendedorDashboardViewController {
             fila ++;
         }
     }
-    public void mostrarChat(VendedorDto vendedor1, VendedorDto vendedor) throws IOException {
+    public void mostrarChat(VendedorDto contacto, VendedorDto vendedor) throws IOException {
+        int columnas = 0;
+        int filas = 0;
+        gridMensajes.getChildren().clear();
+        ChatDto chat = mensajeController.getChat(vendedor, contacto);
+        for (int i = 0; i<mensajeController.getListaMensaje(chat.getId()).size(); i++){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/mensaje-view.fxml"));
+            AnchorPane pane = loader.load();
 
+            MensajeViewController controller = loader.getController();
+            controller.setData(mensajeController.getListaMensaje(chat.getId()).get(i));
+
+            gridMensajes.add(pane, columnas, filas);
+            filas ++;
+        }
     }
     @FXML
     void clickEnviarMensaje(ActionEvent event) {

@@ -6,15 +6,15 @@ import java.util.List;
 public class Chat {
     private final int maxUsuarios = 2;
     private String idChat;
-    private List<Usuario> listaUsuarios;
+    private List<Vendedor> listaUsuarios;
     private List<Mensaje> listaMensajes;
 
     public Chat(String idChat) {
         this.idChat = idChat;
-        listaUsuarios = new ArrayList<Usuario>();
+        listaUsuarios = new ArrayList<Vendedor>();
         listaMensajes = new ArrayList<Mensaje>();
     }
-    public void agregarUsuario(Usuario usuario) {
+    public void agregarUsuario(Vendedor usuario) {
         if (listaUsuarios.size() < maxUsuarios) {
             listaUsuarios.add(usuario);
         }
@@ -29,11 +29,11 @@ public class Chat {
         return maxUsuarios;
     }
 
-    public List<Usuario> getListaUsuarios() {
+    public List<Vendedor> getListaUsuarios() {
         return listaUsuarios;
     }
 
-    public void setListaUsuarios(List<Usuario> listaUsuarios) {
+    public void setListaUsuarios(List<Vendedor> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
     }
 
@@ -43,5 +43,13 @@ public class Chat {
 
     public void setListaMensajes(List<Mensaje> listaMensajes) {
         this.listaMensajes = listaMensajes;
+    }
+
+    public String getIdChat() {
+        return idChat;
+    }
+
+    public void setIdChat(String idChat) {
+        this.idChat = idChat;
     }
 }

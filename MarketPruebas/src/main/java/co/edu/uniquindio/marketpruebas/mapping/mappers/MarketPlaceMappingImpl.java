@@ -82,6 +82,13 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     }
 
     @Override
+    public ChatDto chatToChatDto(Chat chat) {
+        ChatDto chatDto = new ChatDto();
+        chatDto.setId(chat.getIdChat());
+        return chatDto;
+    }
+
+    @Override
     public Publicacion publicacionDtoToPublicacion(PublicacionDto publicacion) {
 
         Publicacion publi = new Publicacion();

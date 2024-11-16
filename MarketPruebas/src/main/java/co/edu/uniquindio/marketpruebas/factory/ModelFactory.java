@@ -32,6 +32,12 @@ public class ModelFactory implements IModelFactoryService {
     }
 
     @Override
+    public ChatDto getChat(VendedorDto vendedor, VendedorDto contacto) {
+        Chat chat = marketPlace.getChat((Vendedor)mapping.usuarioDtoToUsuario(vendedor), (Vendedor)mapping.usuarioDtoToUsuario(contacto));
+        return mapping.chatToChatDto(chat);
+    }
+
+    @Override
     public UsuarioDto getUsuario(UsuarioDto usuario) {
         if(validarLogin(usuario)){
             return mapping.usuarioToUsuarioDto(marketPlace.getUsuarioLogin(usuario.getUsuario(), usuario.getPassword()));
@@ -133,6 +139,8 @@ public class ModelFactory implements IModelFactoryService {
         return marketPlace.crearUsuario((Vendedor) mapping.usuarioDtoToUsuario(vendedor));
     }
 
+
+
     /**
      * /////////////////////////////////// RETORNO DE LISTAS ASOCIADAS A UNA CLASE /////////////////////////////////////////
      */
@@ -180,6 +188,11 @@ public class ModelFactory implements IModelFactoryService {
         return mapping.publicacionesToPublicacionesDto(marketPlace.getListaPublicaciones(idVendedor));
     }
 
+    @Override
+    public List<MensajeDto> getListaMensajeChat(String id) {
+        return mapping.mensajeToMensajesDto(marketPlace.getMensajesChat(id));
+    }
+
     /**
      * ///////////////////////////////////////////////////////////////////////////////////INICIALIZACION DE DATOS/////////////////////////////////////////////////////////////////////////////////////////
      */
@@ -217,10 +230,10 @@ public class ModelFactory implements IModelFactoryService {
         Administrador admin = new Administrador("Admin", "admin", "00000", "desconocida", "admin", "admin","00");
 
         //Creacion de comentarios
-        Comentario comentario = new Comentario(vendedor4,LocalDate.now(),LocalTime.now(),"JAJAJAJAJ el parcerito mas alucin");
-        Comentario comentario2 = new Comentario(vendedor2,LocalDate.now().plusDays(2),LocalTime.now(),"Esta feo");
-        Comentario comentario3 = new Comentario(vendedor1, LocalDate.now().plusDays(3),LocalTime.now(),"Un saludo");
-        Comentario comentario4 = new Comentario(vendedor3,LocalDate.now().plusDays(4),LocalTime.now(),"Gas");
+        Comentario comentario = new Comentario(vendedor4,LocalDate.now(),LocalTime.now(),"JAJAJAJAJ el parcerito mas alucin","0");
+        Comentario comentario2 = new Comentario(vendedor2,LocalDate.now().plusDays(2),LocalTime.now(),"Esta feo","1");
+        Comentario comentario3 = new Comentario(vendedor1, LocalDate.now().plusDays(3),LocalTime.now(),"Un saludo","2");
+        Comentario comentario4 = new Comentario(vendedor3,LocalDate.now().plusDays(4),LocalTime.now(),"Gas","3");
 
         //Creacion de chats
         Chat chat1 = new Chat("01");
@@ -228,6 +241,8 @@ public class ModelFactory implements IModelFactoryService {
         //agregar usuarios a un chat
         chat1.agregarUsuario(vendedor1);
         chat1.agregarUsuario(vendedor2);
+        chat1.getListaUsuarios().add(vendedor1);
+        chat1.getListaUsuarios().add(vendedor2);
 
         //Mensajes
         Mensaje mensaje1 = new Mensaje(vendedor1, LocalDate.now().minusDays(5), LocalTime.now().minusHours(2), "Hola holaaa", "01");

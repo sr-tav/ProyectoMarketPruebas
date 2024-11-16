@@ -16,6 +16,8 @@ public interface IModelFactoryService {
     List<PublicacionDto> getListaPublicaciones(Muro muro);
     boolean crearUsuario(VendedorDto vendedor);
 
+    ChatDto getChat(VendedorDto vendedor, VendedorDto contacto);
+
     //Retorno de listas asociadas a clases
     List<ProductoDto> getListaProductosDto(String id);
 
@@ -30,6 +32,8 @@ public interface IModelFactoryService {
 
     List<Publicacion> getListaPublicaciones(String idVendedor);
     List<PublicacionDto> getListaPublicacionesDto(String idVendedor);
+
+    List<MensajeDto> getListaMensajeChat(String id);
 
     // CRUD PUBLICACION
     boolean agregarPublicacion(PublicacionDto publicacion, String idVendedor);

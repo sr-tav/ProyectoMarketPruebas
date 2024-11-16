@@ -11,6 +11,8 @@ public interface IMarketPlaceMapping {
     UsuarioDto usuarioToUsuarioDto(Usuario usuario);
     Usuario usuarioDtoToUsuario(UsuarioDto usuarioDto);
 
+    ChatDto chatToChatDto(Chat chat);
+
     Publicacion publicacionDtoToPublicacion(PublicacionDto publicacion);
     PublicacionDto publicacionToPublicacionDto(Publicacion publicacion);
 

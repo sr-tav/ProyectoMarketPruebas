@@ -6,8 +6,8 @@ import java.time.LocalTime;
 public class Comentario extends Mensaje{
     private int numMeGustas;
 
-    public Comentario(Usuario usuario, LocalDate fecha, LocalTime hora, String mensaje) {
-        super(usuario, fecha, hora, mensaje);
+    public Comentario(Usuario usuario, LocalDate fecha, LocalTime hora, String mensaje, String idMensaje) {
+        super(usuario, fecha, hora, mensaje, idMensaje);
         this.numMeGustas = 0;
     }
     public Comentario(){}

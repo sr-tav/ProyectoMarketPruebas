@@ -50,6 +50,16 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         }
         return null;
     }
+    public List<Mensaje> getMensajesChat(String id){
+        for (Vendedor v: listaVendedores){
+            for (Chat c: v.getMuro().getListaChats()){
+                if (c.getIdChat().equals(id)){
+                    return c.getListaMensajes();
+                }
+            }
+        }
+        return null;
+    }
     public Usuario getUsuarioPorId(String id){
         for (Vendedor vendedor : listaVendedores){
             if (vendedor.getIdVendedor().equals(id)){
@@ -77,6 +87,28 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         }
         return false;
     }
+
+    public Chat getChat(Vendedor vendedor, Vendedor contacto){
+
+        for(Vendedor v : listaVendedores){
+            System.out.println("Entra");
+            if(v.getIdVendedor().equals(vendedor.getIdVendedor())){
+                System.out.println("Entra2");
+                for (Chat c : v.getMuro().getListaChats()){
+                    System.out.println(c.getListaUsuarios().getFirst().getNombre());
+                    System.out.println(c.getListaUsuarios().getLast().getNombre());
+                    if (c.getListaUsuarios().contains(vendedor) && c.getListaUsuarios().contains(contacto)){
+                        System.out.println("Entra3");
+                        return c;
+                    }
+                }
+
+            }
+        }
+        return null;
+    }
+
+
     /**
      * ////////////////////////////////// RETORNO DE LISTAS ASOCIADAS A UNA CLASE //////////////////////////////////////
      */

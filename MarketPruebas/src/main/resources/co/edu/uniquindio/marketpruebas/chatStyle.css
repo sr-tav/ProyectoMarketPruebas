@@ -19,3 +19,7 @@
     -fx-background-color: #ffffff;
     -fx-background-radius: 40px;
 }
+.fondo_mensaje{
+    -fx-background-color: #31454e;
+    -fx-background-radius: 20px;
+}
