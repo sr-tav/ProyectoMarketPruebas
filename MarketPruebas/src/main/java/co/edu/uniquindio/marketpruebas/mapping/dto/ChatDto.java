@@ -1,8 +1,5 @@
 package co.edu.uniquindio.marketpruebas.mapping.dto;
 
-import co.edu.uniquindio.marketpruebas.model.Mensaje;
-import co.edu.uniquindio.marketpruebas.model.Usuario;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,4 +21,5 @@ public class ChatDto {
     public void setId(String id) {
         this.id = id;
     }
+
 }

@@ -8,6 +8,7 @@ import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.*;
 import co.edu.uniquindio.marketpruebas.model.Chat;
 import co.edu.uniquindio.marketpruebas.model.Estado;
+import co.edu.uniquindio.marketpruebas.model.Mensaje;
 import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -654,6 +655,7 @@ public class VendedorDashboardViewController {
     /**
      * /////////////////////////////////////////////////////////// SECCION PANEL CHATS //////////////////////////////////////////////////////////////////////
      */
+    private ChatDto chatSleccionado;
     @FXML
     private Label labelNombreChat;
 
@@ -705,6 +707,7 @@ public class VendedorDashboardViewController {
         int filas = 0;
         gridMensajes.getChildren().clear();
         ChatDto chat = mensajeController.getChat(vendedor, contacto);
+        this.chatSleccionado = chat;
         for (int i = 0; i<mensajeController.getListaMensaje(chat.getId()).size(); i++){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/mensaje-view.fxml"));
             AnchorPane pane = loader.load();
@@ -717,8 +720,24 @@ public class VendedorDashboardViewController {
         }
     }
     @FXML
-    void clickEnviarMensaje(ActionEvent event) {
+    void clickEnviarMensaje(ActionEvent event) throws IOException {
+        MensajeDto dto = new MensajeDto(vendedor,LocalDate.now(),LocalTime.now(),txtEscribir.getText());
+        mensajeController.agregarMensajeChat(chatSleccionado, dto);
+        actualizarChat(chatSleccionado);
+    }
+    public void actualizarChat(ChatDto chat) throws IOException {
+        int columnas = 0;
+        int filas = 0;
+        for (int i = 0; i<chat.getListaMensajes().size(); i++){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/mensaje-view.fxml"));
+            AnchorPane pane = loader.load();
 
+            MensajeViewController controller = loader.getController();
+            controller.setData(mensajeController.getListaMensaje(chat.getId()).get(i));
+
+            gridMensajes.add(pane, columnas, filas);
+            filas ++;
+        }
     }
     @FXML
     void clickVaciasChat(ActionEvent event) {

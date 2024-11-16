@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketpruebas.model;
 
+import co.edu.uniquindio.marketpruebas.mapping.dto.ChatDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.ProductoDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
 import co.edu.uniquindio.marketpruebas.services.ICrudPublicacion;
@@ -89,23 +90,27 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
     }
 
     public Chat getChat(Vendedor vendedor, Vendedor contacto){
-
+        int a = 0;
         for(Vendedor v : listaVendedores){
             System.out.println("Entra");
             if(v.getIdVendedor().equals(vendedor.getIdVendedor())){
                 System.out.println("Entra2");
                 for (Chat c : v.getMuro().getListaChats()){
-                    System.out.println(c.getListaUsuarios().getFirst().getNombre());
-                    System.out.println(c.getListaUsuarios().getLast().getNombre());
-                    if (c.getListaUsuarios().contains(vendedor) && c.getListaUsuarios().contains(contacto)){
-                        System.out.println("Entra3");
+                    System.out.println("Entra3");
+                    if (c.getIdChat().equals(v.getMuro().getListaChats().get(a).getIdChat())){
+                        System.out.println(a);
+                        System.out.println("Entra4");
                         return c;
                     }
+                    else{
+                        a=a+1;
+                        System.out.println("Entra5");
+                        System.out.println(a);
+                    }
                 }
-
             }
         }
-        return null;
+                                            return null;
     }
 
 

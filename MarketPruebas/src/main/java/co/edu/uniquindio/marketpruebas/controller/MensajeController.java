@@ -5,6 +5,7 @@ import co.edu.uniquindio.marketpruebas.mapping.dto.ChatDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.MensajeDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketpruebas.model.Chat;
+import co.edu.uniquindio.marketpruebas.model.Mensaje;
 import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import co.edu.uniquindio.marketpruebas.services.IServiceMensaje;
 
@@ -22,8 +23,16 @@ public class MensajeController implements IServiceMensaje {
         return modelFactory.getChat(vendedor, contacto);
     }
 
+
+
     @Override
     public List<MensajeDto> getListaMensaje(String id) {
         return modelFactory.getListaMensajeChat(id);
+    }
+
+    @Override
+    public void agregarMensajeChat() {
+        MensajeDto mensaje=new MensajeDto();
+
     }
 }

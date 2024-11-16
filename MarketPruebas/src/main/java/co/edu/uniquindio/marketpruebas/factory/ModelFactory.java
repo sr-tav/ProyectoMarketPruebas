@@ -5,8 +5,6 @@ import co.edu.uniquindio.marketpruebas.mapping.mappers.MarketPlaceMappingImpl;
 import co.edu.uniquindio.marketpruebas.model.*;
 import co.edu.uniquindio.marketpruebas.services.IModelFactoryService;
 
-import javax.swing.*;
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -236,13 +234,8 @@ public class ModelFactory implements IModelFactoryService {
         Comentario comentario4 = new Comentario(vendedor3,LocalDate.now().plusDays(4),LocalTime.now(),"Gas","3");
 
         //Creacion de chats
-        Chat chat1 = new Chat("01");
+        Chat chat1 = new Chat("01", vendedor1, vendedor2);
 
-        //agregar usuarios a un chat
-        chat1.agregarUsuario(vendedor1);
-        chat1.agregarUsuario(vendedor2);
-        chat1.getListaUsuarios().add(vendedor1);
-        chat1.getListaUsuarios().add(vendedor2);
 
         //Mensajes
         Mensaje mensaje1 = new Mensaje(vendedor1, LocalDate.now().minusDays(5), LocalTime.now().minusHours(2), "Hola holaaa", "01");
@@ -278,6 +271,8 @@ public class ModelFactory implements IModelFactoryService {
         muro.agregarPublicacion(publicacion3);
         muro2.agregarPublicacion(publicacion4);
 
+        muro.getListaChats().add(chat1);
+        muro2.getListaChats().add(chat1);
         //Agregar muro a un vendedor
         vendedor1.setMuro(muro);
         vendedor2.setMuro(muro2);
@@ -304,6 +299,8 @@ public class ModelFactory implements IModelFactoryService {
         //Agregar distintos objetos al marketplace automaticamente
         List<Object> parametros = Arrays.asList(vendedor1,vendedor2,admin);
         parametros.forEach(marketPlace1::agregarAutomatico);
+
+        //Agregar chat al mur0
 
         marketPlace = marketPlace1;
     }

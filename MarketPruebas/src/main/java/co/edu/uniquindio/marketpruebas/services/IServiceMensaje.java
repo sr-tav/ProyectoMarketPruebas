@@ -11,4 +11,6 @@ public interface IServiceMensaje {
 
     ChatDto getChat(VendedorDto vendedor, VendedorDto contacto);
     List<MensajeDto> getListaMensaje(String id);
+    void agregarMensajeChat();
+
 }
