@@ -1,7 +1,5 @@
 package co.edu.uniquindio.marketpruebas.mapping.dto;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class ChatDto {
     private String id;
