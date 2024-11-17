@@ -12,6 +12,7 @@ public interface IMarketPlaceMapping {
     Usuario usuarioDtoToUsuario(UsuarioDto usuarioDto);
 
     ChatDto chatToChatDto(Chat chat);
+    Chat chatDtoToChat(ChatDto chatDto);
 
     Publicacion publicacionDtoToPublicacion(PublicacionDto publicacion);
     PublicacionDto publicacionToPublicacionDto(Publicacion publicacion);
@@ -27,6 +28,8 @@ public interface IMarketPlaceMapping {
 
     Muro muroDtoToMuro(MuroDto muro);
     MuroDto muroToMuroDto(Muro muro);
+
+
 
 
     //Convertidor listas

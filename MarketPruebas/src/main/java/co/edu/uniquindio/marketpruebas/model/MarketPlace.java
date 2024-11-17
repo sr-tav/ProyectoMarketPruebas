@@ -90,27 +90,17 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
     }
 
     public Chat getChat(Vendedor vendedor, Vendedor contacto){
-        int a = 0;
         for(Vendedor v : listaVendedores){
-            System.out.println("Entra");
             if(v.getIdVendedor().equals(vendedor.getIdVendedor())){
-                System.out.println("Entra2");
                 for (Chat c : v.getMuro().getListaChats()){
-                    System.out.println("Entra3");
-                    if (c.getIdChat().equals(v.getMuro().getListaChats().get(a).getIdChat())){
-                        System.out.println(a);
-                        System.out.println("Entra4");
+                    if (c.getUsuario1().getIdVendedor().equals(vendedor.getIdVendedor()) && c.getUsuario2().getIdVendedor().equals(contacto.getIdVendedor())
+                            || c.getUsuario1().getIdVendedor().equals(contacto.getIdVendedor()) && c.getUsuario2().getIdVendedor().equals(vendedor.getIdVendedor())){
                         return c;
-                    }
-                    else{
-                        a=a+1;
-                        System.out.println("Entra5");
-                        System.out.println(a);
                     }
                 }
             }
         }
-                                            return null;
+        return null;
     }
 
 
@@ -297,6 +287,17 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
             return false;
         }
 
+    }
+    public boolean agregarMensajeChat(Mensaje mensaje, Chat chat){
+        for (Vendedor vendedor: listaVendedores){
+            for (Chat c : vendedor.getMuro().getListaChats()){
+                if (c.getIdChat().equals(chat.getIdChat())){
+                    c.agregarMensaje(mensaje);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean agregarComentario(Comentario comentario, Publicacion publicacion){

@@ -6,12 +6,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class MensajeDto {
-    private UsuarioDto usuario;
+    private VendedorDto usuario;
     private LocalDate fecha;
     private LocalTime hora;
     private String mensaje;
 
-    public MensajeDto(UsuarioDto usuario , LocalDate fecha , LocalTime hora , String mensaje) {
+    public MensajeDto(VendedorDto usuario , LocalDate fecha , LocalTime hora , String mensaje) {
         this.usuario = usuario;
         this.fecha = fecha;
         this.hora = hora;
@@ -20,11 +20,11 @@ public class MensajeDto {
 
     public MensajeDto() {}
 
-    public UsuarioDto getUsuario() {
+    public VendedorDto getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioDto usuario) {
+    public void setUsuario(VendedorDto usuario) {
         this.usuario = usuario;
     }
 

@@ -12,6 +12,7 @@ import co.edu.uniquindio.marketpruebas.model.Mensaje;
 import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -669,6 +670,9 @@ public class VendedorDashboardViewController {
     private GridPane gridMensajes;
 
     @FXML
+    private ScrollPane scrollChat;
+
+    @FXML
     void clickChats(ActionEvent event) throws IOException {
         paneContactos.setVisible(false);
         paneEstadistica.setVisible(false);
@@ -703,41 +707,61 @@ public class VendedorDashboardViewController {
         }
     }
     public void mostrarChat(VendedorDto contacto, VendedorDto vendedor) throws IOException {
-        int columnas = 0;
+        int columnaVendedor = 1;
+        int columnaContacto = 0;
         int filas = 0;
+
         gridMensajes.getChildren().clear();
         ChatDto chat = mensajeController.getChat(vendedor, contacto);
         this.chatSleccionado = chat;
+
         for (int i = 0; i<mensajeController.getListaMensaje(chat.getId()).size(); i++){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/mensaje-view.fxml"));
             AnchorPane pane = loader.load();
 
+            MensajeDto mensaje = mensajeController.getListaMensaje(chat.getId()).get(i);
             MensajeViewController controller = loader.getController();
-            controller.setData(mensajeController.getListaMensaje(chat.getId()).get(i));
+            controller.setData(mensaje);
 
-            gridMensajes.add(pane, columnas, filas);
+            if (mensaje.getUsuario().getIdVendedor().equals(vendedor.getIdVendedor())) {
+                gridMensajes.add(pane, columnaVendedor, filas);
+            } else if (mensaje.getUsuario().getIdVendedor().equals(contacto.getIdVendedor())) {
+                gridMensajes.add(pane, columnaContacto, filas);
+            }
             filas ++;
         }
+        // Asegúrate de que el ScrollPane se desplace al final
+        Platform.runLater(() -> scrollChat.setVvalue(1.0));
     }
     @FXML
     void clickEnviarMensaje(ActionEvent event) throws IOException {
         MensajeDto dto = new MensajeDto(vendedor,LocalDate.now(),LocalTime.now(),txtEscribir.getText());
-        mensajeController.agregarMensajeChat(chatSleccionado, dto);
-        actualizarChat(chatSleccionado);
+        if (mensajeController.agregarMensajeChat(dto, chatSleccionado)){
+            txtEscribir.clear();
+            actualizarChat(chatSleccionado);
+        }
     }
     public void actualizarChat(ChatDto chat) throws IOException {
-        int columnas = 0;
+        int columnaVendedor = 1;
+        int columnaContacto = 0;
         int filas = 0;
-        for (int i = 0; i<chat.getListaMensajes().size(); i++){
+        gridMensajes.getChildren().clear();
+        for (int i = 0; i<mensajeController.getListaMensaje(chat.getId()).size(); i++){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/mensaje-view.fxml"));
             AnchorPane pane = loader.load();
 
+            MensajeDto mensaje = mensajeController.getListaMensaje(chat.getId()).get(i);
             MensajeViewController controller = loader.getController();
             controller.setData(mensajeController.getListaMensaje(chat.getId()).get(i));
 
-            gridMensajes.add(pane, columnas, filas);
+            if (mensaje.getUsuario().getIdVendedor().equals(vendedor.getIdVendedor())) {
+                gridMensajes.add(pane, columnaVendedor, filas);
+            } else if (mensaje.getUsuario().getIdVendedor().equals(chat.getUsuario2().getIdVendedor()) || mensaje.getUsuario().getIdVendedor().equals(chat.getUsuario1().getIdVendedor())) {
+                gridMensajes.add(pane, columnaContacto, filas);
+            }
             filas ++;
         }
+        Platform.runLater(() -> scrollChat.setVvalue(1.0));
     }
     @FXML
     void clickVaciasChat(ActionEvent event) {

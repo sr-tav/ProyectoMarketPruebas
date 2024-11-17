@@ -10,12 +10,14 @@ public class Chat {
     private Vendedor usuario2;
     private List<Mensaje> listaMensajes;
 
-    public Chat(String idChat, Vendedor usuario1, Vendedor usuario2) {
+    public Chat(String idChat) {
         this.idChat = idChat;
-        this.usuario1 = new Vendedor();
-        this.usuario2 = new Vendedor();
         listaMensajes = new ArrayList<Mensaje>();
     }
+    public Chat() {
+        listaMensajes = new ArrayList<Mensaje>();
+    }
+
 
     public void agregarMensaje(Mensaje mensaje) {
         listaMensajes.add(mensaje);

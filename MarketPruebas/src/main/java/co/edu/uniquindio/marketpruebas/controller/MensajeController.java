@@ -22,17 +22,13 @@ public class MensajeController implements IServiceMensaje {
     public ChatDto getChat(VendedorDto vendedor, VendedorDto contacto) {
         return modelFactory.getChat(vendedor, contacto);
     }
-
-
-
     @Override
     public List<MensajeDto> getListaMensaje(String id) {
         return modelFactory.getListaMensajeChat(id);
     }
 
     @Override
-    public void agregarMensajeChat() {
-        MensajeDto mensaje=new MensajeDto();
-
+    public boolean agregarMensajeChat(MensajeDto mensaje, ChatDto chat) {
+        return modelFactory.agregarMensajeChat(mensaje, chat);
     }
 }

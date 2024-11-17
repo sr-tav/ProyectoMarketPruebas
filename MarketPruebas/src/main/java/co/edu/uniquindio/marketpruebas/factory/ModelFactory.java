@@ -31,7 +31,8 @@ public class ModelFactory implements IModelFactoryService {
 
     @Override
     public ChatDto getChat(VendedorDto vendedor, VendedorDto contacto) {
-        Chat chat = marketPlace.getChat((Vendedor)mapping.usuarioDtoToUsuario(vendedor), (Vendedor)mapping.usuarioDtoToUsuario(contacto));
+        Chat chat = new Chat();
+        chat = marketPlace.getChat((Vendedor)mapping.usuarioDtoToUsuario(vendedor), (Vendedor)mapping.usuarioDtoToUsuario(contacto));
         return mapping.chatToChatDto(chat);
     }
 
@@ -137,6 +138,10 @@ public class ModelFactory implements IModelFactoryService {
         return marketPlace.crearUsuario((Vendedor) mapping.usuarioDtoToUsuario(vendedor));
     }
 
+    @Override
+    public boolean agregarMensajeChat(MensajeDto mensaje, ChatDto chat) {
+        return marketPlace.agregarMensajeChat(mapping.mesajeDtoToMensaje(mensaje), mapping.chatDtoToChat(chat));
+    }
 
 
     /**
@@ -190,6 +195,10 @@ public class ModelFactory implements IModelFactoryService {
     public List<MensajeDto> getListaMensajeChat(String id) {
         return mapping.mensajeToMensajesDto(marketPlace.getMensajesChat(id));
     }
+    @Override
+    public List<Mensaje> getListaMensajesChat(String id) {
+        return marketPlace.getMensajesChat(id);
+    }
 
     /**
      * ///////////////////////////////////////////////////////////////////////////////////INICIALIZACION DE DATOS/////////////////////////////////////////////////////////////////////////////////////////
@@ -234,14 +243,15 @@ public class ModelFactory implements IModelFactoryService {
         Comentario comentario4 = new Comentario(vendedor3,LocalDate.now().plusDays(4),LocalTime.now(),"Gas","3");
 
         //Creacion de chats
-        Chat chat1 = new Chat("01", vendedor1, vendedor2);
-
+        Chat chat1 = new Chat("01");
+        chat1.setUsuario1(vendedor1);
+        chat1.setUsuario2(vendedor2);
 
         //Mensajes
         Mensaje mensaje1 = new Mensaje(vendedor1, LocalDate.now().minusDays(5), LocalTime.now().minusHours(2), "Hola holaaa", "01");
         Mensaje mensaje2 = new Mensaje(vendedor1, LocalDate.now().minusDays(5), LocalTime.now().minusHours(2).plusMinutes(2), "Como estas?", "02");
         Mensaje mensaje3 = new Mensaje(vendedor1, LocalDate.now().minusDays(5), LocalTime.now().minusHours(2).plusMinutes(5), "Que pena molestar, tu sabes a que horas es mañana la induccion?", "03");
-        Mensaje mensaje4 = new Mensaje(vendedor1, LocalDate.now().minusDays(5), LocalTime.now().minusHours(1), "Hey que tal, no me acuerdo, espera busco donde anote la hora", "04");
+        Mensaje mensaje4 = new Mensaje(vendedor2, LocalDate.now().minusDays(5), LocalTime.now().minusHours(1), "Hey que tal, no me acuerdo, espera busco donde anote la hora", "04");
         Mensaje mensaje5 = new Mensaje(vendedor1, LocalDate.now().minusDays(5), LocalTime.now().minusHours(1).plusMinutes(5), "Okey okey", "05");
 
         //Agregar mensajes al chat
@@ -273,6 +283,7 @@ public class ModelFactory implements IModelFactoryService {
 
         muro.getListaChats().add(chat1);
         muro2.getListaChats().add(chat1);
+
         //Agregar muro a un vendedor
         vendedor1.setMuro(muro);
         vendedor2.setMuro(muro2);

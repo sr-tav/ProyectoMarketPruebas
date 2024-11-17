@@ -8,7 +8,7 @@ import java.time.LocalTime;
 public class ComentarioDto extends MensajeDto{
     private int numMeGustas;
 
-    public ComentarioDto(UsuarioDto usuario , LocalDate fecha , LocalTime hora , String mensaje ) {
+    public ComentarioDto(VendedorDto usuario , LocalDate fecha , LocalTime hora , String mensaje ) {
         super(usuario,fecha,hora,mensaje);
         this.numMeGustas = 0;
     }

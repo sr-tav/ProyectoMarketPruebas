@@ -25,7 +25,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1012.0" styleClass="fondo_pane" stylesheets="@loginStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketpruebas.viewcontroller.VendedorDashboardViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1012.0" styleClass="fondo_pane" stylesheets="@loginStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketpruebas.viewcontroller.VendedorDashboardViewController">
    <children>
       <VBox layoutY="1.0" prefHeight="809.0" prefWidth="1012.0">
          <children>
@@ -607,7 +607,7 @@
                                                 </Button>
                                              </children>
                                           </StackPane>
-                                          <ScrollPane fitToWidth="true" prefHeight="688.0" prefWidth="814.0" stylesheets="@scrollContactos.css">
+                                          <ScrollPane fx:id="scrollChat" fitToWidth="true" prefHeight="688.0" prefWidth="814.0" stylesheets="@scrollContactos.css">
                                              <content>
                                                 <GridPane fx:id="gridMensajes" prefHeight="0.0" prefWidth="863.0" styleClass="fondo_pane" stylesheets="@loginStyle.css" vgap="20.0">
                                                    <columnConstraints>

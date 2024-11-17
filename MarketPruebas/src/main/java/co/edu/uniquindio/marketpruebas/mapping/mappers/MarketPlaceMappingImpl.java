@@ -85,7 +85,19 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     public ChatDto chatToChatDto(Chat chat) {
         ChatDto chatDto = new ChatDto();
         chatDto.setId(chat.getIdChat());
+        chatDto.setUsuario1((VendedorDto) usuarioToUsuarioDto(chat.getUsuario1()));
+        chatDto.setUsuario2((VendedorDto) usuarioToUsuarioDto(chat.getUsuario2()));
         return chatDto;
+    }
+
+    @Override
+    public Chat chatDtoToChat(ChatDto chatDto) {
+        Chat chat = new Chat();
+        chat.setIdChat(chatDto.getId());
+        chat.setListaMensajes(modelFactory.getListaMensajesChat(chatDto.getId()));
+        chat.setUsuario1((Vendedor) usuarioDtoToUsuario(chatDto.getUsuario1()));
+        chat.setUsuario2((Vendedor) usuarioDtoToUsuario(chatDto.getUsuario2()));
+        return chat;
     }
 
     @Override
@@ -153,7 +165,7 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     public MensajeDto mensajeToMensajeDto(Mensaje mensaje) {
         MensajeDto dto = new MensajeDto();
         dto.setMensaje(mensaje.getMensaje());
-        dto.setUsuario(usuarioToUsuarioDto(mensaje.getUsuario()));
+        dto.setUsuario((VendedorDto) usuarioToUsuarioDto(mensaje.getUsuario()));
         dto.setFecha(mensaje.getFecha());
         dto.setHora(mensaje.getHora());
         return dto;
@@ -175,7 +187,7 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         ComentarioDto dto = new ComentarioDto();
         dto.setFecha(comentario.getFecha());
         dto.setHora(comentario.getHora());
-        dto.setUsuario(usuarioToUsuarioDto(comentario.getUsuario()));
+        dto.setUsuario((VendedorDto) usuarioToUsuarioDto(comentario.getUsuario()));
         dto.setMensaje(comentario.getMensaje());
         dto.setNumMeGustas(comentario.getNumMeGustas());
         return dto;
