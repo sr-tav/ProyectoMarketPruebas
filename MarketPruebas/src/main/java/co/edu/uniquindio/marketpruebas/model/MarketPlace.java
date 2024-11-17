@@ -61,6 +61,7 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         }
         return null;
     }
+
     public Usuario getUsuarioPorId(String id){
         for (Vendedor vendedor : listaVendedores){
             if (vendedor.getIdVendedor().equals(id)){

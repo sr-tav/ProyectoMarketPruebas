@@ -760,9 +760,28 @@ public class VendedorDashboardViewController {
         Platform.runLater(() -> scrollChat.setVvalue(1.0));
     }
     @FXML
-    void clickVaciasChat(ActionEvent event) {
+    void clickVaciarChat(ActionEvent event) throws IOException {
+        vaciarChat(chatSleccionado);
+        actualizarChat(chatSleccionado);
 
+        System.out.println("Vacia el chat");
     }
+    public void vaciarChat(ChatDto chat) {
+        System.out.println("Iniciando el vaciado del chat...");
+
+        // Obtén la lista de mensajes una vez y trabaja sobre ella
+        List<MensajeDto> mensajes = mensajeController.getListaMensaje(chat.getId());
+
+        // Itera de atrás hacia adelante y elimina mensajes
+        for (int i = mensajes.size() - 1; i >= 0; i--) {
+            mensajeController.eliminarMensajeChat(i, chat);
+            System.out.println("Mensaje eliminado en la posición: " + i);
+        }
+
+        System.out.println("Chat vaciado. Total mensajes restantes: " + mensajes.size());
+    }
+
+
 
     /**
      * //////////////////////////////////////////////////////// SECCION GETTERS Y SETTERS /////////////////////////////////////////////////////////////////////////

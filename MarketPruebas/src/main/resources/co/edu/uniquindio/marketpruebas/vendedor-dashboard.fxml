@@ -597,7 +597,7 @@
                                                       <Insets right="470.0" />
                                                    </StackPane.margin>
                                                 </Label>
-                                                <Button mnemonicParsing="false" onAction="#clickVaciasChat" styleClass="btn_vaciar" stylesheets="@chatStyle.css" text="Vaciar Chat" textFill="#3b3f46">
+                                                <Button mnemonicParsing="false" onAction="#clickVaciarChat" styleClass="btn_vaciar" stylesheets="@chatStyle.css" text="Vaciar Chat" textFill="#3b3f46">
                                                    <StackPane.margin>
                                                       <Insets left="750.0" />
                                                    </StackPane.margin>
