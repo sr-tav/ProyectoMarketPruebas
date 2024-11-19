@@ -1,9 +1,9 @@
-package co.edu.uniquindio.marketpruebas.viewcontroller;
-
+package co.edu.uniquindio.marketpruebas.viewController;
 import co.edu.uniquindio.marketpruebas.controller.MensajeController;
 import co.edu.uniquindio.marketpruebas.controller.MuroController;
 import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
+import co.edu.uniquindio.marketpruebas.viewController.PerfilViewController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.*;
 import javafx.animation.KeyFrame;
@@ -624,14 +624,23 @@ public class VendedorDashboardViewController {
      * ////////////////////////////////////////////////////////// SECCION PANEL PERFIL ////////////////////////////////////////////////////////////
      */
     @FXML
-    void clickPerfil(ActionEvent event) {
+    void clickPerfil(ActionEvent event) throws IOException {
         paneContactos.setVisible(false);
         paneEstadistica.setVisible(false);
         paneInicio.setVisible(false);
         panePerfil.setVisible(true);
         paneChat.setVisible(false);
+        actualizarPerfil();
     }
-
+    private void actualizarPerfil() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/Perfil.fxml"));
+        Scene scene = new Scene(loader.load(), 776, 848);
+        PerfilViewController controller = loader.getController();
+        controller.initialize(vendedor);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
     public void mostrarPublicacionesPersonal() throws IOException {
         int columna = 0;
         int fila = 0;

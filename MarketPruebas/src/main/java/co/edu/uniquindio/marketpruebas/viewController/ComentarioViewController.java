@@ -1,4 +1,4 @@
-package co.edu.uniquindio.marketpruebas.viewcontroller;
+package co.edu.uniquindio.marketpruebas.viewController;
 
 import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
 import co.edu.uniquindio.marketpruebas.mapping.dto.ComentarioDto;
@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 
 import java.net.URL;
 import java.util.ResourceBundle;
