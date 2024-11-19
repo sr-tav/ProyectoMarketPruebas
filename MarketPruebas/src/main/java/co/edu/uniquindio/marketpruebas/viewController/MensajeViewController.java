@@ -1,4 +1,4 @@
-package co.edu.uniquindio.marketpruebas.viewcontroller;
+package co.edu.uniquindio.marketpruebas.viewController;
 
 import co.edu.uniquindio.marketpruebas.mapping.dto.MensajeDto;
 import javafx.fxml.FXML;

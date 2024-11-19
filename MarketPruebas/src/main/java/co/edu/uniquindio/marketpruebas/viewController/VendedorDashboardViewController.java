@@ -1,15 +1,10 @@
-package co.edu.uniquindio.marketpruebas.viewcontroller;
-
+package co.edu.uniquindio.marketpruebas.viewController;
 import co.edu.uniquindio.marketpruebas.controller.MensajeController;
 import co.edu.uniquindio.marketpruebas.controller.MuroController;
 import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.*;
-import co.edu.uniquindio.marketpruebas.model.Chat;
-import co.edu.uniquindio.marketpruebas.model.Estado;
-import co.edu.uniquindio.marketpruebas.model.Mensaje;
-import co.edu.uniquindio.marketpruebas.model.Vendedor;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
