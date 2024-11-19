@@ -20,7 +20,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PerfilViewController implements Initializable {
+public class PerfilViewController {
     UsuarioController usuarioController;
     VendedorDto vendedor;
 
@@ -76,9 +76,11 @@ public class PerfilViewController implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    public void initialize(VendedorDto dto) {
         usuarioController = new UsuarioController();
+        this.vendedor = dto;
+        inicializarPerfil();
         formatearColumnaTabla();
         llenarTabla();
     }
@@ -92,8 +94,7 @@ public class PerfilViewController implements Initializable {
         ctvNombreUsuarios.setCellValueFactory(cellData-> new SimpleStringProperty(cellData.getValue().getNombre()));
     }
 
-    public void inicializarPerfil(VendedorDto vendedor){
-        this.vendedor = vendedor;
+    public void inicializarPerfil(){
         selectProducto.setItems(FXCollections.observableArrayList(usuarioController.getListaProductosDisponibles(vendedor)));
         inicializarInforPersonal();
 
