@@ -53,4 +53,11 @@ public class UsuarioController implements IUsuarioControllerService {
     public boolean crearUsuario(VendedorDto vendedor) {
         return modelFactory.crearUsuario(vendedor);
     }
+    public List<VendedorDto> getListaVendedoresSinAgregar(VendedorDto vendedor) {
+        return modelFactory.getListaVendedoresSinAgregar(vendedor);
+    }
+
+    public List<VendedorDto> buscarPerfiles(String nombre) {
+        return modelFactory.buscarPerfiles(nombre);
+    }
 }

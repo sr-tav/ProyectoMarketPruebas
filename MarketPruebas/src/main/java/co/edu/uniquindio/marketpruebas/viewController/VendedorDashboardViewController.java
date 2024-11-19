@@ -3,6 +3,7 @@ import co.edu.uniquindio.marketpruebas.controller.MensajeController;
 import co.edu.uniquindio.marketpruebas.controller.MuroController;
 import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
+import co.edu.uniquindio.marketpruebas.viewController.PerfilViewController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.*;
 import javafx.animation.KeyFrame;
@@ -629,8 +630,13 @@ public class VendedorDashboardViewController {
         paneInicio.setVisible(false);
         panePerfil.setVisible(true);
         paneChat.setVisible(false);
+        actualizarPerfil();
     }
-
+    private void actualizarPerfil() {
+        FXMLLoader loader = new FXMLLoader();
+        PerfilViewController controller = loader.getController();
+        controller.inicializarPerfil(this.vendedor);
+    }
     public void mostrarPublicacionesPersonal() throws IOException {
         int columna = 0;
         int fila = 0;
