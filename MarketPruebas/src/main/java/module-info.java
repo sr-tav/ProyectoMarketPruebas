@@ -4,7 +4,7 @@ module co.edu.uniquindio.marketpruebas {
     requires java.desktop;
     requires java.sql;
 
-    opens co.edu.uniquindio.marketpruebas.viewController to javafx.fxml;
+    opens co.edu.uniquindio.marketpruebas.viewcontroller to javafx.fxml;
     opens co.edu.uniquindio.marketpruebas to javafx.fxml;
     exports co.edu.uniquindio.marketpruebas;
 }

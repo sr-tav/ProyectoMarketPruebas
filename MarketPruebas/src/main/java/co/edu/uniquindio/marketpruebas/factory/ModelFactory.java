@@ -315,13 +315,4 @@ public class ModelFactory implements IModelFactoryService {
 
         marketPlace = marketPlace1;
     }
-    public List<VendedorDto> getListaVendedoresSinAgregar(VendedorDto vendedor) {
-        Vendedor vendedor1= (Vendedor) mapping.usuarioDtoToUsuario(vendedor);
-        // devuelve la lista de usuarios que no tiene agregado los q ya tiene aparecen en otro lado
-        return mapping.VendedoresToVendedoresDto( marketPlace.getListaVendedoresSinAgregar(vendedor1));
-    }
-
-    public List<VendedorDto> buscarPerfiles(String nombre) {
-        return mapping.VendedoresToVendedoresDto(marketPlace.buscarPerfiles(nombre));
-    }
 }

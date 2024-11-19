@@ -1,4 +1,4 @@
-package co.edu.uniquindio.marketpruebas.viewController;
+package co.edu.uniquindio.marketpruebas.viewcontroller;
 
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;

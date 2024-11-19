@@ -1,10 +1,13 @@
-package co.edu.uniquindio.marketpruebas.viewController;
+package co.edu.uniquindio.marketpruebas.viewcontroller;
 
+import co.edu.uniquindio.marketpruebas.controller.MuroController;
 import co.edu.uniquindio.marketpruebas.controller.PublicacionController;
 import co.edu.uniquindio.marketpruebas.mapping.dto.PublicacionDto;
+import co.edu.uniquindio.marketpruebas.model.Publicacion;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
