@@ -638,26 +638,14 @@ public class VendedorDashboardViewController {
         PerfilViewController controller = loader.getController();
         controller.initialize(vendedor);
         Stage stage = new Stage();
+
+        Stage stage2 = (Stage) btnContacto.getScene().getWindow();
+        stage2.close();
+
         stage.setScene(scene);
         stage.show();
     }
-    public void mostrarPublicacionesPersonal() throws IOException {
-        int columna = 0;
-        int fila = 0;
-        for(int i = 0;i<muroController.getListaPublicaciones(vendedor).size();i++){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketpruebas/publicacion.fxml"));
-            AnchorPane pane = loader.load();
 
-            PublicacionViewController controller = loader.getController();
-            controller.setVendedor(this.vendedor);
-            controller.setData(muroController.getListaPublicaciones(vendedor).get(i));
-
-
-            gridInicio.add(pane, columna, fila);
-            fila ++;
-
-        }
-    }
     /**
      * /////////////////////////////////////////////////////////// SECCION PANEL CHATS //////////////////////////////////////////////////////////////////////
      */
