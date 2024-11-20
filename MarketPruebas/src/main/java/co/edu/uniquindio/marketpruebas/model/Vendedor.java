@@ -1,11 +1,12 @@
 package co.edu.uniquindio.marketpruebas.model;
 
+import co.edu.uniquindio.marketpruebas.services.IPrototypeVendedorAccount;
 import co.edu.uniquindio.marketpruebas.services.IPublicacionControllerServices;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vendedor extends Usuario {
+public class Vendedor extends Usuario implements IPrototypeVendedorAccount {
     private final int maxContactos = 10;
     private String IdVendedor;
     private List<Vendedor> listaContactos;
@@ -114,5 +115,16 @@ public class Vendedor extends Usuario {
         for (Publicacion publicacion : muro.getListaPublicaciones()){
             publicacion.setIdVendedor(IdVendedor);
         }
+    }
+
+    @Override
+    public IPrototypeVendedorAccount clone() {
+        Vendedor vendedor = null;
+        try {
+            vendedor = (Vendedor) super.clone();
+        }catch (CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+        return vendedor;
     }
 }

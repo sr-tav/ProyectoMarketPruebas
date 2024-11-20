@@ -313,7 +313,7 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
         for (Vendedor vendedor: listaVendedores){
             for (Chat c : vendedor.getMuro().getListaChats()){
                 if (c.getIdChat().equals(chat.getIdChat())){
-                    c.agregarMensaje(mensaje);
+                    c.enviarMensaje(mensaje);
                     return true;
                 }
             }

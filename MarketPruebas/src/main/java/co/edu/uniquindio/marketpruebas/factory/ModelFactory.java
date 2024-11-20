@@ -259,11 +259,11 @@ public class ModelFactory implements IModelFactoryService {
         producto1.getObservers().add(observer);
 
         //Agregar mensajes al chat
-        chat1.agregarMensaje(mensaje1);
-        chat1.agregarMensaje(mensaje2);
-        chat1.agregarMensaje(mensaje3);
-        chat1.agregarMensaje(mensaje4);
-        chat1.agregarMensaje(mensaje5);
+        chat1.enviarMensaje(mensaje1);
+        chat1.enviarMensaje(mensaje2);
+        chat1.enviarMensaje(mensaje3);
+        chat1.enviarMensaje(mensaje4);
+        chat1.enviarMensaje(mensaje5);
 
         //Agregar comentario a publicaciones
         publicacion4.agregarComentario(comentario);

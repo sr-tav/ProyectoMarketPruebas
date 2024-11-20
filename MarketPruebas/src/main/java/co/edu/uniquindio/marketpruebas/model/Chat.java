@@ -1,9 +1,11 @@
 package co.edu.uniquindio.marketpruebas.model;
 
+import co.edu.uniquindio.marketpruebas.services.ChatMediator;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Chat {
+public class Chat implements ChatMediator {
     private final int maxUsuarios = 2;
     private String idChat;
     private Vendedor usuario1;
@@ -16,11 +18,6 @@ public class Chat {
     }
     public Chat() {
         listaMensajes = new ArrayList<Mensaje>();
-    }
-
-
-    public void agregarMensaje(Mensaje mensaje) {
-        listaMensajes.add(mensaje);
     }
     /**
      * SECCION GETTERS Y SETTERS
@@ -51,5 +48,10 @@ public class Chat {
 
     public void setIdChat(String idChat) {
         this.idChat = idChat;
+    }
+
+    @Override
+    public void enviarMensaje(Mensaje mensaje) {
+        listaMensajes.add(mensaje);
     }
 }

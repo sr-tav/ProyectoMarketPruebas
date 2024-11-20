@@ -1,12 +1,13 @@
 package co.edu.uniquindio.marketpruebas.model;
 
+import co.edu.uniquindio.marketpruebas.services.IProductoComposite;
 import co.edu.uniquindio.marketpruebas.services.Observer;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Producto {
+public class Producto implements IProductoComposite {
     private String idVendedor;
     private String nombre;
     private Image imagen;
@@ -95,5 +96,15 @@ public class Producto {
 
     public void setObservers(List<Observer> observers) {
         this.observers = observers;
+    }
+
+    @Override
+    public double obtenerPrecio() {
+        return precio;
+    }
+
+    @Override
+    public void mostrar() {
+        System.out.println("Producto: " + nombre + " - Precio: " + precio);
     }
 }
