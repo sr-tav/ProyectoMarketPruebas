@@ -254,6 +254,10 @@ public class ModelFactory implements IModelFactoryService {
         Mensaje mensaje4 = new Mensaje(vendedor2, LocalDate.now().minusDays(5), LocalTime.now().minusHours(1), "Hey que tal, no me acuerdo, espera busco donde anote la hora", "04");
         Mensaje mensaje5 = new Mensaje(vendedor1, LocalDate.now().minusDays(5), LocalTime.now().minusHours(1).plusMinutes(5), "Okey okey", "05");
 
+        //Implementacion observer
+        VendedorObserver observer = new VendedorObserver(producto1);
+        producto1.getObservers().add(observer);
+
         //Agregar mensajes al chat
         chat1.agregarMensaje(mensaje1);
         chat1.agregarMensaje(mensaje2);
@@ -311,7 +315,6 @@ public class ModelFactory implements IModelFactoryService {
         List<Object> parametros = Arrays.asList(vendedor1,vendedor2,admin);
         parametros.forEach(marketPlace1::agregarAutomatico);
 
-        //Agregar chat al mur0
 
         marketPlace = marketPlace1;
     }

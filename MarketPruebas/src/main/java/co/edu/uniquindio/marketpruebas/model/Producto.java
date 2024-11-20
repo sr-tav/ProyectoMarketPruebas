@@ -88,4 +88,12 @@ public class Producto {
     public void setIdVendedor(String idVendedor) {
         this.idVendedor = idVendedor;
     }
+
+    public List<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(List<Observer> observers) {
+        this.observers = observers;
+    }
 }
