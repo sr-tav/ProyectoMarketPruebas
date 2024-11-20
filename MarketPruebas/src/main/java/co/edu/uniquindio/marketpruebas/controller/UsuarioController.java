@@ -5,11 +5,12 @@ import co.edu.uniquindio.marketpruebas.mapping.dto.ProductoDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.marketpruebas.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketpruebas.model.Usuario;
+import co.edu.uniquindio.marketpruebas.services.ILoginProxy;
 import co.edu.uniquindio.marketpruebas.services.IUsuarioControllerService;
 
 import java.util.List;
 
-public class UsuarioController implements IUsuarioControllerService {
+public class UsuarioController implements IUsuarioControllerService{
     ModelFactory modelFactory;
 
     public UsuarioController() {
@@ -19,14 +20,6 @@ public class UsuarioController implements IUsuarioControllerService {
     @Override
     public UsuarioDto getUsuario(UsuarioDto usuario) {
         return modelFactory.getUsuario(usuario);
-    }
-
-    @Override
-    public boolean validarUsuario(UsuarioDto usuario) {
-        if (modelFactory.validarLogin(usuario)) {
-            return true;
-        }
-        return false;
     }
 
     @Override

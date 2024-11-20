@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketpruebas.viewController;
 
+import co.edu.uniquindio.marketpruebas.controller.Proxy.ProxyLogin;
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
 import co.edu.uniquindio.marketpruebas.mapping.dto.AdministradorDto;
@@ -19,6 +20,7 @@ import java.io.IOException;
 public class LoginViewController {
     private ModelFactory modelFactory;
     private UsuarioController usuarioController;
+    private ProxyLogin proxyLogin;
 
     @FXML
     private Button btnIngresar;
@@ -34,6 +36,7 @@ public class LoginViewController {
 
     @FXML
     void initialize(){
+        proxyLogin = new ProxyLogin();
         usuarioController = new UsuarioController();
         modelFactory = ModelFactory.getInstance();
     }
@@ -45,7 +48,7 @@ public class LoginViewController {
 
     public void login() throws IOException {
         UsuarioDto dto = buildUsuarioDto();
-        if (usuarioController.validarUsuario(dto)){
+        if (proxyLogin.validarUsuario(dto)){
             abrirVentana(usuarioController.getUsuario(dto));
         }
     }

@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface IUsuarioControllerService {
     public UsuarioDto getUsuario(UsuarioDto usuario);
-    public boolean validarUsuario(UsuarioDto usuario);
     public Usuario getUsuarioCompleto(UsuarioDto usuario);
     public List<ProductoDto> getListaProductosDisponibles(UsuarioDto usuario);
     public List<VendedorDto> getListaContactos(UsuarioDto usuario);
