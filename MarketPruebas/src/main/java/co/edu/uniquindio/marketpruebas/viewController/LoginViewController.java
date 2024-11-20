@@ -1,4 +1,4 @@
-package co.edu.uniquindio.marketpruebas.viewcontroller;
+package co.edu.uniquindio.marketpruebas.viewController;
 
 import co.edu.uniquindio.marketpruebas.controller.UsuarioController;
 import co.edu.uniquindio.marketpruebas.factory.ModelFactory;
@@ -35,6 +35,7 @@ public class LoginViewController {
     @FXML
     void initialize(){
         usuarioController = new UsuarioController();
+        modelFactory = ModelFactory.getInstance();
     }
 
     @FXML

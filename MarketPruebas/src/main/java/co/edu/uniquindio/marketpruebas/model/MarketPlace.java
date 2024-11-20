@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion {
     private String nombre;
@@ -50,6 +51,25 @@ public class MarketPlace implements IInteraccionEntreContactos, ICrudPublicacion
             }
         }
         return null;
+    }
+    public List<Vendedor> getListaVendedoresSinAgregar(Vendedor vendedor1) {
+        List<Vendedor> listaVendedores= new ArrayList<>();
+        for (Vendedor i : this.listaVendedores){
+            for(Vendedor j : getListaContactos(vendedor1.getIdVendedor())){
+                if(!i.getIdVendedor().equals(j.getIdVendedor())){
+                    listaVendedores.add(i);
+                }
+            }
+        }
+        return listaVendedores;
+    }
+
+    public List<Vendedor> buscarPerfiles(String nombre) {
+        if(nombre!=null&&!nombre.isEmpty()){
+            return listaVendedores.stream().filter(vendedor -> vendedor.getNombre().contains(nombre)).collect(Collectors.toCollection(ArrayList::new));
+        }else {
+            return listaVendedores;
+        }
     }
     public List<Mensaje> getMensajesChat(String id){
         for (Vendedor v: listaVendedores){
